@@ -8,7 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ReplayIcon from "@mui/icons-material/Replay";
 
-function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual}) {
+function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual }) {
 
   const openAbout = () => {
     toggleAbout(true);
@@ -22,7 +22,7 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
     <div className="content">
       <CloseIcon />
       <div className="menuItem" onClick={toggleDarkMode}>
-        <div>Slå {darkMode ? "av": "på"} nattmodus</div>
+        <div>Slå {darkMode ? "av" : "på"} nattmodus</div>
         <Brightness4Icon />
       </div>
 
@@ -31,28 +31,26 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
         <ReplayIcon />
       </div>
 
-      {!window.cordova && (
-        <a
-          href="https://play.google.com/store/apps/details?id=no.artsdatabanken.orakel"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="menuItem"
-        >
-          <div>Artsorakelet på Google Play</div>
-          <ShopOutlinedIcon />
-        </a>
-      )}
-      {!window.cordova && (
-        <a
-          href="https://apps.apple.com/no/app/id1522271415"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="menuItem"
-        >
-          <div>Artsorakelet i App Store</div>
-          <AppleIcon />
-        </a>
-      )}
+      <a
+        href="https://play.google.com/store/apps/details?id=no.artsdatabanken.orakel"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="menuItem"
+      >
+        <div>Artsorakelet på Google Play</div>
+        <ShopOutlinedIcon />
+      </a>
+
+
+      <a
+        href="https://apps.apple.com/no/app/id1522271415"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="menuItem"
+      >
+        <div>Artsorakelet i App Store</div>
+        <AppleIcon />
+      </a>
 
       <div className="menuItem" onClick={openManual}>
         <div>Bruksanvisning</div>

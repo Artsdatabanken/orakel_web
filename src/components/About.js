@@ -45,23 +45,6 @@ function About() {
         blir ikke tilgjengelige for Artsdatabanken eller andre.
       </p>
 
-      {window.cordova && (
-        <p>
-          Artsorakelet er også tilgjengelig som nettversjon for pc og mobil på{" "}
-          <a href="https://orakel.artsdatabanken.no">
-            orakel.artsdatabanken.no
-          </a>
-          .
-        </p>
-      )}
-
-      {!window.cordova && (
-        <p>
-          Artsorakelet er også tilgjengelig som Android og iOS app, se lenkene i
-          hovedmenyen.
-        </p>
-      )}
-
       <p>
         Du kan lese mer om Artsorakelet på{" "}
         <a href="https://www.artsdatabanken.no/Pages/299643">

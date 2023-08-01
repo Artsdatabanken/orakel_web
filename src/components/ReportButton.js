@@ -18,8 +18,6 @@ function ReportButton({ reportResult, croppedImages }) {
     setDialogOpen(false);
   };
 
-  let device = { platform: "app" };
-
   const openDialog = (e) => {
     if (runningOnMobile()) {
       saveImages(croppedImages);
@@ -43,20 +41,11 @@ function ReportButton({ reportResult, croppedImages }) {
 
     if (runningOnMobile()) {
       // TODO: Await update from artsobsmobile before update, to ensure we don't redirect user to nonexistent page
-      platform = `platform%3D${
-        window.cordova ? (device ? device.platform : "app") : "mobileweb"
-      }`;
+      platform = `platform%3D${"web"
+        }`;
       reporttype = `?scientificname=${reportResult.scientificNameID}%26`;
-      if (prefix === "test") {
-        url = "https://utv.artsdatabanken.no/a2m/#/";
-      } else if (!window.cordova && window.location.hostname === "localhost") {
-        // When testing with artsobs mobile, run artsobsmobile on localhost:3000
-        // And run this on any other port. Artsobs mobile has issues when run on other ports.
-        // url= 'http://localhost:3000/#/'
-        url = "https://utv.artsdatabanken.no/a2m/#/";
-      } else {
-        url = "https://mobil.artsobservasjoner.no/#/";
-      }
+      
+      url = "https://mobil.artsobservasjoner.no/#/";
       // REDIRECT TO THIS ONE
       // url += "report";
       url += "orakel";
