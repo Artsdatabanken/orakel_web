@@ -121,7 +121,7 @@ function App() {
 
     var formdata = new FormData();
 
-    formdata.append("application", "Web")
+    formdata.append("application", "Artsorakel Web")
 
     for (let image of croppedImages) {
       formdata.append("image", image);
