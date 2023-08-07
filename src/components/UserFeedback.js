@@ -42,7 +42,7 @@ function UserFeedback({ inputStage, gotError }) {
             </div>
           </div>
 
-         
+
 
           <div className="manual-item">
             <svg viewBox="0 0 24 24">
@@ -66,14 +66,22 @@ function UserFeedback({ inputStage, gotError }) {
         </div>
       )}
 
-      {gotError && gotError !== 503 && (
+      {gotError === 429 && (
+        <div className="hint">
+          <div className="body emphasis">
+            For mange forsøk fra samme bruker, vent noen minutter og prøv igjen.
+          </div>
+        </div>
+      )}
+
+      {gotError && gotError !== 503 && gotError !== 429 && (
         <div className="hint">
           <div className="body emphasis">
             Noe gikk galt, vennligst prøv igjen. Ta kontakt med{" "}
             <a href="mailto:support@artsobservasjoner.no">
               support@artsobservasjoner.no
             </a>{" "}
-            hvis problemet vedvarer.
+            hvis problemet vedvarer. Kode: {gotError}
           </div>
         </div>
       )}

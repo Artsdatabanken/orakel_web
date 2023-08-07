@@ -128,7 +128,7 @@ function App() {
     }
 
     axios
-      .post("https://ai.test.artsdatabanken.no/", formdata)
+      .post("https://ai.artsdatabanken.no/", formdata)
       // .post("http://localhost:5000/", formdata)
       // .post("https://airesearch.artsdatabanken.no/", formdata)
       .then((res) => {

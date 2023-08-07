@@ -238,6 +238,14 @@ ul {
   line-height: 1rem;
 }
 
+.hint {
+  margin-top: .5rem;
+  padding: .5rem;
+  border-radius: .5rem;
+  background-color: var(--danger);
+  color: var(--text-clr-on-primary);
+}
+
 #bigDropzone {
   opacity: 0;
   top: 0;
