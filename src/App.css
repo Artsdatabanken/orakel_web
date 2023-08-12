@@ -10,6 +10,7 @@
   --primary-clr: hsl(35, 93%, 45%);
   --bg-clr: hsl(35, 93%, 45%);
   --box-clr: #fff;
+  --tick-clr: #fff;
   --text-clr: hsl(30, 3%, 29%);
   --text-clr-on-primary: #eeeeee;
   --danger: hsl(14, 46%, 48%);
@@ -21,6 +22,7 @@
   --primary-clr: hsl(35, 93%, 68%);
   --bg-clr: #121212;
   --box-clr: hsl(33, 14%, 15%);
+  --tick-clr: hsl(33, 14%, 15%);
   --text-clr: #eeeeee;
   --text-clr-on-primary: #121212;
   --danger: hsl(14, 46%, 68%);
@@ -836,6 +838,10 @@ a.btn {
 .resultLabels {
   flex-grow: 1;
   flex-shrink: 1;
+}
+
+.tick {
+  background-color: var(--tick-clr);
 }
 
 .chevron-right {

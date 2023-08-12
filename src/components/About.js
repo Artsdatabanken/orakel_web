@@ -35,13 +35,13 @@ function About() {
         bilder som er offentlig tilgjengelig på artsobservasjoner.no. Når appen
         brukes sier modellen hva det ligner mest på av artene den har blitt
         trent med. Dette innebærer at den kun kan foreslå arter som finnes i
-        Norsk natur hvor bildene ikke er unntatt offentlighet (som ved store
-        rovdyr). Den kjenner altså kun viltlevende arter (ingen husdyr,
-        hageplanter, osv.) og gir svar på artsnivå (og noen underarter).
+        Norsk natur og som har blitt rapportert med bilder. Den kjenner altså
+        kun viltlevende arter (ingen mennesker, husdyr, rene hageplanter, osv.)
+        og gir svar på artsnivå (og noen underarter).
       </p>
 
       <p>
-        Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon
+      Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon
         blir ikke tilgjengelige for Artsdatabanken eller andre.
       </p>
 
