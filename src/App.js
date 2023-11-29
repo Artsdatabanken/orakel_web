@@ -250,9 +250,11 @@ function App() {
           >
             {!croppedImages.length && (
               <div className="placeholder-container">
-                <h1 className="placeholder-title">
+                <h1 className="placeholder-title">Artsorakelet</h1>
+                <h2 className="placeholder-title">
+                
                   Ta eller velg et bilde for å starte
-                </h1>
+                </h2>
                 <p className="placeholder-body">
                   Artsorakelet kjenner ikke igjen mennesker, husdyr,
                   hageplanter, osv.
