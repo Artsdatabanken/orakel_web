@@ -250,7 +250,7 @@ function App() {
           >
             {!croppedImages.length && (
               <div className="placeholder-container">
-                <h1 className="placeholder-title">Artsorakelet</h1>
+                <h1 className="placeholder-title">Artsorakelet</h1> 
                 <h2 className="placeholder-title">
                 
                   Ta eller velg et bilde for å starte

@@ -2,19 +2,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
+/*
 
+
+v beige der hvit på forsiden (bg)
+v Sommergress mørk der organge, (evnt. bittelitt mørekere om vi må)
+- rød/grønn knapp korall + vintergrønn
+- knappesystem rigget til artsobs
+- stripp skygger
+- helene grubler på bue på hovedseksjon
+- delete knapp siden og "handlekurv-siden" må bli mer selvforklarende (bilde-actions)
+- chevron -> open in 
+- font + farge 
+- om arten: utadgående lenker, kanskje tenke på tekst, plassering, og action
+- få toril og wouter til å debattere om navn bør være fulle.
+- helene gruble på actions i meny, gjør hvis ikke  (kan restart dø?) (darktheme inn i settings)
+- meny på forside? gruble litt
+- vurdere tekst i knapp (hvor?)
+
+*/
 :root {
   --font-chivo: 'Chivo', sans-serif;
   --font-space: 'Space Mono', sans-serif;
   --overlay-color: pink;
   --summer-grass-green: #495e2e;
-  --summer-grass-light: #9b9921;
+  --summer-grass-green-50: #c6c7b0;
   --coral-light: #e55440;
   --coral-dark: #cf3e1c;
   --winter-green-dark: #007759;
   --ocean-dark: #262f31;
   --sand-50: #FFF7EB; /* Header + footer + toppelementbokser*/
   --sand-10: #FFFCF7; /* Ny bg-farge*/
+  --fresh-water-blue:#005B72;
+  --info:var(--fresh-water-blue);
   
 }
 
@@ -23,7 +43,7 @@
 }
 
 .lightmode {
-  --primary-clr: var(--summer-grass-green);
+  --primary-clr: var(--summer-grass-green-50);
   --bg-clr: var(--summer-grass-green);
   --box-clr: var(--sand-50);
   --tick-clr: #fff;
@@ -89,7 +109,7 @@ ul {
   display: flex;
   flex-direction: column;
   position: relative;
-  max-width: 900px;
+  /*max-width: 900px;*/
   display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -172,7 +192,7 @@ ul {
   margin-top: .5rem;
   padding: .5rem;
   border-radius: .5rem;
-  background-color: var(--danger);
+  background-color: var(--info);
   color: var(--text-clr-on-primary);
 }
 
