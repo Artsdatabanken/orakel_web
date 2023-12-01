@@ -8,8 +8,13 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ReplayIcon from "@mui/icons-material/Replay";
 
-function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual }) {
-
+function Menu({
+  resetImages,
+  toggleDarkMode,
+  darkMode,
+  toggleAbout,
+  toggleManual,
+}) {
   const openAbout = () => {
     toggleAbout(true);
   };
@@ -20,7 +25,10 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
 
   return (
     <div className="content">
-      <CloseIcon />
+      <div className="modalHeader">
+        <CloseIcon />
+      </div>
+
       <div className="menuItem" onClick={toggleDarkMode}>
         <div>Slå {darkMode ? "av" : "på"} nattmodus</div>
         <Brightness4Icon />
@@ -40,7 +48,6 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
         <div>Artsorakelet på Google Play</div>
         <ShopOutlinedIcon />
       </a>
-
 
       <a
         href="https://apps.apple.com/no/app/id1522271415"

@@ -29,7 +29,6 @@ function App() {
   const [gotError, setError] = useState(false);
 
   document.addEventListener("backbutton", onBackKeyDown, false);
-  
 
   function onBackKeyDown() {
     // Handle the back button
@@ -41,12 +40,11 @@ function App() {
 
   const addImage = async (images) => {
     setError(false);
-    
+
     for (let i of images) {
-        setUncroppedImages([...uncroppedImages, i]);
+      setUncroppedImages([...uncroppedImages, i]);
     }
   };
-
 
   const imageCropped = (img) => {
     if (img) {
@@ -58,7 +56,6 @@ function App() {
     }
     setUncroppedImages([]);
   };
-
 
   const editImage = (index) => {
     setUncroppedImages([fullImages[index]]);
@@ -72,7 +69,6 @@ function App() {
     setResultStage(false);
   };
 
-
   const resetImages = () => {
     setMenuVisible(false);
     setError(false);
@@ -83,16 +79,13 @@ function App() {
     setResultStage(false);
   };
 
-
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
 
-
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
-
 
   const closeModal = () => {
     setChosenPrediction(false);
@@ -100,14 +93,12 @@ function App() {
     setExtendedManualVisible(false);
   };
 
-
   const goToInput = () => {
     setResultStage(false);
     setPredictions([]);
     setInputStage(true);
     document.getElementById("uploaderImages").click();
   };
-
 
   const uploadMore = async (sender) => {
     await addImage(document.getElementById(sender).files);
@@ -121,7 +112,7 @@ function App() {
 
     var formdata = new FormData();
 
-    formdata.append("application", "Artsorakel Web")
+    formdata.append("application", "Artsorakel Web");
 
     for (let image of croppedImages) {
       formdata.append("image", image);
@@ -137,7 +128,7 @@ function App() {
         );
 
         if (predictions.length === 0) {
-          predictions = res.data.predictions[0].taxa.items
+          predictions = res.data.predictions[0].taxa.items;
         }
 
         if (predictions.length > 5) {
@@ -160,7 +151,6 @@ function App() {
       });
   };
 
-
   return (
     <React.Fragment>
       {!!uncroppedImages.length &&
@@ -175,10 +165,8 @@ function App() {
         ))}
 
       <div
-        className={
-          "App" +
-          (darkMode ? " darkmode" : " lightmode")
-        }
+        id="AppContainer"
+        className={"App" + (darkMode ? " darkmode" : " lightmode")}
       >
         <div
           id="modal"
@@ -196,7 +184,9 @@ function App() {
               e.stopPropagation();
             }}
           >
-            <CloseIcon onClick={closeModal} />
+            <div className="modalHeader">
+              <CloseIcon onClick={closeModal} />
+            </div>
 
             {!!chosenPrediction && (
               <ExtendedResult
@@ -331,7 +321,6 @@ function App() {
           )}
 
           <div className={"bottomButtons " + (inputStage ? "" : "hidden")}>
-
             <div
               className="bottomButton newImageButton primary clickable"
               tabIndex="0"

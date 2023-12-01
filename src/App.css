@@ -596,10 +596,8 @@ input {
 
 #modal .content {
   position: relative;
-  margin-top: 10vh;
-  height: 80vh;
-  height: calc(var(--vh, 1vh) * 80);
-  border-radius: 2rem;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   font-size: 1.2rem;
   font-weight: 400;
 }
@@ -609,8 +607,8 @@ input {
 }
 
 #modal.invisible .content {
-  -webkit-transform: translateX(100%);
-  transform: translateX(100%);
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
 }
 
 #menu .content {
@@ -624,11 +622,16 @@ input {
   transform: translateY(-100%);
 }
 
-.modal .content > svg {
+.modalHeader > svg {
   position: absolute;
   right: 1rem;
   top: 1rem;
   cursor: pointer;
+}
+
+.modal .modalHeader {
+  border-bottom: 1px solid hsla(0, 0%, 50%, 0.5);
+  text-align: end;
 }
 
 .aboutLogo {
@@ -742,6 +745,9 @@ hr {
   background-color: var(--danger);
   border-color: var(--text-clr-on-primary);
   color: var(--text-clr-on-primary);
+  border-radius: .4em;
+  padding: .2em .2em .2em 1em;
+  margin-top: .4em;
 }
 
 .ok {
@@ -760,7 +766,6 @@ hr {
 }
 
 #modal .resultLabels {
-  border-top: 1px solid hsla(0, 0%, 50%, 50%);
   border-bottom: 1px solid hsla(0, 0%, 50%, 50%);
   padding: 1em 0;
   margin-bottom: 2em;
@@ -838,6 +843,7 @@ a.btn {
 .resultLabels {
   flex-grow: 1;
   flex-shrink: 1;
+  margin-left: 1rem;
 }
 
 .tick {

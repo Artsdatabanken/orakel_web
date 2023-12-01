@@ -2,11 +2,14 @@ import React from "react";
 
 function ResultGauge({ result, theme, ranking }) {
   const percentage = result.probability * 100;
-  let gaugeWidth = 100;
-  let gaugeHeight = 8;
+  let rem = parseFloat(getComputedStyle(document.documentElement).fontSize)
 
-  const percentageWidth =
-    percentage ** 1.75 * (100 / 100 ** 1.75) * (gaugeWidth / 100) + "%";
+  const pageWidth  = document.getElementById('AppContainer').offsetWidth;;
+
+  let gaugeWidth = pageWidth - (14 * rem);
+  let gaugeHeight = .6 * rem;
+
+  const percentageWidth = gaugeHeight / 1.5 + percentage ** 1.75 * (100 / 100 ** 1.75) * ((gaugeWidth - gaugeHeight) / 100);
   const colors = [
     [170, 0, 0],
     [220, 214, 43],
@@ -42,7 +45,7 @@ function ResultGauge({ result, theme, ranking }) {
         style={{
           position: "relative",
           marginTop: gaugeHeight * 2,
-          width: gaugeWidth + "%",
+          width: gaugeWidth,
           height: gaugeHeight,
           backgroundColor: color,
           opacity: 0.15,
@@ -70,8 +73,7 @@ function ResultGauge({ result, theme, ranking }) {
             width: 2,
             height: gaugeHeight,
             marginTop: -gaugeHeight,
-            marginLeft:
-              t ** 1.75 * (100 / 100 ** 1.75) * (gaugeWidth / 100) + "%",
+            marginLeft: gaugeHeight / 2 + t ** 1.75 * (100 / 100 ** 1.75) * ((gaugeWidth - gaugeHeight) / 100),
           }}
           className="tick"
         />

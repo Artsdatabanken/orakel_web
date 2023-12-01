@@ -6,8 +6,9 @@ function ExtendedManual() {
     <div className="scrollable scrollbarless extendedManual">
       <p className="intro">
         Artsdatabankens Artsorakel prøver å artsbestemme bilder ved hjelp av
-        maskinlæring. Artsorakelet kjenner kun viltlevende arter (ingen husdyr,
-        hageplanter, osv.) og gir svar på artsnivå (og noen underarter).
+        maskinlæring. Artsorakelet kjenner kun viltlevende arter (ingen
+        mennesker, husdyr, rene hageplanter, osv.) og gir svar på artsnivå (og
+        noen underarter).
       </p>
       <p>
         <svg viewBox="0 0 24 24">

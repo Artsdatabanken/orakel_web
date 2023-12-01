@@ -4,15 +4,18 @@ import TaxonImage from "./taxonImage";
 import ResultGauge from "./resultGauge";
 
 function IdResult({ result, openResult, croppedImages }) {
-
   const openResultModal = () => {
     openResult(result);
   };
 
   return (
     <div className="resultRow" onClick={openResultModal}>
-      <div className="resultDonut">
+      <div>
         <TaxonImage
+          style={{
+            flexGrow: 0,
+            flexShrink: 0,
+          }}
           result={result}
           fullWidth={false}
         />

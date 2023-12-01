@@ -1,8 +1,8 @@
 import React from "react";
 import "../App.css";
 import ReportButton from "./ReportButton";
-import WarningIcon from "@mui/icons-material/Warning"
-
+import WarningIcon from "@mui/icons-material/Warning";
+import TaxonImage from "./taxonImage";
 
 function ExtendedResult({ result, croppedImages, preventClick }) {
   const percentage = Math.round(result.probability * 100);
@@ -10,6 +10,8 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
 
   return (
     <div className="extendedResult scrollable scrollbarless">
+      
+      
       <div
         className="resultLabels"
         onClick={(e) => {
@@ -17,9 +19,17 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
         }}
       >
         <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexGrow: 0,
+          justifyContent: "center",
+          paddingBottom: "1.2rem"
+        }}
+      ><TaxonImage result={result} size={.5 * 40 + "rem"} /></div>
+        <div
           className={
-            result.vernacularName.toLowerCase() ===
-            result.name.toLowerCase()
+            result.vernacularName.toLowerCase() === result.name.toLowerCase()
               ? "hyphenate vernacular italics"
               : "hyphenate vernacular"
           }
@@ -33,14 +43,17 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
           &#8288;
           {result.name.slice(1)}
         </div>
+        <div className="group hyphenate">
+          {result.groupName}
+        </div>
+
       </div>
 
       <div className="resultDescription">
         Artsorakelet gir {percentage} % treff for{" "}
         <span
           className={
-            result.vernacularName.toLowerCase() ===
-            result.name.toLowerCase()
+            result.vernacularName.toLowerCase() === result.name.toLowerCase()
               ? "italics"
               : ""
           }
