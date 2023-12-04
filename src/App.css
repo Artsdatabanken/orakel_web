@@ -3,11 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 /*
-
-
 v beige der hvit på forsiden (bg)
 v Sommergress mørk der organge, (evnt. bittelitt mørekere om vi må)
-- rød/grønn knapp korall + vintergrønn
+v rød/grønn knapp korall + vintergrønn
 - knappesystem rigget til artsobs
 - stripp skygger
 - helene grubler på bue på hovedseksjon
@@ -22,11 +20,17 @@ v Sommergress mørk der organge, (evnt. bittelitt mørekere om vi må)
 
 */
 :root {
+  /* Accent colour chart */
+  --summer-grass-green: #495e2e;
+  --summer-grass-green-80: #a3ae96;
+  --summer-grass-green-50: #c6c7b0;
+  --summer-grass-green-10: #f3f5f2;
+
+  /* ADB Profile */
   --font-chivo: 'Chivo', sans-serif;
   --font-space: 'Space Mono', sans-serif;
   --overlay-color: pink;
-  --summer-grass-green: #495e2e;
-  --summer-grass-green-50: #c6c7b0;
+ 
   --coral-light: #e55440;
   --coral-dark: #cf3e1c;
   --winter-green-dark: #007759;
@@ -34,8 +38,22 @@ v Sommergress mørk der organge, (evnt. bittelitt mørekere om vi må)
   --sand-50: #FFF7EB; /* Header + footer + toppelementbokser*/
   --sand-10: #FFFCF7; /* Ny bg-farge*/
   --fresh-water-blue:#005B72;
+  --fresh-water-blue-light: #0283a1; /* Ferskvannblå*/
   --info:var(--fresh-water-blue);
-  
+  --base-size:8px;
+  --gap:var(--base-size);
+  --focus-border-width: 2px;
+  --button-font-size: 16px;
+  --icon-size: 18px;
+  --border-radius: 30px;
+  --padding-horisontal: 22px;
+  --padding-vertical: 14px;
+  --border-width: 2px;
+  --focus-border-width: 3px;
+  --icon-button-size: 40px;
+  --focus-color: var(--summer-grass-green);
+  --focus-outline:var(--focus-border-width) solid var(--focus-color);
+  --body-color:var(--ocean-dark);
 }
 
 :root *:focus {
@@ -43,15 +61,25 @@ v Sommergress mørk der organge, (evnt. bittelitt mørekere om vi må)
 }
 
 .lightmode {
-  --primary-clr: var(--summer-grass-green-50);
   --bg-clr: var(--summer-grass-green);
   --box-clr: var(--sand-50);
+  /* Buttons */
+  --primary-clr: var(--summer-grass-green);
+  --text-clr-on-primary:#fff;
+
+  --secondary-clr: var(--summer-grass-green-50);
+  --text-clr-on-secondary:var(--body-color);
+
+  --primary-color-hover: var(--summer-grass-green-80);
+  --secondary-color-hover: var(--summer-grass-green-10);
+
+  /* Other stuff */
+  
   --tick-clr: #fff;
   --text-clr: var(--ocean-dark);
-  --text-clr-on-primary: #fff;
   --danger: var(--coral-dark);
   --ok: var(--winter-green-dark);
-  color: var(--text-clr);
+  --color: var(--text-clr);
 }
 
 .darkmode {
@@ -118,6 +146,100 @@ ul {
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
 }
+
+/* BUTTONS */
+/* Based on design system in AO3. */
+
+button:focus-visible,
+button:focus:not(:focus-visible),
+.primary:focus,
+.secondary:focus,
+.text-button:focus,
+.ghost:focus {
+    outline: var(--focus-outline);
+    border-color: var(--box-clr);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button,
+.btn {
+  padding: var(--padding-vertical) var(--padding-horisontal);
+  border-radius: var(--border-radius);
+  border-width: var(--border-width);
+  border-style: solid;
+  box-sizing: border-box;
+  font-size: var(--button-font-size);
+  line-height: var(--button-font-size);
+  margin: var(--gap);
+  margin-left: 0;
+}
+
+.btn svg {
+height: 1.3em;
+}
+
+.btn > span {
+flex-grow: 1;
+padding: 1rem;
+}
+
+.primary {
+  background-color: var(--primary-clr);
+  color: var(--text-clr-on-primary);
+  border-color: var(--primary-clr);
+}
+
+.primary:hover,
+.primary:active {
+    background: var(--primary-color-hover);
+    border-color: var(--primary-color-hover);
+}
+
+.secondary {
+  background-color: var(--secondary-clr);
+  color: var(--text-clr-on-secondary);
+  border-color: var(--secondary-clr);
+}
+
+.secondary:hover,
+.secondary:active {
+    background: var(--secondary-color-hover);
+    border-color: var(--secondary-color-hover);
+}
+
+.newImageButton {
+  font-size: 3.5rem;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  position: absolute;
+  transform-origin: center;
+  transform: translateX(-50%);
+}
+
+.galleryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  position: absolute;
+  margin-left: -5rem;
+  margin-top: 2rem;
+  transform-origin: center;
+  transform: translateX(-50%);
+}
+
+.hidden.bottomButtons {
+  display: none;
+}
+/* OTHER STUFF */
 
 .bottom-section::after {
   content: "";
@@ -285,39 +407,6 @@ ul {
   will-change: transform;
 }
 
-.newImageButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3.5rem;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 50%;
-  position: absolute;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
-  transform-origin: center;
-  transform: translateX(-50%);
-}
-
-.galleryButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 50%;
-  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
-  position: absolute;
-  margin-left: -5rem;
-  margin-top: 2rem;
-  transform-origin: center;
-  transform: translateX(-50%);
-}
-
-.hidden.bottomButtons {
-  display: none;
-}
 
 .littleSpinner {
   box-sizing: border-box;
@@ -334,11 +423,8 @@ ul {
   animation: spin 1s linear infinite;
 }
 
-.primary {
-  background-color: var(--primary-clr);
-  border-color: var(--text-clr-on-primary);
-  color: var(--text-clr-on-primary);
-}
+
+
 
 input {
   opacity: 0;
@@ -416,37 +502,7 @@ input {
   z-index: 2;
 }
 
-.btn {
-  border: 0.15em solid;
-  box-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.25);
-  border-radius: 1em;
-  height: 2em;
-  font-size: 1.3rem;
-  padding: 0.5em 1em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  text-decoration: none;
-  margin: 0.2em;
-}
 
-.id.btn {
-  padding: 0 2em;
-}
-
-.reset.btn {
-  padding: 0 1em;
-}
-
-.btn svg {
-  height: 1.3em;
-}
-
-.btn > span {
-  flex-grow: 1;
-  padding: 1rem;
-}
 
 .cropContainer {
   position: absolute;

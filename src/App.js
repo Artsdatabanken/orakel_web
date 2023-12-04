@@ -288,14 +288,13 @@ function App() {
           }
         >
           {inputStage && !!croppedImages.length && (
-            <div className="top-btn" onClick={getId} tabIndex="0">
-              <div className="btn id primary">Identifiser</div>
-            </div>
+            <button className="btn id primary" onClick={getId} tabIndex="0">
+              Identifiser
+            </button>
           )}
 
           {resultStage && (
-            <div className="top-btn">
-              <div
+              <button
                 className="btn reset primary"
                 onClick={resetImages}
                 tabIndex="0"
@@ -305,10 +304,9 @@ function App() {
                     fill="currentColor"
                     d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
                   />
-                </svg>
+                </svg> Tøm utvalg
                 {/* <ReplayIcon /> */}
-              </div>
-            </div>
+              </button>
           )}
 
           {resultStage && !!predictions.length && (
@@ -334,9 +332,9 @@ function App() {
 
           <div className={"bottomButtons " + (inputStage ? "" : "hidden")}>
 
-            <div
+            <button
               className="bottomButton newImageButton primary clickable"
-              tabIndex="0"
+              
             >
               <AddAPhotoIcon style={{ fontSize: ".8em" }} />
               <input
@@ -345,7 +343,8 @@ function App() {
                 id="uploaderImages"
                 onChange={uploadMore.bind(this, "uploaderImages")}
               />
-            </div>
+            </button>
+
           </div>
         </div>
       </div>
