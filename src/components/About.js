@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 function About() {
   const { t } = useTranslation();
@@ -93,34 +93,35 @@ function About() {
       <hr />
 
       <p className="intro">
-        {t("Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av maskinlæring.")}
+        {t(
+          "Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av maskinlæring."
+        )}
       </p>
 
       <p>
-        Gjenkjenningsmodellen trenes hos Naturalis Biodiversity Center, med
-        bilder som er offentlig tilgjengelig på artsobservasjoner.no. Når appen
-        brukes sier modellen hva det ligner mest på av artene den har blitt
-        trent med. Dette innebærer at den kun kan foreslå arter som finnes i
-        Norsk natur og som har blitt rapportert med bilder. Den kjenner altså
-        kun viltlevende arter (ingen mennesker, husdyr, rene hageplanter, osv.)
-        og gir svar på artsnivå (og noen underarter).
+        {t(
+          "Gjenkjenningsmodellen trenes hos Naturalis Biodiversity Center, med bilder som er offentlig tilgjengelig på artsobservasjoner.no. Når appen brukes sier modellen hva det ligner mest på av artene den har blitt trent med. Dette innebærer at den kun kan foreslå arter som finnes i Norsk natur og som har blitt rapportert med bilder. Den kjenner altså kun viltlevende arter (ingen mennesker, husdyr, rene hageplanter, osv.) og gir svar på artsnivå (og noen underarter)."
+        )}
       </p>
 
       <p>
-        Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon
-        blir ikke tilgjengelige for Artsdatabanken eller andre.
+        {t(
+          "Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon blir ikke tilgjengelige for Artsdatabanken eller andre."
+        )}
       </p>
 
       <p>
-        Du kan lese mer om Artsorakelet på{" "}
-        <a href="https://www.artsdatabanken.no/Pages/299643">
-          Artsdatabankens nettsider
-        </a>
-        . Spørsmål og tilbakemelding kan sendes til{" "}
-        <a href="mailto:support@artsobservasjoner.no">
-          support@artsobservasjoner.no
-        </a>
-        .
+        <Trans i18nKey="about_readmore">
+          Du kan lese mer om Artsorakelet på{" "}
+          <a href="https://www.artsdatabanken.no/Pages/299643">
+            Artsdatabankens nettsider
+          </a>
+          . Spørsmål og tilbakemelding kan sendes til{" "}
+          <a href="mailto:support@artsobservasjoner.no">
+            support@artsobservasjoner.no
+          </a>
+          .
+        </Trans>
       </p>
 
       <p>
