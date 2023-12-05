@@ -1,14 +1,16 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-// import LanguageDetector from 'i18next-browser-languagedetector';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 import translationNB from './locales/nb/translation.json';
+import translationNN from './locales/nn/translation.json';
+import translationEN from './locales/en/translation.json';
 
 
 i18n
   // detect user language
   // learn more: https://github.com/i18next/i18next-browser-languageDetector
-//   .use(LanguageDetector)
+  .use(LanguageDetector)
   // pass the i18n instance to react-i18next.
   .use(initReactI18next)
   // init i18next
@@ -22,7 +24,13 @@ i18n
     resources: {
       nb: {
         translation: translationNB
-      }
+      },
+      nn: {
+        translation: translationNN
+      },
+      en: {
+        translation: translationEN
+      },
     }
   });
 
