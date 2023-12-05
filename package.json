@@ -12,11 +12,13 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "crypto": "^1.0.1",
+    "i18next": "^23.7.7",
     "libheif-js": "^1.15.1",
     "pngjs": "^7.0.0",
     "react": "^18.2.0",
     "react-cropper": "^2.3.3",
     "react-dom": "^18.2.0",
+    "react-i18next": "^13.5.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },

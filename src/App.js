@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
+
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -14,6 +16,9 @@ import About from "./components/About";
 import ExtendedManual from "./components/ExtendedManual";
 
 function App() {
+  const { t } = useTranslation();
+
+
   const [croppedImages, setCroppedImages] = useState([]);
   const [uncroppedImages, setUncroppedImages] = useState([]);
   const [fullImages, setFullImages] = useState([]);
@@ -241,11 +246,11 @@ function App() {
             {!croppedImages.length && (
               <div className="placeholder-container">
                 <h1 className="placeholder-title">
-                  Ta eller velg et bilde for å starte
+                {t('Ta eller velg et bilde for å starte')}
+                  
                 </h1>
                 <p className="placeholder-body">
-                  Artsorakelet kjenner ikke igjen mennesker, husdyr,
-                  hageplanter, osv.
+                {t('Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.')}
                 </p>
               </div>
             )}
