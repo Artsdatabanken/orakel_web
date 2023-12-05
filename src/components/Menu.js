@@ -43,7 +43,7 @@ function Menu({
         <Brightness4Icon />
       </div>
 
-      <div className="menuItem" onClick={() => i18next.changeLanguage("en")}>
+      <div className="menuItem" onClick={() => i18next.changeLanguage("nb")}>
         <div>
           {t("Menu.Change_language_to")}: Norsk Bokmål
         </div>
