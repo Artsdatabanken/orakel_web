@@ -51,7 +51,7 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
       </div>
 
       <div className="resultDescription">
-        {t("Extended_result.Percentage_for", { percentage: percentage })}
+        {t("Extended_result.Percentage_for", { percentage: percentage })}{" "}
         <span
           className={
             result.vernacularName.toLowerCase() === result.name.toLowerCase()

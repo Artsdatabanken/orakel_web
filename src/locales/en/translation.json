@@ -11,12 +11,42 @@
     "Server_storage": "Pictures are sent to the server for recognition. Pictures and user information are not available to the NBIC or any third party.",
     "Read_more": "You can learn more about Artsorakel on <2>NBIC's website (in Norwegian)</2>. Questions and feedback may be sent to <4>support@artsobservasjoner.no</4>."
   },
+
   "Extended_result": {
     "Percentage_for": "Artsorakel found a {{percentage}} % match with",
     "based_on_1_picture": "based on your picture.",
     "based_on_x_pictures": "based on your {{pictures}} pictures.",
-    "May_be_wrong": "There is no guarantee that this is correct, and you have to verify this yourself, especially if you plan to report this sighting.",
+    "May_be_wrong": "There is no guarantee that this is correct, and you need to verify this independently, especially if you plan to report this sighting.",
     "NEVER_EAT_ANYTHING": "NEVER EAT ANYTHING BASED ON THE APPS ANSWERS",
-    "About_the_species": "About this species"
+    "About_the_species": "About species"
+  },
+
+  "Brief_result_NEVER_EAT_ANYTHING": "DON'T EAT BASED ON ID",
+  "Image_cropper_hint": "Zoom and pan until the subject fills the square",
+
+  "Menu": {
+    "Dark_mode_disable": "Disable dark mode",
+    "Dark_mode_enable": "Enable dark mode",
+    "Change_language_to": "Change language to",
+    "Restart_app": "Restart the app",
+    "App_on_google_play": "Artsorakel on Google Play",
+    "App_in_app_store": "Artsorakel in the App Store",
+    "Manual": "Manual",
+    "About": "About Artsorakel"
+  },
+
+  "Report_button": {
+    "Report": "Report observation",
+    "Did_you_verify": "Have you verified the species?",
+    "Check_independently": "Verify the identification yourself before reporting. Artsorakel can be wrong also at high percentages. Do you want to continue?",
+    "Cancel": "Cancel",
+    "Continue": "Continue"
+  },
+
+  "Short_manual": {
+    "Take_picture": "Take or select a picture of a species in Norwegian nature",
+    "Zoom": "Zoom in on the species in the picture",
+    "Multiple_pics": "Adding more pictures improves recognition",
+    "Identify": "Press \"Identify\" to see what it could be!"
   }
 }
