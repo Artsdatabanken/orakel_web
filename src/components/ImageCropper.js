@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+import { useTranslation } from "react-i18next";
 
 import Slider from "@mui/material/Slider";
 import DoneIcon from "@mui/icons-material/Done";
@@ -32,6 +33,8 @@ if (!HTMLCanvasElement.prototype.toBlob) {
 }
 
 export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
+  const {t} = useTranslation();
+
   const [image, setImage] = useState();
   const [cropper, setCropper] = useState();
   const [zoom, setZoom] = useState(.25);
@@ -187,7 +190,7 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
         />
       </div>
 
-      <div className="hint">Zoom og flytt til motivet fyller firkanten</div>
+      <div className="hint">{t("Image_cropper_hint")}</div>
 
       <div className="buttons">
         <div onClick={cancel} className="btn danger">

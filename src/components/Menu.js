@@ -1,4 +1,8 @@
 import React from "react";
+
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
+
 import "../App.css";
 import CloseIcon from "@mui/icons-material/Close";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -7,6 +11,7 @@ import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ReplayIcon from "@mui/icons-material/Replay";
+import TranslateIcon from '@mui/icons-material/Translate';
 
 function Menu({
   resetImages,
@@ -15,6 +20,8 @@ function Menu({
   toggleAbout,
   toggleManual,
 }) {
+  const { t } = useTranslation();
+
   const openAbout = () => {
     toggleAbout(true);
   };
@@ -30,12 +37,22 @@ function Menu({
       </div>
 
       <div className="menuItem" onClick={toggleDarkMode}>
-        <div>Slå {darkMode ? "av" : "på"} nattmodus</div>
+        <div>
+          {darkMode ? t("Menu.Dark_mode_disable") : t("Menu.Dark_mode_enable")}
+        </div>
         <Brightness4Icon />
       </div>
 
+      <div className="menuItem" onClick={() => i18next.changeLanguage("en")}>
+        <div>
+          {t("Menu.Change_language_to")}: Norsk Bokmål
+        </div>
+        <TranslateIcon />
+      </div>
+
+
       <div className="menuItem" onClick={resetImages}>
-        <div>Restart appen</div>
+        <div>{t("Menu.Restart_app")}</div>
         <ReplayIcon />
       </div>
 
@@ -45,7 +62,7 @@ function Menu({
         rel="noopener noreferrer"
         className="menuItem"
       >
-        <div>Artsorakelet på Google Play</div>
+        <div>{t("Menu.App_on_google_play")}</div>
         <ShopOutlinedIcon />
       </a>
 
@@ -55,17 +72,17 @@ function Menu({
         rel="noopener noreferrer"
         className="menuItem"
       >
-        <div>Artsorakelet i App Store</div>
+        <div>{t("Menu.App_in_app_store")}</div>
         <AppleIcon />
       </a>
 
       <div className="menuItem" onClick={openManual}>
-        <div>Bruksanvisning</div>
+        <div>{t("Menu.Manual")}</div>
         <MenuBookIcon />
       </div>
 
       <div className="menuItem" onClick={openAbout}>
-        <div>Om Artsorakelet</div>
+        <div>{t("Menu.About")}</div>
         <InfoOutlinedIcon />
       </div>
     </div>

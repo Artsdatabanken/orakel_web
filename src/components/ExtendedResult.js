@@ -1,17 +1,19 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 import "../App.css";
 import ReportButton from "./ReportButton";
 import WarningIcon from "@mui/icons-material/Warning";
 import TaxonImage from "./taxonImage";
 
 function ExtendedResult({ result, croppedImages, preventClick }) {
+  const { t } = useTranslation();
+
   const percentage = Math.round(result.probability * 100);
   const n_pics = croppedImages.length;
 
   return (
     <div className="extendedResult scrollable scrollbarless">
-      
-      
       <div
         className="resultLabels"
         onClick={(e) => {
@@ -19,14 +21,16 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
         }}
       >
         <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexGrow: 0,
-          justifyContent: "center",
-          paddingBottom: "1.2rem"
-        }}
-      ><TaxonImage result={result} size={.5 * 40 + "rem"} /></div>
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexGrow: 0,
+            justifyContent: "center",
+            paddingBottom: "1.2rem",
+          }}
+        >
+          <TaxonImage result={result} size={0.5 * 40 + "rem"} />
+        </div>
         <div
           className={
             result.vernacularName.toLowerCase() === result.name.toLowerCase()
@@ -43,14 +47,11 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
           &#8288;
           {result.name.slice(1)}
         </div>
-        <div className="group hyphenate">
-          {result.groupName}
-        </div>
-
+        <div className="group hyphenate">{result.groupName}</div>
       </div>
 
       <div className="resultDescription">
-        Artsorakelet gir {percentage} % treff for{" "}
+        {t("Extended_result.Percentage_for", { percentage: percentage })}
         <span
           className={
             result.vernacularName.toLowerCase() === result.name.toLowerCase()
@@ -60,12 +61,13 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
         >
           {result.vernacularName}
         </span>{" "}
-        basert på {n_pics === 1 ? "bildet ditt" : "dine " + n_pics + " bilder"}.
-        Det er ikke sagt at det stemmer, du må selv kontrollere at det er
-        riktig, særlig hvis du skal rapportere funnet.
+        {n_pics === 1
+          ? t("Extended_result.based_on_1_picture")
+          : t("Extended_result.based_on_x_pictures", { pictures: n_pics })}
+        {t("Extended_result.May_be_wrong")}
         {result.groupName === "Sopper" && (
           <div className="danger">
-            <WarningIcon /> ALDRI SPIS NOE BASERT PÅ ARTSORAKELETS SVAR
+            <WarningIcon /> {t("Extended_result.NEVER_EAT_ANYTHING")}
           </div>
         )}
       </div>
@@ -76,7 +78,7 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
           rel="noopener noreferrer"
           className="btn primary"
         >
-          Om arten
+          {t("Extended_result.About_the_species")}
         </a>
         <ReportButton
           reportResult={result}

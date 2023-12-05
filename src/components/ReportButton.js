@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import "../App.css";
 import { runningOnMobile } from "../utils/utils";
 import axios from "axios";
@@ -10,6 +12,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContentText from "@mui/material/DialogContentText";
 
 function ReportButton({ reportResult, croppedImages }) {
+  const { t } = useTranslation();
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [encryptionData, setEncryptionData] = useState(false);
   const [uploadingImages, setUploadingImages] = useState(false);
@@ -41,10 +45,9 @@ function ReportButton({ reportResult, croppedImages }) {
 
     if (runningOnMobile()) {
       // TODO: Await update from artsobsmobile before update, to ensure we don't redirect user to nonexistent page
-      platform = `platform%3D${"web"
-        }`;
+      platform = `platform%3D${"web"}`;
       reporttype = `?scientificname=${reportResult.scientificNameID}%26`;
-      
+
       url = "https://mobil.artsobservasjoner.no/#/";
       // REDIRECT TO THIS ONE
       // url += "report";
@@ -90,7 +93,7 @@ function ReportButton({ reportResult, croppedImages }) {
   return (
     <React.Fragment>
       <div className="btn primary" onClick={openDialog.bind(this)}>
-        Rapporter funn
+        {t("Report_button.Report")}
         {uploadingImages && <span className="littleSpinner"></span>}
       </div>
 
@@ -101,19 +104,18 @@ function ReportButton({ reportResult, croppedImages }) {
         fullWidth={true}
       >
         <DialogTitle id="alert-dialog-title">
-          {"Har du bekreftet arten?"}
+          {t("Report_button.Did_you_verify")}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Sjekk artsbestemmelsen selv før du rapporterer. Artsorakelet kan ta
-            feil også ved høy treffprosent. Vil du fortsette?
+            {t("Report_button.Check_independently")}
           </DialogContentText>
 
           <form action="" method="post" encType="multipart/form-data"></form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose} color="primary">
-            Avbryt
+            {t("Report_button.Cancel")}
           </Button>
           <Button
             onClick={(e) => {
@@ -122,7 +124,7 @@ function ReportButton({ reportResult, croppedImages }) {
             color="primary"
             autoFocus
           >
-            Fortsett
+            {t("Report_button.Continue")}
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,9 +1,14 @@
 {
-  "Ta eller velg et bilde for å starte": "Take or select a picture to get started",
-  "Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.": "Artsorakel does not recognize people, pets, garden plants, etc.",
-  "Identifiser": "Identify",
-  "Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av maskinlæring.": "Artsorakel is developed by the Norwegian Biodiversity Information Centre (NBIC, Artsdatabanken) in collaboration with Naturalis Biodiversity Center. The app attempts to identify species in pictures using machine learning.",
-  "Gjenkjenningsmodellen trenes hos Naturalis Biodiversity Center, med bilder som er offentlig tilgjengelig på artsobservasjoner.no. Når appen brukes sier modellen hva det ligner mest på av artene den har blitt trent med. Dette innebærer at den kun kan foreslå arter som finnes i Norsk natur og som har blitt rapportert med bilder. Den kjenner altså kun viltlevende arter (ingen mennesker, husdyr, rene hageplanter, osv.) og gir svar på artsnivå (og noen underarter).": "The recognition model is trained at Naturalis Biodiversity Center, using pictures that are publicly available on artsobservasjoner.no. When the app is used, the model will say which of the species it has been trained on is most similar. This means that it can only suggest species that are present in norwegian nature and that have been reported with pictures. It therefor only knows species in the wild (no people, pets, pure garden plants, etc.) and provides answers on a species level (and some subspecies).",
-  "Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon blir ikke tilgjengelige for Artsdatabanken eller andre.": "Pictures are sent to the server for recognition. Pictures and user information are not available to the NBIC or any third party.",
-  "about_readmore": "You can learn more about Artsorakel on <2>NBIC's website (in Norwegian)</2>. Questions and feedback may be sent to <5>support@artsobservasjoner.no</5>."
+  "Main": {
+    "Get_started": "Take or select a picture to get started",
+    "Artsorakel_limitations": "Artsorakel does not recognize people, pets, garden plants, etc.",
+    "Identify": "Identify"
+  },
+
+  "About": {
+    "App": "Artsorakel is developed by the Norwegian Biodiversity Information Centre (NBIC, Artsdatabanken) in collaboration with Naturalis Biodiversity Center. The app attempts to identify species in pictures using machine learning.",
+    "Model_training": "The recognition model is trained at Naturalis Biodiversity Center, using pictures that are publicly available on artsobservasjoner.no. When the app is used, the model will say which of the species it has been trained on is most similar. This means that it can only suggest species that are present in norwegian nature and that have been reported with pictures. It therefor only knows species in the wild (no people, pets, pure garden plants, etc.) and provides answers on a species level (and some subspecies).",
+    "Server_storage": "Pictures are sent to the server for recognition. Pictures and user information are not available to the NBIC or any third party.",
+    "Read_more": "You can learn more about Artsorakel on <2>NBIC's website (in Norwegian)</2>. Questions and feedback may be sent to <4>support@artsobservasjoner.no</4>."
+  }
 }

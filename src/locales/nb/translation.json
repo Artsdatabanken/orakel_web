@@ -1,9 +1,78 @@
 {
-  "Ta eller velg et bilde for å starte": "Ta eller velg et bilde for å starte",
-  "Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.": "Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.",
-  "Identifiser": "Identifiser",
-  "Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av maskinlæring.": "Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av maskinlæring.",
-  "Gjenkjenningsmodellen trenes hos Naturalis Biodiversity Center, med bilder som er offentlig tilgjengelig på artsobservasjoner.no. Når appen brukes sier modellen hva det ligner mest på av artene den har blitt trent med. Dette innebærer at den kun kan foreslå arter som finnes i Norsk natur og som har blitt rapportert med bilder. Den kjenner altså kun viltlevende arter (ingen mennesker, husdyr, rene hageplanter, osv.) og gir svar på artsnivå (og noen underarter).": "Gjenkjenningsmodellen trenes hos Naturalis Biodiversity Center, med bilder som er offentlig tilgjengelig på artsobservasjoner.no. Når appen brukes sier modellen hva det ligner mest på av artene den har blitt trent med. Dette innebærer at den kun kan foreslå arter som finnes i Norsk natur og som har blitt rapportert med bilder. Den kjenner altså kun viltlevende arter (ingen mennesker, husdyr, rene hageplanter, osv.) og gir svar på artsnivå (og noen underarter).",
-  "Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon blir ikke tilgjengelige for Artsdatabanken eller andre.": "Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon blir ikke tilgjengelige for Artsdatabanken eller andre.",
-  "Du kan lese mer om Artsorakelet på <a href='https://www.artsdatabanken.no/Pages/299643'>Artsdatabankens nettsider</a>. Spørsmål og tilbakemelding kan sendes til <a href='mailto:support@artsobservasjoner.no'>support@artsobservasjoner.no</a>.": "Du kan lese mer om Artsorakelet på <a href='https://www.artsdatabanken.no/Pages/299643'>Artsdatabankens nettsider</a>. Spørsmål og tilbakemelding kan sendes til <a href='mailto:support@artsobservasjoner.no'>support@artsobservasjoner.no</a>."
+  "Main": {
+    "Get_started": "Ta eller velg et bilde for å starte",
+    "Artsorakel_limitations": "Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.",
+    "Identify": "Identifiser"
+  },
+
+  "About": {
+    "App": "Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av maskinlæring.",
+    "Model_training": "Gjenkjenningsmodellen trenes hos Naturalis Biodiversity Center, med bilder som er offentlig tilgjengelig på artsobservasjoner.no. Når appen brukes sier modellen hva det ligner mest på av artene den har blitt trent med. Dette innebærer at den kun kan foreslå arter som finnes i Norsk natur og som har blitt rapportert med bilder. Den kjenner altså kun viltlevende arter (ingen mennesker, husdyr, rene hageplanter, osv.) og gir svar på artsnivå (og noen underarter).",
+    "Server_storage": "Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon blir ikke tilgjengelige for Artsdatabanken eller andre.",
+    "Read_more": "Du kan lese mer om Artsorakelet på <2>Artsdatabankens nettsider</2>. Spørsmål og tilbakemelding kan sendes til <4>support@artsobservasjoner.no</4>."
+  },
+
+  "Extended_manual": {
+    "App_info": "Artsdatabankens Artsorakel prøver å artsbestemme bilder ved hjelp av maskinlæring. Artsorakelet kjenner kun viltlevende arter (ingen mennesker, husdyr, rene hageplanter, osv.) og gir svar på artsnivå (og noen underarter).",
+    "Add_picture": "Legg til et bilde, enten ved å bruke kameraet, eller velge et bilde du har lagret.",
+    "Cropping": "Når du har lagt til bilde kommer redigeringsskjermen opp. Zoom inn og rotér slik at du får fokus på arten.",
+    "Adding_more_pictures": "Du kan legge til flere bilder, og det kan hjelpe på gjenkjenningen. Ta gjerne bilder fra forskjellige vinkler eller av ulike deler. Du har alltid muligheten til å trykke på bildene som er lagt til for å redigere dem på nytt eller fjerne dem.",
+    "Identify": "Tykk på «Identifiser». Bildene sendes til orakelet og etter kort tid har du fått resultatet! Resultatene vises med treffprosent for hver art.",
+    "Caveats_interpreting": "Nå er det din tur til å bruke hodet! En høy treffprosent i Artsorakelet garanterer ikke at resultatet er riktig. Artsorakelet prøver å matche bildene dine med bilder det har sett før, men mange arter har det sett få, dårlige eller ingen bilder av! Husdyr, hageplanter og mennesker har det ikke blitt trent med i det hele tatt, og heller ikke bilder som er unntatt offentlighet, som bilder av store rovdyr.",
+    "Interpret_and_report": "Trykker du på et resultat kan du lese mer om det, klikke videre og se mer om arten på Artsdatabankens nettside. Vi anbefaler deg å være litt detektiv i denne delen av prosessen. Let opp informasjon om de foreslåtte artene eller diskuter resultatet med andre som har kunnskap. Er du sikker på at du har et riktig resultat kan du rapportere funnet i Artsobservasjoner.no. Vennligst ikke rapporter funn kun basert på Artsorakelets svar.",
+    "A_few_tips": "Noen tips",
+    "Tips": {
+      "Testing_the_app": "Det er helt ok å teste appen med en selfie, et kjæledyr, eller noe eksotisk. Det er både gøy og en god måte å få erfaring med appen på. Husk bare at svaret ikke kommer til å stemme: appen kan kun kjenne igjen ville norske arter.",
+      "Unknown_species": "Husk også at appen kun har blitt trent med bilder som er åpent tilgjengelige. Den har for eksempel aldri sett en ulv fordi observasjoner av ulv er unntatt offentlighet. Den foreslår derfor aldri ulv som en mulighet.",
+      "Underreported_species": "Noen arter, for eksempel fisk, rapporteres relativt lite. Der er ikke Artsorakelet like flink. Hvis du rapporterer med bilde på Artsobservasjoner.no bidrar du til å gjøre neste versjon av Artsorakelet bedre.",
+      "Uncertain_results": "Er gjenkjenningen usikker? Det kan hjelpe å legge til flere bilder av samme eksemplar, fra forskjellige deler eller vinkler.",
+      "Do_more_research": "Høy treffprosent er ikke det samme som høy sikkerhet, og svar med høy score kan være feil. Sammenlign med bilder, bøker, eller spør noen som kan hjelpe deg.",
+      "Critical_situations": "Aldri ta svaret for gitt i viktige situasjoner. Ikke bruk Artsorakelet til å vurdere om noe er giftig eller ikke, for eksempel."
+    }
+  },
+
+  "Extended_result": {
+    "Percentage_for": "Artsorakelet gir {{percentage}} % treff for",
+    "based_on_1_picture": "basert på bildet ditt.",
+    "based_on_x_pictures": "basert på dine {{pictures}} bilder.",
+    "Result_may_be_wrong": "Det er ikke sagt at det stemmer, du må selv kontrollere at det er riktig, særlig hvis du skal rapportere funnet.",
+    "NEVER_EAT_ANYTHING": "ALDRI SPIS NOE BASERT PÅ ARTSORAKELETS SVAR",
+    "About_the_species": "Om arten"
+  },
+
+  "Brief_result_NEVER_EAT_ANYTHING": "ALDRI SPIS NOE PGA APPEN",
+  "Image_cropper_hint": "Zoom og flytt til motivet fyller firkanten",
+
+  "Menu": {
+    "Dark_mode_disable": "Slå av nattmodus",
+    "Dark_mode_enable": "Slå på nattmodus",
+    "Change_language_to": "Endre språk til",
+    "Restart_app": "Restart appen",
+    "App_on_google_play": "Artsorakelet på Google Play",
+    "App_in_app_store": "Artsorakelet i App Store",
+    "Manual": "Bruksanvisning",
+    "About": "Om Artsorakelet"
+  },
+
+  "Report_button": {
+    "Report": "Rapporter funn",
+    "Did_you_verify": "Har du bekreftet arten?",
+    "Check_independently": "Sjekk artsbestemmelsen selv før du rapporterer. Artsorakelet kan ta feil også ved høy treffprosent. Vil du fortsette?",
+    "Cancel": "Avbryt",
+    "Continue": "Fortsett"
+  },
+
+  "Short_manual": {
+    "Take_picture": "Ta eller velg et bilde av en art i norsk natur",
+    "Zoom": "Zoom inn til arten på bildet",
+    "Multiple_pics": "Flere bilder gir sikrere gjenkjenning",
+    "Identify": "Trykk «identifiser» for å se hva det kan være!"
+  },
+
+  "Errors": {
+    "503": "Artsorakelet opplever stor trafikk for tiden. Vennligst prøv igjen.",
+    "429": "For mange forsøk fra samme bruker, vent noen minutter og prøv igjen.",
+    "Generic": "Noe gikk galt, vennligst prøv igjen. Ta kontakt med <2>support@artsobservasjoner.no</2> hvis problemet vedvarer.",
+    "Code": "Kode: {{code}}"
+  }
 }

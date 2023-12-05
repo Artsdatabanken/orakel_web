@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -17,7 +17,6 @@ import ExtendedManual from "./components/ExtendedManual";
 
 function App() {
   const { t } = useTranslation();
-
 
   const [croppedImages, setCroppedImages] = useState([]);
   const [uncroppedImages, setUncroppedImages] = useState([]);
@@ -245,12 +244,9 @@ function App() {
           >
             {!croppedImages.length && (
               <div className="placeholder-container">
-                <h1 className="placeholder-title">
-                {t("Ta eller velg et bilde for å starte")}
-                  
-                </h1>
+                <h1 className="placeholder-title">{t("Main.Get_started")}</h1>
                 <p className="placeholder-body">
-                {t("Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.")}
+                  {t("Main.Artsorakel_limitations")}
                 </p>
               </div>
             )}
@@ -282,7 +278,7 @@ function App() {
         >
           {inputStage && !!croppedImages.length && (
             <div className="top-btn" onClick={getId} tabIndex="0">
-              <div className="btn id primary">{t("Identifiser")}</div>
+              <div className="btn id primary">{t("Main.Identify")}</div>
             </div>
           )}
 

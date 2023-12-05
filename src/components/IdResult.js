@@ -1,9 +1,13 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
+
 import "../App.css";
 import TaxonImage from "./taxonImage";
 import ResultGauge from "./resultGauge";
 
 function IdResult({ result, openResult, croppedImages }) {
+  const {t} = useTranslation()
   const openResultModal = () => {
     openResult(result);
   };
@@ -40,7 +44,7 @@ function IdResult({ result, openResult, croppedImages }) {
         </div>
         <div className="group">{result.groupName}</div>
         {result.groupName === "Sopper" && (
-          <div className="danger">ALDRI SPIS NOE PGA APPEN</div>
+          <div className="danger">{t("Brief_result_NEVER_EAT_ANYTHING")}</div>
         )}
         <ResultGauge result={result} />
       </div>
