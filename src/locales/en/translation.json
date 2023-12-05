@@ -48,5 +48,12 @@
     "Zoom": "Zoom in on the species in the picture",
     "Multiple_pics": "Adding more pictures improves recognition",
     "Identify": "Press \"Identify\" to see what it could be!"
+  },
+
+  "Errors": {
+    "503": "Artsorakel has a lot of traffic right now. Please try again.",
+    "429": "Too many requests from the same user, wait a few minutes and try again.",
+    "Generic": "Something went wrong, please try again. Contact <2>support@artsobservasjoner.no</2> if the problem persists.",
+    "Code": "Code: {{code}}"
   }
 }
