@@ -63,7 +63,7 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
         </span>{" "}
         {n_pics === 1
           ? t("Extended_result.based_on_1_picture")
-          : t("Extended_result.based_on_x_pictures", { pictures: n_pics })}
+          : t("Extended_result.based_on_x_pictures", { pictures: n_pics })}{" "}
         {t("Extended_result.May_be_wrong")}
         {result.groupName === "Sopper" && (
           <div className="danger">

@@ -35,7 +35,7 @@
     "Percentage_for": "Artsorakelet gir {{percentage}} % treff for",
     "based_on_1_picture": "basert på bildet ditt.",
     "based_on_x_pictures": "basert på dine {{pictures}} bilder.",
-    "Result_may_be_wrong": "Det er ikke sagt at det stemmer, du må selv kontrollere at det er riktig, særlig hvis du skal rapportere funnet.",
+    "May_be_wrong": "Det er ikke sagt at det stemmer, du må selv kontrollere at det er riktig, særlig hvis du skal rapportere funnet.",
     "NEVER_EAT_ANYTHING": "ALDRI SPIS NOE BASERT PÅ ARTSORAKELETS SVAR",
     "About_the_species": "Om arten"
   },
