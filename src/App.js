@@ -246,11 +246,11 @@ function App() {
             {!croppedImages.length && (
               <div className="placeholder-container">
                 <h1 className="placeholder-title">
-                {t('Ta eller velg et bilde for å starte')}
+                {t("Ta eller velg et bilde for å starte")}
                   
                 </h1>
                 <p className="placeholder-body">
-                {t('Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.')}
+                {t("Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.")}
                 </p>
               </div>
             )}
@@ -282,7 +282,7 @@ function App() {
         >
           {inputStage && !!croppedImages.length && (
             <div className="top-btn" onClick={getId} tabIndex="0">
-              <div className="btn id primary">Identifiser</div>
+              <div className="btn id primary">{t("Identifiser")}</div>
             </div>
           )}
 

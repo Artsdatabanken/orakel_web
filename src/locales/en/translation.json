@@ -1,3 +1,7 @@
 {
-    "Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.": "Artsorakel does not recognize people, pets, garden plants, etc."
+    "Ta eller velg et bilde for å starte": "Take or select a picture to get started",
+    "Artsorakelet kjenner ikke igjen mennesker, husdyr, hageplanter, osv.": "Artsorakel does not recognize people, pets, garden plants, etc.",
+    "Identifiser": "Identify",
+    "Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av maskinlæring.":
+    "Artsorakel is developed by the Norwegian Biodiversity Information Centre (Artsdatabanken) in collaboration with Naturalis Biodiversity Center. The app attempts to identify species in pictures using machine learning."
 }
