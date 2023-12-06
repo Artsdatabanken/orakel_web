@@ -5,6 +5,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import translationNB from './locales/nb/translation.json';
 import translationNN from './locales/nn/translation.json';
 import translationEN from './locales/en/translation.json';
+import translationNL from './locales/nl/translation.json';
+
 
 
 i18n
@@ -30,6 +32,9 @@ i18n
       },
       en: {
         translation: translationEN
+      },
+      nl: {
+        translation: translationNL
       },
     }
   });
