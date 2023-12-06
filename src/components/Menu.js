@@ -50,6 +50,13 @@ function Menu({
         <TranslateIcon />
       </div>
 
+      <div className="menuItem" onClick={() => i18next.changeLanguage("nn")}>
+        <div>
+          {t("Menu.Change_language_to")}: Norsk Nynorsk
+        </div>
+        <TranslateIcon />
+      </div>
+
 
       <div className="menuItem" onClick={resetImages}>
         <div>{t("Menu.Restart_app")}</div>

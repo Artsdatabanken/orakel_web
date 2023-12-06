@@ -1,1 +1,78 @@
-{}
+{
+  "Main": {
+    "Get_started": "Ta eller vel eit bilete for å starte",
+    "Artsorakel_limitations": "Artsorakelet kjenner ikkje att folk, husdyr, hageplantar, osv.",
+    "Identify": "Identifiser"
+  },
+
+  "About": {
+    "App": "Artsorakelet er utvikla av Artsdatabanken i samarbeid med Naturalis Biodiversity Center. Appen prøver å artsbestemma bilete ved hjelp av maskinlæring.",
+    "Model_training": "Kjenningsmodellen vert trent hos Naturalis Biodiversity Center, med bilete som er offentleg tilgjengelege på artsobservasjoner.no. Når appen vert brukt, seier modellen kva det liknar mest på av artane den har blitt trent med. Dette inneber at den berre kan føreslå artar som finst i norsk natur og som har blitt rapportert med bilete. Den kjenner altså berre ville artar (ingen folk, husdyr, reine hageplantar, osv.) og gjev svar på artsnivå (og nokre underartar).",
+    "Server_storage": "Bilete vert sendt til serveren for gjenkjenning. Bilete og brukarinformasjon blir ikkje tilgjengelege for Artsdatabanken eller andre.",
+    "Read_more": "Du kan lese meir om Artsorakelet på <2>nettsidene til Artsdatabanken</2>. Spørsmål og tilbakemelding kan sendast til <4>support@artsobservasjoner.no</4>."
+  },
+
+  "Extended_manual": {
+    "App_info": "Artsdatabankens Artsorakel prøver å artsbestemma bilete ved hjelp av maskinlæring. Artsorakelet kjenner berre ville artar (ingen folk, husdyr, reine hageplantar, osv.) og gjev svar på artsnivå (og nokre underartar).",
+    "Add_picture": "Legg til eit bilete, anten ved å bruke kameraet, eller velje eit bilete du har lagra.",
+    "Cropping": "Når du har lagt til bilete kjem redigeringsskjermen opp. Zoom inn og roter slik at du får fokus på arten.",
+    "Adding_more_pictures": "Du kan leggja til fleire bilete, og det kan hjelpe på gjenkjenninga. Ta gjerne bilete frå ulike vinklar eller av ulike delar. Du har alltid mogelegheita til å trykkje på bileta som er lagt til for å redigere dei på nytt eller fjerne dei.",
+    "Identify": "Trykk på «Identifiser». Bileta vert sende til orakelet og etter kort tid har du fått resultatet! Resultata vert viste med treffprosent for kvar art.",
+    "Caveats_interpreting": "No er det din tur til å bruke hovudet! Ein høg treffprosent i Artsorakelet garanterer ikkje at resultatet er rett. Artsorakelet prøver å matche bileta dine med bilete det har sett før, men mange artar har det sett få, dårlege eller ingen bilete av! Husdyr, hageplantar og folk har det ikkje blitt trent med i det heile, og heller ikkje bilete som er unnateke offentlegheita, som bilete av store rovdyr.",
+    "Interpret_and_report": "Trykker du på eit resultat kan du lese meir om det, klikke vidare og sjå meir om arten på Artsdatabanken si nettside. Vi rår deg til å vere litt detektiv i denne delen av prosessen. Søk opp informasjon om dei føreslegne artane eller diskuter resultatet med andre som har kunnskap. Er du sikker på at du har eit rett resultat kan du rapportere funnet i Artsobservasjoner.no. Vennlegst ikkje rapporter funn berre basert på Artsorakelets svar.",
+    "A_few_tips": "Nokre tips",
+    "Tips": {
+      "Testing_the_app": "Det er heilt ok å teste appen med ein selfie, eit kjæledyr, eller noko eksotisk. Det er både gøy og ein god måte å få erfaring med appen på. Hugs berre at svaret ikkje kjem til å stemme: appen kan berre kjenne igjen ville norske artar.",
+      "Unknown_species": "Hugs også at appen berre er trent med bilete som er ope tilgjengelege. Den har til dømes aldri sett ein ulv fordi observasjonar av ulv er unntatt offentlegheit. Den føreslår derfor aldri ulv som ein moglegheit.",
+      "Underreported_species": "Nokre artar, til dømes fisk, vert relativt lite rapporterte. Der er ikkje Artsorakel like flink. Om du rapporterer med bilete på Artsobservasjoner.no bidreg du til å gjere neste versjon av Artsorakel betre.",
+      "Uncertain_results": "Er gjenkjenninga usikker? Det kan hjelpe å legge til fleire bilete av same eksemplar, frå ulike delar eller vinklar.",
+      "Do_more_research": "Høg treffprosent er ikkje det same som høg sikkerheit, og svar med høg score kan vere feil. Samanlikn med bilete, bøker, eller spør nokon som kan hjelpe deg.",
+      "Critical_situations": "Aldri ta svaret for gitt i viktige situasjonar. Ikkje bruk Artsorakel til å vurdere om noko er giftig eller ikkje, til dømes."
+    }
+  },
+
+  "Extended_result": {
+    "Percentage_for": "Artsorakel gjev {{percentage}} % treff for",
+    "based_on_1_picture": "basert på biletet ditt.",
+    "based_on_x_pictures": "basert på dine {{pictures}} bilete.",
+    "May_be_wrong": "Det er ikkje sagt at det stemmer, du må sjølv kontrollere at det er rett, særleg om du skal rapportere funnet.",
+    "NEVER_EAT_ANYTHING": "ALDRI SPISE NOKO BASERT PÅ SVAR FRÅ ARTSORAKEL",
+    "About_the_species": "Om arten"
+  },
+
+  "Brief_result_NEVER_EAT_ANYTHING": "ALDRI SPISE NOKO PGA APPEN",
+  "Image_cropper_hint": "Zoom inn og flytt slik at motivet fyller firkanten",
+
+  "Menu": {
+    "Dark_mode_disable": "Slå av nattmodus",
+    "Dark_mode_enable": "Slå på nattmodus",
+    "Change_language_to": "Endre språk til",
+    "Restart_app": "Start appen på nytt",
+    "App_on_google_play": "Artsorakel på Google Play",
+    "App_in_app_store": "Artsorakel i App Store",
+    "Manual": "Bruksanvising",
+    "About": "Om Artsorakel"
+  },
+
+  "Report_button": {
+    "Report": "Rapporter funn",
+    "Did_you_verify": "Har du sjekka arten?",
+    "Check_independently": "Sjekk artsbestemminga sjølv før du rapporterer. Artsorakel kan ta feil også ved høg treffprosent. Vil du halde fram?",
+    "Cancel": "Avbryt",
+    "Continue": "Framhald"
+  },
+
+  "Short_manual": {
+    "Take_picture": "Ta eller vel eit bilete av ein art i norsk natur",
+    "Zoom": "Zoom inn til arten på biletet",
+    "Multiple_pics": "Fleire bilete gir sikrare gjenkjenning",
+    "Identify": "Trykk «identifiser» for å sjå kva det kan vere!"
+  },
+
+  "Errors": {
+    "503": "Artsorakel opplever stor trafikk for tida. Prøv igjen seinare.",
+    "429": "For mange forsøk frå same brukar, vent nokre minuttar og prøv igjen.",
+    "Generic": "Noko gjekk gale, prøv igjen. Ta kontakt med <2>support@artsobservasjoner.no</2> om problemet vedvarar.",
+    "Code": "Kode: {{code}}"
+  }
+}
