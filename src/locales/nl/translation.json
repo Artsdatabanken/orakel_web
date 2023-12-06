@@ -1,0 +1,78 @@
+{
+  "Main": {
+    "Get_started": "Neem of selecteer een foto om te beginnen",
+    "Artsorakel_limitations": "Artsorakel herkent geen mensen, huisdieren, tuinplanten, enz.",
+    "Identify": "Identificeer"
+  },
+
+  "About": {
+    "App": "Artsorakel is ontwikkeld door Artsdatabanken in samenwerking met Naturalis Biodiversity Center. De app probeert afbeeldingen te determineren met behulp van machine learning.",
+    "Model_training": "Het herkenningsmodel wordt getraind bij Naturalis Biodiversity Center, met afbeeldingen die openbaar beschikbaar zijn op artsobservasjoner.no. Wanneer de app wordt gebruikt, zegt het model op welke soort het het meest lijkt, van de soorten waarmee het is getraind. Dit betekent dat het alleen soorten kan voorstellen die voorkomen in de Noorse natuur en die zijn gerapporteerd met afbeeldingen. Het kent dus alleen in het wild levende soorten (geen mensen, huisdieren, zuivere tuinplanten, enz.) en geeft antwoord op soortniveau (en sommige ondersoorten).",
+    "Server_storage": "Afbeeldingen worden naar de server gestuurd voor herkenning. Afbeeldingen en gebruikersinformatie zij  niet toegankelijk voor Artsdatabanken of anderen.",
+    "Read_more": "Je kunt meer lezen over Artsorakel op <2>de website van Artsdatabanken (in het Noors)</2>. Vragen en feedback kunnen worden gestuurd naar <4>support@artsobservasjoner.no</4>."
+  },
+
+  "Extended_manual": {
+    "App_info": "Artsorakel van Artsdatabanken probeert soorten in afbeeldingen te herkennen met behulp van machine learning. Artsorakel kent alleen in het wild levende soorten (geen mensen, huisdieren, zuivere tuinplanten, enz.) en geeft antwoord op soortniveau (en sommige ondersoorten).",
+    "Add_picture": "Voeg een afbeelding toe, door de camera te gebruiken, of door een eerder opgeslagen afbeelding te kiezen.",
+    "Cropping": "Wanneer je een afbeelding hebt toegevoegd, verschijnt het bewerkingsscherm. Zoom in en roteer zodat de soort goed zichtbaar is.",
+    "Adding_more_pictures": "Je kunt meer afbeeldingen toevoegen, en dat kan de herkenning helpen. Neem vooral afbeeldingen vanuit verschillende hoeken of van verschillende delen. Je hebt altijd de mogelijkheid om op de toegevoegde afbeeldingen te klikken om e opnieuw te bewerken of te verwijderen.",
+    "Identify": "Klik op \"Identificeer\". De afbeeldingen worden naar het orakel gestuurd en na korte tijd heb je het resultaat! De resultaten worden getoond met een trefferspercentage voor elke soort.",
+    "Caveats_interpreting": "Nu is het jouw beurt om na te denken! Een hoog trefferspercentage in Artsorakel garandeert niet dat het resultaat juist is. Artsorakel probeert je afbeeldingen te matchen met afbeeldingen die het eerder heeft gezien, maar van veel soorten heeft het weinig, slechte of geen afbeeldingen gezien! Op huisdieren, tuinplanten en mensen is helemaal niet getraind, net als afbeeldingen die zijn uitgezonderd van openbaarheid, zoals afbeeldingen van grote roofdieren.",
+    "Interpret_and_report": "Als je op een resultaat klikt, kun je er meer over lezen, verder klikken en meer over de soort zien op de website van Artsdatabanken. We raden je aan om een beetje eigen onderzoek te doen in dit deel van het proces. Zoek informatie op over de voorgestelde soorten of bespreek het resultaat met anderen met soortenkennis. Als je zeker weet dat je een juist resultaat hebt, kun je de vondst rapporteren op Artsobservasjoner.no. Rapporteer alsjeblieft geen vondsten alleen gebaseerd op de antwoorden van Artsorakel.",
+    "A_few_tips": "Een paar tips",
+    "Tips": {
+      "Testing_the_app": "Het is helemaal oké om de app te testen met een selfie, een huisdier, of iets exotisch. Het is zowel leuk als een goede manier om ervaring op te doen met de app. Onthoud wel dat het antwoord niet zal kloppen: de app kan alleen wilde Noorse soorten herkennen.",
+      "Unknown_species": "Bedenk ook dat de app alleen is getraind met afbeeldingen die openbaar beschikbaar zijn. Het heeft bijvoorbeeld nooit een wolf gezien omdat observaties van wolven niet publiek toegankelijk zijn. Het stelt daarom nooit een wolf voor als een mogelijkheid.",
+      "Underreported_species": "Sommige soorten, zoals vissen, worden relatief weinig gerapporteerd. Daar is Artsorakel niet zo goed in. Als je een afbeelding op Artsobservasjoner.no rapporteert, draag je bij aan het verbeteren van de volgende versie van Artsorakel.",
+      "Uncertain_results": "Is de herkenning onzeker? Het kan helpen om meer afbeeldingen van hetzelfde exemplaar toe te voegen, van verschillende delen of venuit verschillende hoeken.",
+      "Do_more_research": "Hoge trefferspercentages zijn niet hetzelfde als hoge zekerheid, en antwoorden met een hoge score kunnen alsnog onjuist zijn. Vergelijk met andere afbeeldingen, boeken, of vraag iemand die je kan helpen.",
+      "Critical_situations": "Neem het antwoord nooit voor lief in belangrijke situaties. Gebruik Artsorakel niet om te beoordelen of iets giftig is of niet, bijvoorbeeld."
+    }
+  },
+
+  "Extended_result": {
+    "Percentage_for": "Artsorakel geeft een {{percentage}} % match voor",
+    "based_on_1_picture": "gebaseerd op jouw afbeelding.",
+    "based_on_x_pictures": "gebaseerd op jouw {{pictures}} afbeeldingen.",
+    "May_be_wrong": "Dat wil niet zeggen dat het klopt, je moet zelf controleren of het juist is, vooral als je de vondst wilt rapporteren.",
+    "NEVER_EAT_ANYTHING": "EET NOOIT IETS GEBASEERD OP ANTWOORDEN VAN ARTSORAKEL",
+    "About_the_species": "Over de soort"
+  },
+
+  "Brief_result_NEVER_EAT_ANYTHING": "EET NOOIT IETS VANWEGE DE APP",
+  "Image_cropper_hint": "Zoom in en verschuif zodat de soort het vierkant vult",
+
+  "Menu": {
+    "Dark_mode_disable": "Zet nachtmodus uit",
+    "Dark_mode_enable": "Zet nachtmodus aan",
+    "Change_language_to": "Verander taal naar",
+    "Restart_app": "Herstart de app",
+    "App_on_google_play": "Artsorakel op Google Play",
+    "App_in_app_store": "Artsorakel in de App Store",
+    "Manual": "Handleiding",
+    "About": "Over Artsorakel"
+  },
+
+  "Report_button": {
+    "Report": "Rapporteer vondst",
+    "Did_you_verify": "Heb je de soort bevestigd?",
+    "Check_independently": "Controleer de soortbepaling zelf voordat je rapporteert. Artsorakel kan ook bij een hoog trefferspercentage fouten maken. Wil je doorgaan?",
+    "Cancel": "Annuleren",
+    "Continue": "Doorgaan"
+  },
+
+  "Short_manual": {
+    "Take_picture": "Neem of kies een foto van een soort in de Noorse natuur",
+    "Zoom": "Zoom in op de soort in de afbeelding",
+    "Multiple_pics": "Meerdere afbeeldingen geven een betere herkenning",
+    "Identify": "Druk op \"identificeer\" om te zien wat het kan zijn!"
+  },
+
+  "Errors": {
+    "503": "Artsorakel krijgt momenteel veel verkeer. Probeer het later opnieuw.",
+    "429": "Te veel pogingen van dezelfde gebruker, wacht enkele minuten en probeer het opnieuw.",
+    "Generic": "Er ging iets mis, probeer het opnieuw. Neem contact op met <2>support@artsobservasjoner.no</2> als het probleem zich blijft voordoen.",
+    "Code": "Code: {{code}}"
+  }
+}
