@@ -39,6 +39,10 @@ v rød/grønn knapp korall + vintergrønn
   --sand-10: #FFFCF7; /* Ny bg-farge*/
   --fresh-water-blue:#005B72;
   --fresh-water-blue-light: #0283a1; /* Ferskvannblå*/
+  --fresh-water-blue-80:#337B8D;
+
+  --fresh-water-blue-20:#CCDEE3;
+  --fresh-water-blue-10:#E6EFF1;
   --info:var(--fresh-water-blue);
   --base-size:8px;
   --gap:var(--base-size);
@@ -51,27 +55,29 @@ v rød/grønn knapp korall + vintergrønn
   --border-width: 2px;
   --focus-border-width: 3px;
   --icon-button-size: 40px;
-  --focus-color: var(--summer-grass-green);
+  --big-round-button-size:60px;
+  --focus-color: var(--fresh-water-blue-light);
   --focus-outline:var(--focus-border-width) solid var(--focus-color);
   --body-color:var(--ocean-dark);
 }
 
+/*
 :root *:focus {
-  outline: none;
-}
+  outline: none; NOOOO WHYY NEVER EVER EVER DO THIS
+}*/
 
 .lightmode {
   --bg-clr: var(--summer-grass-green);
   --box-clr: var(--sand-50);
   /* Buttons */
-  --primary-clr: var(--summer-grass-green);
+  --primary-clr: var(--fresh-water-blue);
   --text-clr-on-primary:#fff;
 
-  --secondary-clr: var(--summer-grass-green-50);
+  --secondary-clr: var(--fresh-water-blue-20);
   --text-clr-on-secondary:var(--body-color);
 
-  --primary-color-hover: var(--summer-grass-green-80);
-  --secondary-color-hover: var(--summer-grass-green-10);
+  --primary-color-hover: var(--fresh-water-blue-80);
+  --secondary-color-hover: var(--fresh-water-blue-10);
 
   /* Other stuff */
   
@@ -150,20 +156,6 @@ ul {
 /* BUTTONS */
 /* Based on design system in AO3. */
 
-button:focus-visible,
-button:focus:not(:focus-visible),
-.primary:focus,
-.secondary:focus,
-.text-button:focus,
-.ghost:focus {
-    outline: var(--focus-outline);
-    border-color: var(--box-clr);
-}
-
-button:hover {
-  cursor: pointer;
-}
-
 button,
 .btn {
   padding: var(--padding-vertical) var(--padding-horisontal);
@@ -177,15 +169,27 @@ button,
   margin-left: 0;
 }
 
-.btn svg {
-height: 1.3em;
+
+/* Focus */
+:focus{
+  outline: 2px solid pink;
+  border:2px solid yellow;
 }
 
-.btn > span {
-flex-grow: 1;
-padding: 1rem;
+button:focus,
+.btn:focus{
+    outline: var(--focus-outline);
+    border-color: var(--box-clr);
 }
 
+/* Hover */
+button:hover,
+.btn:hover {
+  cursor: pointer;
+  border-color:pink;
+}
+
+/* Button styles */
 .primary {
   background-color: var(--primary-clr);
   color: var(--text-clr-on-primary);
@@ -210,15 +214,56 @@ padding: 1rem;
     border-color: var(--secondary-color-hover);
 }
 
-.newImageButton {
-  font-size: 3.5rem;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 50%;
-  position: absolute;
-  transform-origin: center;
-  transform: translateX(-50%);
+
+
+/* Specific Buttons */
+
+.menu-button{
+  background:transparent;
+  color:white;
+  border: none;
 }
+
+/* Do we need ghost button? I think not? */
+
+/* delete button etc. */
+
+.icon-button,
+.big-round-button{
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+}
+
+.icon-button {    
+  width: var(--icon-button-size);
+  height: var(--icon-button-size);
+  min-width: var(--icon-button-size);
+  min-height: var(--icon-button-size);
+}
+
+
+.big-round-button{
+  width: var(--big-round-button-size);
+  height: var(--big-round-button-size);
+  min-width: var(--big-round-button-size);
+  min-height: var(--big-round-button-size);
+}
+
+
+/* Are we sure we want these? */
+.danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: var(--text-clr-on-primary);
+}
+
+.ok {
+  background-color: var(--ok);
+  border-color: var(--ok);
+  color: var(--text-clr-on-primary);
+}
+
 
 .galleryButton {
   display: flex;
@@ -239,6 +284,26 @@ padding: 1rem;
 .hidden.bottomButtons {
   display: none;
 }
+
+/* Button icons */
+
+button svg,
+.btn svg {
+  vertical-align: text-top;
+  font-size: var(--icon-size);
+  line-height: var(--button-font-size);
+  margin-right: var(--gap);
+  height:var(--icon-size);
+  vertical-align: center;
+}
+
+button.big-round-button svg,
+.btn.big-round-button svg,
+button.icon-button svg,
+.btn.icon-button svg {
+  margin-right: 1px;
+}
+
 /* OTHER STUFF */
 
 .bottom-section::after {
@@ -380,9 +445,10 @@ padding: 1rem;
 .bottomButtons {
   z-index: 2;
   position: absolute;
+  text-align: center;
   left: 0;
   width: 100%;
-  margin-left: 50%;
+  right: 0;
   height: 6rem;
   bottom: calc(1rem + constant(safe-area-inset-bottom));
   bottom: calc(1rem + env(safe-area-inset-bottom));
@@ -551,10 +617,11 @@ input {
   margin: 1rem;
 }
 
+/*
 .cropContainer svg {
   height: 1.5rem;
   cursor: pointer;
-}
+}*/
 
 .modal {
   position: absolute;
@@ -742,21 +809,9 @@ hr {
   word-wrap: break-word;
 }
 
-.danger {
-  background-color: var(--danger);
-  border-color: var(--text-clr-on-primary);
-  color: var(--text-clr-on-primary);
-}
 
-.ok {
-  background-color: var(--ok);
-  border-color: var(--text-clr-on-primary);
-  color: var(--text-clr-on-primary);
-}
 
-.danger svg {
-  margin-right: 0.3em;
-}
+
 
 #modal .vernacular {
   font-size: 2em;

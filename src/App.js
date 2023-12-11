@@ -29,6 +29,8 @@ function App() {
   const [gotError, setError] = useState(false);
 
   document.addEventListener("backbutton", onBackKeyDown, false);
+
+  // i18 språkstøtte ?
   
 
   function onBackKeyDown() {
@@ -227,13 +229,11 @@ function App() {
 
         <div className="image-section">
           <div className="topBar">
-            <MenuIcon
-              className={
-                "menu-icon" + (!inputStage && !resultStage ? " hidden" : "")
-              }
-              style={{ fontSize: "2em" }}
-              onClick={toggleMenu}
-            />
+          <button onClick={toggleMenu} className={
+                "menu-button menu-icon icon-button" + (!inputStage && !resultStage ? " hidden" : "")
+              } title="Menu" aria-label="Meny">
+              <MenuIcon/>
+            </button>          
 
             <img
               src="Artsdatabanken_notext_mono_white.svg"
@@ -333,10 +333,10 @@ function App() {
           <div className={"bottomButtons " + (inputStage ? "" : "hidden")}>
 
             <button
-              className="bottomButton newImageButton primary clickable"
+              className="bottomButton big-round-button primary clickable"
               
             >
-              <AddAPhotoIcon style={{ fontSize: ".8em" }} />
+              <AddAPhotoIcon />
               <input
                 className="clickable"
                 type="file"
