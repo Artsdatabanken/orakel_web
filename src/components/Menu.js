@@ -8,7 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ReplayIcon from "@mui/icons-material/Replay";
 
-function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual }) {
+function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual, toggleMenu }) {
 
   const openAbout = () => {
     toggleAbout(true);
@@ -19,49 +19,63 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
   };
 
   return (
-    <div className="content">
-      <CloseIcon />
-      <div className="menuItem" onClick={toggleDarkMode}>
+
+     <nav class="menu">
+
+        <ul> 
+          <li className="menuItem">
+            <a href="https://play.google.com/store/apps/details?id=no.artsdatabanken.orakel"
+                target="_blank"
+                rel="noopener noreferrer">
+              <span>Artsorakelet på Google Play</span>
+              <ShopOutlinedIcon />
+            </a>
+
+          </li>
+          <li className="menuItem">
+            <a
+              href="https://apps.apple.com/no/app/id1522271415"
+              target="_blank"
+              rel="noopener noreferrer"
+              
+            >
+              <span>Artsorakelet i App Store</span>
+              <AppleIcon />
+            </a>
+          </li>
+
+          <li className="menuItem" >
+            <button onClick={openManual}>
+            <div>Bruksanvisning</div>
+            <MenuBookIcon /></button>
+          </li>
+
+          <li className="menuItem" >
+            <button onClick={openAbout} >
+            <span>Om Artsorakelet</span>
+            <InfoOutlinedIcon /></button>
+          </li>
+
+        </ul>
+
+      <h2>Settings</h2>
+      {/* Move to settings*/}
+        <div className="menuItem" onClick={toggleDarkMode}>
         <div>Slå {darkMode ? "av" : "på"} nattmodus</div>
         <Brightness4Icon />
       </div>
+      
 
+      
+   {/* 
       <div className="menuItem" onClick={resetImages}>
         <div>Restart appen</div>
         <ReplayIcon />
-      </div>
+      </div>*/}
+    
+      
+      </nav>
 
-      <a
-        href="https://play.google.com/store/apps/details?id=no.artsdatabanken.orakel"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="menuItem"
-      >
-        <div>Artsorakelet på Google Play</div>
-        <ShopOutlinedIcon />
-      </a>
-
-
-      <a
-        href="https://apps.apple.com/no/app/id1522271415"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="menuItem"
-      >
-        <div>Artsorakelet i App Store</div>
-        <AppleIcon />
-      </a>
-
-      <div className="menuItem" onClick={openManual}>
-        <div>Bruksanvisning</div>
-        <MenuBookIcon />
-      </div>
-
-      <div className="menuItem" onClick={openAbout}>
-        <div>Om Artsorakelet</div>
-        <InfoOutlinedIcon />
-      </div>
-    </div>
   );
 }
 

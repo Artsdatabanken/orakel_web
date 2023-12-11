@@ -173,38 +173,23 @@ function App() {
           (darkMode ? " darkmode" : " lightmode")
         }
       >
-        {/* Modal med les mer om artsinfo */}
-        <div
-          id="modal"
-          className={
-            "modal " +
-            (!!chosenPrediction | aboutVisible | extendedManualVisible
-              ? "visible"
-              : "invisible")
-          }
-        onClick={closeModal}
-        >
-          <div
-            className="content"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <button onClick={closeModal} class="menu-button menu-icon icon-button inverted" title="Lukk menu" aria-label="Lukk meny"><CloseIcon  /></button>
 
-            {!!chosenPrediction && (
-              <ExtendedResult
-                result={chosenPrediction}
-                croppedImages={croppedImages}
-              />
-            )}
+        <div className="topBar">
+          <button onClick={toggleMenu} className={
+              "menu-button menu-icon icon-button" + (!inputStage && !resultStage ? " hidden" : "")
+            } title="Menu" aria-label="Meny">
+            <MenuIcon/>
+          </button>          
 
-            {aboutVisible && <About />}
-
-            {extendedManualVisible && <ExtendedManual />}
-          </div>
+          <img
+            src="Artsdatabanken_notext_mono_white.svg"
+            alt="Artsdatabanken"
+            className={
+              "logo" + (!inputStage && !resultStage ? " hidden" : "")
+            }
+          />
         </div>
-
+        {/* Modal med: meny? */}
         <div
           id="menu"
           className={"modal " + (menuVisible ? "visible" : "invisible")}
@@ -219,126 +204,155 @@ function App() {
           />
         </div>
 
-        <div className="image-section">
-          <div className="topBar">
-          <button onClick={toggleMenu} className={
-                "menu-button menu-icon icon-button" + (!inputStage && !resultStage ? " hidden" : "")
-              } title="Menu" aria-label="Meny">
-              <MenuIcon/>
-            </button>          
-
-            <img
-              src="Artsdatabanken_notext_mono_white.svg"
-              alt="Artsdatabanken"
+        {/* Faktisk appen */}
+        <div id="main">
+          <div className="image-section">
+            
+            <div
               className={
-                "logo" + (!inputStage && !resultStage ? " hidden" : "")
+                "topContent" + (!inputStage && !resultStage ? " expanded" : "")
               }
-            />
+            >
+              {!croppedImages.length && (
+                <div className="placeholder-container">
+                  <h1 className="placeholder-title">Artsorakelet</h1> 
+                  <h2 className="placeholder-title">
+                  
+                    Ta eller velg et bilde for å starte
+                  </h2>
+                  <p className="placeholder-body">
+                    Artsorakelet kjenner ikke igjen mennesker, husdyr,
+                    hageplanter, osv.
+                  </p>
+                </div>
+              )}
+
+              <div
+                className={"images scrollbarless" + (loading ? " loading" : "")}
+              >
+                {croppedImages.map((img, index) => (
+                  <UploadedImage
+                    img={img}
+                    key={index}
+                    imgIndex={index}
+                    editImage={editImage}
+                  />
+                ))}
+
+                {!!croppedImages.length && (inputStage || resultStage) && (
+                  <div className="goToInput" onClick={goToInput}></div>
+                )}
+              </div>
+            </div>
           </div>
+
           <div
             className={
-              "topContent" + (!inputStage && !resultStage ? " expanded" : "")
+              "bottom-section scrollbarless " +
+              (inputStage || resultStage ? "" : "hidden")
             }
           >
-            {!croppedImages.length && (
-              <div className="placeholder-container">
-                <h1 className="placeholder-title">Artsorakelet</h1> 
-                <h2 className="placeholder-title">
-                
-                  Ta eller velg et bilde for å starte
-                </h2>
-                <p className="placeholder-body">
-                  Artsorakelet kjenner ikke igjen mennesker, husdyr,
-                  hageplanter, osv.
-                </p>
+            {inputStage && !!croppedImages.length && (
+              <button className="btn id primary" onClick={getId} tabIndex="0">
+                Identifiser
+              </button>
+            )}
+
+            {resultStage && (
+                <button
+                  className="btn reset primary"
+                  onClick={resetImages}
+                  tabIndex="0"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
+                    />
+                  </svg> Tøm utvalg
+                  {/* <ReplayIcon /> */}
+                </button>
+            )}
+
+            {resultStage && !!predictions.length && (
+              <div>
+                {predictions.map((prediction) => (
+                  <IdResult
+                    result={prediction}
+                    key={prediction.scientificNameID}
+                    croppedImages={croppedImages}
+                    openResult={setChosenPrediction}
+                  />
+                ))}
               </div>
             )}
 
-            <div
-              className={"images scrollbarless" + (loading ? " loading" : "")}
-            >
-              {croppedImages.map((img, index) => (
-                <UploadedImage
-                  img={img}
-                  key={index}
-                  imgIndex={index}
-                  editImage={editImage}
-                />
-              ))}
-
-              {!!croppedImages.length && (inputStage || resultStage) && (
-                <div className="goToInput" onClick={goToInput}></div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={
-            "bottom-section scrollbarless " +
-            (inputStage || resultStage ? "" : "hidden")
-          }
-        >
-          {inputStage && !!croppedImages.length && (
-            <button className="btn id primary" onClick={getId} tabIndex="0">
-              Identifiser
-            </button>
-          )}
-
-          {resultStage && (
-              <button
-                className="btn reset primary"
-                onClick={resetImages}
-                tabIndex="0"
-              >
-                <svg viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
-                  />
-                </svg> Tøm utvalg
-                {/* <ReplayIcon /> */}
-              </button>
-          )}
-
-          {resultStage && !!predictions.length && (
-            <div>
-              {predictions.map((prediction) => (
-                <IdResult
-                  result={prediction}
-                  key={prediction.scientificNameID}
-                  croppedImages={croppedImages}
-                  openResult={setChosenPrediction}
-                />
-              ))}
-            </div>
-          )}
-
-          {inputStage && (
-            <UserFeedback
-              inputStage={inputStage}
-              gotError={gotError}
-              loading={loading}
-            />
-          )}
-
-          <div className={"bottomButtons " + (inputStage ? "" : "hidden")}>
-
-            <button
-              className="bottomButton big-round-button primary clickable"
-              
-            >
-              <AddAPhotoIcon />
-              <input
-                className="clickable"
-                type="file"
-                id="uploaderImages"
-                onChange={uploadMore.bind(this, "uploaderImages")}
+            {inputStage && (
+              <UserFeedback
+                inputStage={inputStage}
+                gotError={gotError}
+                loading={loading}
               />
-            </button>
+            )}
 
+            <div className={"bottomButtons " + (inputStage ? "" : "hidden")}>
+
+              <button
+                className="bottomButton big-round-button primary clickable"
+                
+              >
+                <AddAPhotoIcon />
+                <input
+                  className="clickable"
+                  type="file"
+                  id="uploaderImages"
+                  onChange={uploadMore.bind(this, "uploaderImages")}
+                />
+              </button>
+
+            </div>
+          </div>
+          
+                  {/* Modal med overliggende lag, brukes til:
+          - les mer om artsinfo
+          - om artsdatabanken
+          - bruksannvisning
+
+          Hvorfor ligger den ØVERST? */} 
+          <div
+            id="modal"
+            className={
+              "modal " +
+              (!!chosenPrediction | aboutVisible | extendedManualVisible
+                ? "visible"
+                : "invisible")
+            }
+          onClick={closeModal}
+          >
+            <div
+              className="content"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <button onClick={closeModal} class="menu-button menu-icon icon-button inverted" title="Lukk menu" aria-label="Lukk meny"><CloseIcon  /></button>
+
+              {!!chosenPrediction && (
+                <ExtendedResult
+                  result={chosenPrediction}
+                  croppedImages={croppedImages}
+                />
+              )}
+
+              {aboutVisible && <About />}
+
+              {extendedManualVisible && <ExtendedManual />}
+            </div>
           </div>
         </div>
+
+
+
       </div>
     </React.Fragment>
   );

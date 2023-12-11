@@ -45,6 +45,7 @@ v rød/grønn knapp korall + vintergrønn
   --fresh-water-blue-10:#E6EFF1;
   --info:var(--fresh-water-blue);
 
+  --header-height:46px;
   --base-size:8px;
   --half-size:4px;
   --double-size:16px;
@@ -477,7 +478,7 @@ button.icon-button svg,
 
 .topBar {
   width: 100%;
-  height: 0px;
+  height: var(--header-height);;
   position: relative;
   flex-grow: 0;
   top: 0;
@@ -752,6 +753,17 @@ hr {
   background-color: hsla(0, 0%, 50%, 0.5);
 }
 
+.menu{
+  background:var(--box-clr);
+  padding:var(--double-size);
+  margin-top:var(--header-height);
+  max-height:calc(100% - var(--header-height));
+}
+
+nav ul{
+  padding: 0;
+}
+
 .menuItem {
   display: flex;
   flex-direction: row;
@@ -761,18 +773,13 @@ hr {
   font-size: 1.2rem;
   font-weight: 400;
   cursor: pointer;
+
 }
 
 .menuItem:active {
   background-color: var(--overlay-color);
 }
 
-
-
-#menu a {
-  text-decoration: none;
-  color: inherit;
-}
 
 .resultRow {
   display: flex;
