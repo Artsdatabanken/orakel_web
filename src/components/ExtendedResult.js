@@ -60,10 +60,9 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
         <a
           href={result.infoUrl}
           target={"_blank"}
-          rel="noopener noreferrer"
-          className="btn primary"
+          rel="noopener noreferrer"         
         >
-          Om arten
+          Om arten 
         </a>
         <ReportButton
           reportResult={result}

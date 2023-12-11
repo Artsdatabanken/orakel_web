@@ -49,7 +49,6 @@ function App() {
     }
   };
 
-
   const imageCropped = (img) => {
     if (img) {
       img.lastModifiedDate = new Date();
@@ -60,7 +59,6 @@ function App() {
     }
     setUncroppedImages([]);
   };
-
 
   const editImage = (index) => {
     setUncroppedImages([fullImages[index]]);
@@ -74,7 +72,6 @@ function App() {
     setResultStage(false);
   };
 
-
   const resetImages = () => {
     setMenuVisible(false);
     setError(false);
@@ -85,16 +82,13 @@ function App() {
     setResultStage(false);
   };
 
-
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
 
-
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
-
 
   const closeModal = () => {
     setChosenPrediction(false);
@@ -102,14 +96,12 @@ function App() {
     setExtendedManualVisible(false);
   };
 
-
   const goToInput = () => {
     setResultStage(false);
     setPredictions([]);
     setInputStage(true);
     document.getElementById("uploaderImages").click();
   };
-
 
   const uploadMore = async (sender) => {
     await addImage(document.getElementById(sender).files);
@@ -162,7 +154,6 @@ function App() {
       });
   };
 
-
   return (
     <React.Fragment>
       {!!uncroppedImages.length &&
@@ -182,6 +173,7 @@ function App() {
           (darkMode ? " darkmode" : " lightmode")
         }
       >
+        {/* Modal med les mer om artsinfo */}
         <div
           id="modal"
           className={
@@ -190,7 +182,7 @@ function App() {
               ? "visible"
               : "invisible")
           }
-          onClick={closeModal}
+        onClick={closeModal}
         >
           <div
             className="content"
@@ -198,7 +190,7 @@ function App() {
               e.stopPropagation();
             }}
           >
-            <CloseIcon onClick={closeModal} />
+            <button onClick={closeModal} class="menu-button menu-icon icon-button inverted" title="Lukk menu" aria-label="Lukk meny"><CloseIcon  /></button>
 
             {!!chosenPrediction && (
               <ExtendedResult

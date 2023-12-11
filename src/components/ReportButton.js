@@ -89,10 +89,10 @@ function ReportButton({ reportResult, croppedImages }) {
 
   return (
     <React.Fragment>
-      <div className="btn primary" onClick={openDialog.bind(this)}>
+      <button className="btn secondary" onClick={openDialog.bind(this)}>
         Rapporter funn
         {uploadingImages && <span className="littleSpinner"></span>}
-      </div>
+      </button>
 
       <Dialog
         onClose={handleDialogClose}
