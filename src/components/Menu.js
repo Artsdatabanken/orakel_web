@@ -1,79 +1,93 @@
 import React from "react";
 import "../App.css";
-import CloseIcon from "@mui/icons-material/Close";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import AppleIcon from "@mui/icons-material/Apple";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import ReplayIcon from "@mui/icons-material/Replay";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import LaunchIcon from '@mui/icons-material/Launch';
+import SettingsIcon from '@mui/icons-material/Settings';
 
-function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual, toggleMenu }) {
+function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual,toggleMenu,toggleSettings }) {
 
   const openAbout = () => {
     toggleAbout(true);
   };
 
   const openManual = () => {
-    toggleManual(true);
+    toggleManual(true); 
+  }
+
+  const openSettings = () => {
+    toggleSettings(true);
+ 
   };
 
   return (
-
-     <nav class="menu">
-
+     <nav class="modal-wrapper">
         <ul> 
-          <li className="menuItem">
+          <li>
             <a href="https://play.google.com/store/apps/details?id=no.artsdatabanken.orakel"
                 target="_blank"
                 rel="noopener noreferrer">
-              <span>Artsorakelet på Google Play</span>
               <ShopOutlinedIcon />
+              <span>Artsorakelet på Google Play</span>              
+              <LaunchIcon />              
             </a>
 
           </li>
-          <li className="menuItem">
+          <li>
             <a
               href="https://apps.apple.com/no/app/id1522271415"
               target="_blank"
-              rel="noopener noreferrer"
-              
-            >
-              <span>Artsorakelet i App Store</span>
+              rel="noopener noreferrer">
               <AppleIcon />
+              <span>Artsorakelet i App Store</span>
+              <LaunchIcon />                  
             </a>
           </li>
 
-          <li className="menuItem" >
+          <li>
             <button onClick={openManual}>
-            <div>Bruksanvisning</div>
-            <MenuBookIcon /></button>
+              <MenuBookIcon />
+              <span>Bruksanvisning</span>             
+              <ChevronRightIcon />    
+            </button>
           </li>
 
-          <li className="menuItem" >
+          <li>
             <button onClick={openAbout} >
-            <span>Om Artsorakelet</span>
-            <InfoOutlinedIcon /></button>
+              <InfoOutlinedIcon />
+              <span>Om Artsorakelet</span>              
+              <ChevronRightIcon />  
+            </button>
+          </li>
+          <li>
+            <button onClick={openSettings} >
+              <SettingsIcon />
+              <span>Settings</span>              
+              <ChevronRightIcon />  
+            </button>
           </li>
 
         </ul>
-
+{/*
       <h2>Settings</h2>
-      {/* Move to settings*/}
-        <div className="menuItem" onClick={toggleDarkMode}>
+       Move to settings
+        <div  onClick={toggleDarkMode}>
         <div>Slå {darkMode ? "av" : "på"} nattmodus</div>
         <Brightness4Icon />
-      </div>
+      </div>*/}
       
-
       
    {/* 
-      <div className="menuItem" onClick={resetImages}>
+      <div  onClick={resetImages}>
         <div>Restart appen</div>
         <ReplayIcon />
       </div>*/}
     
-      
+      <button class="modal-background" onClick={toggleMenu}></button>
       </nav>
 
   );

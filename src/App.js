@@ -26,6 +26,7 @@ function App() {
   const [extendedManualVisible, setExtendedManualVisible] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [settingsVisible, setSettingsVisible] = useState(false);
   const [gotError, setError] = useState(false);
 
   document.addEventListener("backbutton", onBackKeyDown, false);
@@ -84,6 +85,10 @@ function App() {
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
+  };
+
+  const toggleSettings = () => {
+    setSettingsVisible(!settingsVisible);
   };
 
   const toggleDarkMode = () => {
@@ -156,6 +161,7 @@ function App() {
 
   return (
     <React.Fragment>
+      
       {!!uncroppedImages.length &&
         uncroppedImages.map((ucimg, index) => (
           <ImageCropper
@@ -174,35 +180,40 @@ function App() {
         }
       >
 
-        <div className="topBar">
-          <button onClick={toggleMenu} className={
-              "menu-button menu-icon icon-button" + (!inputStage && !resultStage ? " hidden" : "")
-            } title="Menu" aria-label="Meny">
-            <MenuIcon/>
-          </button>          
-
+         {/* Header + navigeringsmeny
+              - ting som er tilgjengelig for alle over alt :) <3
+         */}
+        <header>
           <img
             src="Artsdatabanken_notext_mono_white.svg"
-            alt="Artsdatabanken"
+            alt="Artsdatabanken logo"
             className={
               "logo" + (!inputStage && !resultStage ? " hidden" : "")
             }
           />
-        </div>
-        {/* Modal med: meny? */}
-        <div
-          id="menu"
-          className={"modal " + (menuVisible ? "visible" : "invisible")}
-          onClick={toggleMenu}
-        >
-          <Menu
+          <button onClick={toggleMenu} className={
+              "menu-button menu-icon icon-button" + (!inputStage && !resultStage ? " hidden" : "")
+            } 
+            title={menuVisible ? ("Lukk meny") : ("Åpne meny")} 
+            aria-label={menuVisible ? ("Lukk meny") : ("Åpne meny")}
+            >
+            {menuVisible ? (
+              <CloseIcon/>
+            ) : (
+              <MenuIcon/>
+            )}
+          </button>     
+          {menuVisible && <Menu
             resetImages={resetImages}
             toggleDarkMode={toggleDarkMode}
             toggleAbout={setAboutVisible}
             toggleManual={setExtendedManualVisible}
+            toggleMenu={toggleMenu}
+            toggleSettings={toggleSettings}
             darkMode={darkMode}
-          />
-        </div>
+          />}     
+        </header>
+             
 
         {/* Faktisk appen */}
         <div id="main">

@@ -476,12 +476,13 @@ button.icon-button svg,
   bottom: calc(1rem + env(safe-area-inset-bottom));
 }
 
-.topBar {
+header {
   width: 100%;
   height: var(--header-height);;
   position: relative;
   flex-grow: 0;
   top: 0;
+  overflow: visible;
 }
 
 .topContent {
@@ -645,6 +646,8 @@ input {
   cursor: pointer;
 }*/
 
+
+
 .modal {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.72);
@@ -753,27 +756,80 @@ hr {
   background-color: hsla(0, 0%, 50%, 0.5);
 }
 
-.menu{
-  background:var(--box-clr);
-  padding:var(--double-size);
-  margin-top:var(--header-height);
-  max-height:calc(100% - var(--header-height));
+.modal-wrapper{
+  display: flex;
+  flex-direction: column;
+  height:calc(100vh - var(--header-height));
+  overflow: hidden;
+  z-index: 20;
+  position: absolute;
+  top:var(--header-height);
+  left:0;
+  right:0
 }
+
+.modal-background:hover,
+.modal-background:focus,
+.modal-background{
+  background-color: rgba(0, 0, 0, 0.72);
+  flex:1;
+  border:0;
+  border-radius:0;
+  width: 100%;
+  margin:0
+}
+
 
 nav ul{
   padding: 0;
+  list-style: none;
+  background:var(--box-clr);
+  padding:var(--double-size);
+  margin-top:0;
+  max-height:calc(100% - var(--header-height));
+  width: 100%;
 }
 
-.menuItem {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-top: 1px solid hsla(0, 0%, 50%, 0.5);
-  padding: 1rem 0;
-  font-size: 1.2rem;
-  font-weight: 400;
-  cursor: pointer;
+nav li,
+nav li a,
+nav li button {
+  width:100%;
+  margin:0;
+}
 
+nav li a,
+nav li button {
+  width:100%;
+  padding:var(--base-size);  
+  border-radius: 0;
+  border:0;
+  display: flex;
+  justify-content: space-between;
+  background: inherit;
+  border-radius: var(--border-radius);
+}
+
+nav li a span,
+nav li button span{
+  flex:1;
+  padding:0 10px;
+  display: inline-block;
+  text-align: left;
+}
+
+nav li a svg,
+nav li button svg{
+  margin:0
+}
+
+nav li a:hover,
+nav li button:hover{
+  background:var(--secondary-clr)
+}
+
+nav li a:focus,
+nav li button:focus{
+  border-radius: var(--border-radius);
 }
 
 .menuItem:active {
