@@ -183,6 +183,7 @@ function App() {
          {/* Header + navigeringsmeny
               - ting som er tilgjengelig for alle over alt :) <3
          */}
+         
         <header>
           <img
             src="Artsdatabanken_notext_mono_white.svg"
@@ -270,10 +271,7 @@ function App() {
             )}
 
             {resultStage && (
-                <button
-                  className="btn reset primary"
-                  onClick={resetImages}
-                  tabIndex="0"
+                <button className="btn reset primary" onClick={resetImages}
                 >
                   <svg viewBox="0 0 24 24">
                     <path
@@ -324,42 +322,46 @@ function App() {
             </div>
           </div>
           
-                  {/* Modal med overliggende lag, brukes til:
+          {/* Modal med overliggende lag, brukes til:
           - les mer om artsinfo
           - om artsdatabanken
           - bruksannvisning
 
           Hvorfor ligger den ØVERST? */} 
-          <div
-            id="modal"
-            className={
-              "modal " +
-              (!!chosenPrediction | aboutVisible | extendedManualVisible
-                ? "visible"
-                : "invisible")
-            }
-          onClick={closeModal}
-          >
+
+          {!!chosenPrediction | aboutVisible | extendedManualVisible && (
             <div
-              className="content"
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
+              id="modal"
+              className="modal"
+              onClick={closeModal}
             >
-              <button onClick={closeModal} class="menu-button menu-icon icon-button inverted" title="Lukk menu" aria-label="Lukk meny"><CloseIcon  /></button>
+              <div
+                className="content"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <button onClick={closeModal} 
+                class="menu-button menu-icon icon-button inverted" 
+                title="Lukk menu" 
+                aria-label="Lukk meny">
+                  <CloseIcon  />
+                </button>
+               
 
-              {!!chosenPrediction && (
-                <ExtendedResult
-                  result={chosenPrediction}
-                  croppedImages={croppedImages}
-                />
-              )}
+                {aboutVisible && <About />}
 
-              {aboutVisible && <About />}
+                {extendedManualVisible && <ExtendedManual />}
 
-              {extendedManualVisible && <ExtendedManual />}
+                {!!chosenPrediction && (
+                  <ExtendedResult
+                    result={chosenPrediction}
+                    croppedImages={croppedImages}
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
 

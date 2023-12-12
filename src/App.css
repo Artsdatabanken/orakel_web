@@ -483,6 +483,7 @@ header {
   flex-grow: 0;
   top: 0;
   overflow: visible;
+  z-index:100
 }
 
 .topContent {
@@ -495,7 +496,6 @@ header {
   transition: transform 300ms ease-in-out 3ms;
   will-change: transform;
 }
-
 
 .littleSpinner {
   box-sizing: border-box;
@@ -512,9 +512,6 @@ header {
   animation: spin 1s linear infinite;
 }
 
-
-
-
 input {
   opacity: 0;
   position: absolute;
@@ -527,14 +524,7 @@ input {
   cursor: pointer;
 }
 
-.scrollbarless {
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
-}
-
-.scrollbarless::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
-}
+/* NEI, ikke fjern scrollbars. UU. Ikke selvforklarende */
 
 .images {
   display: flex;
@@ -647,27 +637,12 @@ input {
 }*/
 
 
-
 .modal {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.72);
   width: 100%;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
-}
-
-.modal.invisible {
-  z-index: -2;
-  opacity: 0;
-  transition: opacity 100ms linear 203ms, z-index 0ms linear 303ms;
-  will-change: opacity, z-index;
-}
-
-.modal.visible {
-  opacity: 1;
-  z-index: 3;
-  transition: opacity 100ms linear 3ms;
-  will-change: opacity;
 }
 
 .modal .content {
@@ -756,6 +731,8 @@ hr {
   background-color: hsla(0, 0%, 50%, 0.5);
 }
 
+/* Navigation menu */
+.modal,
 .modal-wrapper{
   display: flex;
   flex-direction: column;
@@ -768,6 +745,11 @@ hr {
   right:0
 }
 
+.modal{
+  height:100vh;
+  top:0;
+}
+
 .modal-background:hover,
 .modal-background:focus,
 .modal-background{
@@ -778,7 +760,6 @@ hr {
   width: 100%;
   margin:0
 }
-
 
 nav ul{
   padding: 0;
@@ -832,11 +813,8 @@ nav li button:focus{
   border-radius: var(--border-radius);
 }
 
-.menuItem:active {
-  background-color: var(--overlay-color);
-}
 
-
+/* Other things */
 .resultRow {
   display: flex;
   flex-direction: row;

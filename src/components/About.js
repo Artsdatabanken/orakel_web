@@ -3,12 +3,9 @@ import "../App.css";
 
 function About() {
   return (
+    
     <div className="scrollable scrollbarless">
-      <img
-        src="Artsdatabanken_long_light.svg"
-        alt="Artsdatabanken"
-        className="aboutHeader light"
-      />
+      <h1>Om Artsorakelet</h1>     
 
       <img
         src="Artsdatabanken_long_dark.svg"
@@ -59,12 +56,12 @@ function About() {
 
       <p>
         <img
-          src="Artsdatabanken_high_light.svg"
+          src="Artsdatabanken_Logo_Colour.png"
           alt="Artsdatabanken"
           className="aboutLogo light"
         />
         <img
-          src="Artsdatabanken_high_dark.svg"
+          src="Artsdatabanken_Logo_White.svg"
           alt="Artsdatabanken"
           className="aboutLogo dark"
         />

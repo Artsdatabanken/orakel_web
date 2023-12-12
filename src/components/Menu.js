@@ -12,25 +12,29 @@ import SettingsIcon from '@mui/icons-material/Settings';
 function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual,toggleMenu,toggleSettings }) {
 
   const openAbout = () => {
+    toggleMenu();
     toggleAbout(true);
   };
 
   const openManual = () => {
+    toggleMenu();
     toggleManual(true); 
   }
 
   const openSettings = () => {
-    toggleSettings(true);
- 
+    toggleMenu();
+    toggleSettings(true); 
   };
 
+  /* TODO: UU requirement: Escape closes menu */
+
   return (
-     <nav class="modal-wrapper">
+     <nav className="modal-wrapper">
         <ul> 
           <li>
             <a href="https://play.google.com/store/apps/details?id=no.artsdatabanken.orakel"
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener noreferrer" onClick={toggleMenu}>
               <ShopOutlinedIcon />
               <span>Artsorakelet på Google Play</span>              
               <LaunchIcon />              
@@ -41,7 +45,7 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
             <a
               href="https://apps.apple.com/no/app/id1522271415"
               target="_blank"
-              rel="noopener noreferrer">
+              rel="noopener noreferrer" onClick={toggleMenu}>
               <AppleIcon />
               <span>Artsorakelet i App Store</span>
               <LaunchIcon />                  
@@ -87,7 +91,7 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
         <ReplayIcon />
       </div>*/}
     
-      <button class="modal-background" onClick={toggleMenu}></button>
+      <button className="modal-background" onClick={toggleMenu}></button>
       </nav>
 
   );
