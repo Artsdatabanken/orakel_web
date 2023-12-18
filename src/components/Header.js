@@ -20,43 +20,42 @@ function Header({setAboutVisible,setExtendedManualVisible,toggleSettings,setChos
 
   document.addEventListener("escape", closeAll, false); // not the way in react
 
-
-
   return (         
          
-         <header> 
-          {/* Header + navigeringsmeny
-              - ting som er tilgjengelig for alle over alt :) <3
-         */}
-         <img
-           src="Artsdatabanken_notext_mono_white.svg"
-           alt="Artsdatabanken logo"
-           className={"logo"}
-         />
-         <button onClick={toggleMenu} className={
-             "menu-button menu-icon icon-button"
-           } 
-           title={menuVisible ? ("Lukk meny") : ("Åpne meny")} 
-           aria-label={menuVisible ? ("Lukk meny") : ("Åpne meny")}
-           >
-           {menuVisible ? (
-             <CloseIcon/>
-           ) : ( 
-             <MenuIcon/>
-           )}
-         </button>     
-         {menuVisible && 
-         
-         <Menu
-           toggleAbout={setAboutVisible}
-           toggleManual={setExtendedManualVisible}
-           toggleMenu={toggleMenu}
-           toggleSettings={toggleSettings}
-           //resetImages={resetImages}
-           //toggleDarkMode={toggleDarkMode}
-           //darkMode={darkMode}
-         />}     
-       </header>
+    <header> 
+      {/* Header + navigeringsmeny
+          - ting som er tilgjengelig for alle over alt :) <3
+      */}
+      <img
+        src="Artsdatabanken_notext_mono_white.svg"
+        alt="Artsdatabanken logo"
+        className={"logo"}
+      />
+      <a href="/" class="clear-link" >Artsorakelet</a>
+      <button onClick={toggleMenu} className={
+          "menu-button menu-icon icon-button"
+        } 
+        title={menuVisible ? ("Lukk meny") : ("Åpne meny")} 
+        aria-label={menuVisible ? ("Lukk meny") : ("Åpne meny")}
+        >
+        {menuVisible ? (
+          <CloseIcon/>
+        ) : ( 
+          <MenuIcon/>
+        )}
+      </button>     
+      {menuVisible && 
+      
+      <Menu
+        toggleAbout={setAboutVisible}
+        toggleManual={setExtendedManualVisible}
+        toggleMenu={toggleMenu}
+        toggleSettings={toggleSettings}
+        //resetImages={resetImages}
+        //toggleDarkMode={toggleDarkMode}
+        //darkMode={darkMode}
+      />}     
+  </header>
     
 
   );

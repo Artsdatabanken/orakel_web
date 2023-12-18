@@ -1,10 +1,11 @@
 import React from "react";
 import "../App.css";
 
-function UserFeedback({ inputStage, gotError }) {
+function UserFeedback({ gotError }) {
   return (
     <React.Fragment>
-      {inputStage && !gotError && (
+      {false && 
+      /* Keep error handling clean, stuff this elsewhere. */(
         <div className="manual">
           <div className="manual-item">
             <svg viewBox="0 0 24 24">

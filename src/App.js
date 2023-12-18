@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import axios from "axios";
 import "./App.css";
 import UploadedImage from "./components/Image";
@@ -10,6 +9,7 @@ import ImageCropper from "./components/ImageCropper";
 import About from "./components/About";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
+import Frontpage from "./components/Frontpage";
 import ExtendedManual from "./components/ExtendedManual";
 
 function App() {
@@ -24,16 +24,10 @@ function App() {
   const [aboutVisible, setAboutVisible] = useState(false);
   const [extendedManualVisible, setExtendedManualVisible] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [gotError, setError] = useState(false);
 
-
-
   // i18 språkstøtte ?
-  
-
-
 
   const addImage = async (images) => {
     setError(false);
@@ -163,76 +157,71 @@ function App() {
           />
         ))}
 
-      <div
-        className={
-          "App" +
-          (darkMode ? " darkmode" : " lightmode")
-        }
-      >
+      <div className={"App" +(darkMode ? " darkmode" : " lightmode")}>
 
         <Header
-        toggleAbout={setAboutVisible}
-        toggleManual={setExtendedManualVisible}
-        toggleSettings={toggleSettings}
-        setChosenPrediction={setChosenPrediction}
+          setAboutVisible={setAboutVisible}
+          setExtendedManualVisible={setExtendedManualVisible}
+          toggleSettings={toggleSettings}
+          setChosenPrediction={setChosenPrediction}
         />
              
 
         {/* Faktisk appen */}
         <div id="main">
-          <div className="image-section">
-            
-            <div
-              className={
-                "topContent" + (!inputStage && !resultStage ? " expanded" : "")
-              }
-            >
-              {!croppedImages.length && (
-                <div className="placeholder-container">
-                  <h1 className="placeholder-title">Artsorakelet</h1> 
-                  <h2 className="placeholder-title">
-                  
-                    Ta eller velg et bilde for å starte
-                  </h2>
-                  <p className="placeholder-body">
-                    Artsorakelet kjenner ikke igjen mennesker, husdyr,
-                    hageplanter, osv.
-                  </p>
+
+          {
+          /* Forsiden*/
+          (!croppedImages.length) ?
+           (<Frontpage 
+            uploadMore={uploadMore} 
+            setExtendedManualVisible={setExtendedManualVisible}/>)
+           :(
+            <>
+
+            {/* NOT front page */}
+            <div className="image-section">            
+              <div className={"topContent"}>              
+                <div
+                  className={"images scrollbarless" + (loading ? " loading" : "")}
+                >
+                  {croppedImages.map((img, index) => (
+                    <UploadedImage
+                      img={img}
+                      key={index}
+                      imgIndex={index}
+                      editImage={editImage}
+                    />
+                  ))}
+
+                  {!!croppedImages.length && (inputStage || resultStage) && (
+                    <div className="goToInput" onClick={goToInput}></div>
+                  )}
                 </div>
-              )}
-
-              <div
-                className={"images scrollbarless" + (loading ? " loading" : "")}
-              >
-                {croppedImages.map((img, index) => (
-                  <UploadedImage
-                    img={img}
-                    key={index}
-                    imgIndex={index}
-                    editImage={editImage}
-                  />
-                ))}
-
-                {!!croppedImages.length && (inputStage || resultStage) && (
-                  <div className="goToInput" onClick={goToInput}></div>
-                )}
               </div>
             </div>
-          </div>
+            
+            {inputStage && (              
+              <>
+              
+              <h2>"Opplastingsstadiet"</h2>
+              {!!croppedImages.length && (
+                <button className="btn id primary" onClick={getId} tabIndex="0">
+                  Identifiser
+                </button>
+              )}
 
-          <div
-            className={
-              "bottom-section scrollbarless " +
-              (inputStage || resultStage ? "" : "hidden")
-            }
-          >
-            {inputStage && !!croppedImages.length && (
-              <button className="btn id primary" onClick={getId} tabIndex="0">
-                Identifiser
-              </button>
+              <UserFeedback
+                inputStage={inputStage}
+                gotError={gotError}
+                loading={loading}
+              /></>
             )}
 
             {resultStage && (
+              
+              <>
+              <h2>"resultatsstadiet"</h2>
                 <button className="btn reset primary" onClick={resetImages}
                 >
                   <svg viewBox="0 0 24 24">
@@ -243,46 +232,40 @@ function App() {
                   </svg> Tøm utvalg
                   {/* <ReplayIcon /> */}
                 </button>
-            )}
 
-            {resultStage && !!predictions.length && (
-              <div>
-                {predictions.map((prediction) => (
-                  <IdResult
-                    result={prediction}
-                    key={prediction.scientificNameID}
-                    croppedImages={croppedImages}
-                    openResult={setChosenPrediction}
-                  />
-                ))}
-              </div>
-            )}
+                { !!predictions.length && (
+                <div>
+                  {predictions.map((prediction) => (
+                    <IdResult
+                      result={prediction}
+                      key={prediction.scientificNameID}
+                      croppedImages={croppedImages}
+                      openResult={setChosenPrediction}
+                    />
+                  ))}
+                </div>
+              )}
 
-            {inputStage && (
-              <UserFeedback
-                inputStage={inputStage}
-                gotError={gotError}
-                loading={loading}
+            <Modal 
+              isVisible={chosenPrediction}
+              closeModal={closeModal}
+              header={"Resultater"}
+              children={<chosenPrediction />}
+              subChildren={<ExtendedResult
+                result={chosenPrediction}
+                croppedImages={croppedImages}
               />
+            }
+          />
+              </>
             )}
+            
+            
+            </>
 
-            <div className={"bottomButtons " + (inputStage ? "" : "hidden")}>
 
-              <button
-                className="bottomButton big-round-button primary clickable"
-                
-              >
-                <AddAPhotoIcon />
-                <input
-                  className="clickable"
-                  type="file"
-                  id="uploaderImages"
-                  onChange={uploadMore.bind(this, "uploaderImages")}
-                />
-              </button>
-
-            </div>
-          </div>
+           )
+          }
           
           {/* 
             - Nå er modalene nøstet opp og inn i én komponent.
@@ -303,18 +286,6 @@ function App() {
             header={"Bruksanvisning"}
             children={<ExtendedManual />}
           />
-
-          <Modal 
-            isVisible={chosenPrediction}
-            closeModal={closeModal}
-            header={"Resultater"}
-            children={<chosenPrediction />}
-            subChildren={<ExtendedResult
-              result={chosenPrediction}
-              croppedImages={croppedImages}
-            />}
-          />
-
          
         </div>
 

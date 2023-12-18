@@ -118,12 +118,24 @@ v rød/grønn knapp korall + vintergrønn
   }
 }
 
+
+h1{
+  font-size: 28px;
+  margin-bottom: var(--double-size);
+}
+
+h2{
+  font-size: 24px;
+  margin-bottom: var(--double-size);
+}
+
 body {
   align-items: center;
   justify-content: center;
   background-color: var(--sand-50);
   font-family: var(--font-chivo);
   overflow: hidden;
+  text-align: center;
 }
 
 #root {
@@ -153,7 +165,7 @@ ul {
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
-  background-color: var(--bg-clr);
+  background-color: var(--box-clr);
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
 }
@@ -478,7 +490,8 @@ button.icon-button svg,
 
 header {
   width: 100%;
-  height: var(--header-height);;
+  height: var(--header-height);
+  background: var(--bg-clr);
   position: relative;
   flex-grow: 0;
   top: 0;
@@ -769,6 +782,7 @@ nav ul{
   margin-top:0;
   max-height:calc(100% - var(--header-height));
   width: 100%;
+  margin-bottom: 0;
 }
 
 nav li,
@@ -981,4 +995,21 @@ a.btn {
   100% {
     transform: rotate(360deg);
   }
+}
+
+
+.clear-link{
+  text-align: center;
+  padding-top:var(--double-size);
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.frontpage{
+  background: var(--bg-clr);
+  color:white;
+  padding:10%;
+  font-size: 20px;
 }

@@ -7,7 +7,8 @@ function Modal({header,children,subChildren,closeModal,isVisible}) {
   if (isVisible === false){
     return null;
   }
-  
+  // TODO:: TRAP FOCUS
+  // TODO:: TRAP SCROLL
   return (
    
       <div
@@ -15,7 +16,7 @@ function Modal({header,children,subChildren,closeModal,isVisible}) {
         className="modal"
         onClick={closeModal}
       >
-        <div className="content">
+        <div className="content" onClick={e => e.stopPropagation()}>
           <button onClick={closeModal}
           class="menu-button menu-icon icon-button inverted" 
           title="Lukk menu" 
