@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import "./App.css";
 import UploadedImage from "./components/Image";
@@ -9,8 +7,9 @@ import IdResult from "./components/IdResult";
 import ExtendedResult from "./components/ExtendedResult";
 import UserFeedback from "./components/UserFeedback";
 import ImageCropper from "./components/ImageCropper";
-import Menu from "./components/Menu";
 import About from "./components/About";
+import Modal from "./components/Modal";
+import Header from "./components/Header";
 import ExtendedManual from "./components/ExtendedManual";
 
 function App() {
@@ -25,22 +24,16 @@ function App() {
   const [aboutVisible, setAboutVisible] = useState(false);
   const [extendedManualVisible, setExtendedManualVisible] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
+
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [gotError, setError] = useState(false);
 
-  document.addEventListener("backbutton", onBackKeyDown, false);
+
 
   // i18 språkstøtte ?
   
 
-  function onBackKeyDown() {
-    // Handle the back button
-    setMenuVisible(false);
-    setChosenPrediction(false);
-    setAboutVisible(false);
-    setExtendedManualVisible(false);
-  }
+
 
   const addImage = async (images) => {
     setError(false);
@@ -74,7 +67,6 @@ function App() {
   };
 
   const resetImages = () => {
-    setMenuVisible(false);
     setError(false);
     setCroppedImages([]);
     setPredictions([]);
@@ -83,9 +75,7 @@ function App() {
     setResultStage(false);
   };
 
-  const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
+
 
   const toggleSettings = () => {
     setSettingsVisible(!settingsVisible);
@@ -180,40 +170,12 @@ function App() {
         }
       >
 
-         {/* Header + navigeringsmeny
-              - ting som er tilgjengelig for alle over alt :) <3
-         */}
-         
-        <header>
-          <img
-            src="Artsdatabanken_notext_mono_white.svg"
-            alt="Artsdatabanken logo"
-            className={
-              "logo" + (!inputStage && !resultStage ? " hidden" : "")
-            }
-          />
-          <button onClick={toggleMenu} className={
-              "menu-button menu-icon icon-button" + (!inputStage && !resultStage ? " hidden" : "")
-            } 
-            title={menuVisible ? ("Lukk meny") : ("Åpne meny")} 
-            aria-label={menuVisible ? ("Lukk meny") : ("Åpne meny")}
-            >
-            {menuVisible ? (
-              <CloseIcon/>
-            ) : (
-              <MenuIcon/>
-            )}
-          </button>     
-          {menuVisible && <Menu
-            resetImages={resetImages}
-            toggleDarkMode={toggleDarkMode}
-            toggleAbout={setAboutVisible}
-            toggleManual={setExtendedManualVisible}
-            toggleMenu={toggleMenu}
-            toggleSettings={toggleSettings}
-            darkMode={darkMode}
-          />}     
-        </header>
+        <Header
+        toggleAbout={setAboutVisible}
+        toggleManual={setExtendedManualVisible}
+        toggleSettings={toggleSettings}
+        setChosenPrediction={setChosenPrediction}
+        />
              
 
         {/* Faktisk appen */}
@@ -322,46 +284,38 @@ function App() {
             </div>
           </div>
           
-          {/* Modal med overliggende lag, brukes til:
-          - les mer om artsinfo
-          - om artsdatabanken
-          - bruksannvisning
+          {/* 
+            - Nå er modalene nøstet opp og inn i én komponent.
 
-          Hvorfor ligger den ØVERST? */} 
+          */} 
+                    
 
-          {!!chosenPrediction | aboutVisible | extendedManualVisible && (
-            <div
-              id="modal"
-              className="modal"
-              onClick={closeModal}
-            >
-              <div
-                className="content"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              >
-                <button onClick={closeModal} 
-                class="menu-button menu-icon icon-button inverted" 
-                title="Lukk menu" 
-                aria-label="Lukk meny">
-                  <CloseIcon  />
-                </button>
-               
+          <Modal 
+            isVisible={aboutVisible}
+            closeModal={closeModal}
+            header={"Om Artsobservasjoner"}
+            children={<About />}
+          />
 
-                {aboutVisible && <About />}
+          <Modal 
+            isVisible={extendedManualVisible}
+            closeModal={closeModal}
+            header={"Bruksanvisning"}
+            children={<ExtendedManual />}
+          />
 
-                {extendedManualVisible && <ExtendedManual />}
+          <Modal 
+            isVisible={chosenPrediction}
+            closeModal={closeModal}
+            header={"Resultater"}
+            children={<chosenPrediction />}
+            subChildren={<ExtendedResult
+              result={chosenPrediction}
+              croppedImages={croppedImages}
+            />}
+          />
 
-                {!!chosenPrediction && (
-                  <ExtendedResult
-                    result={chosenPrediction}
-                    croppedImages={croppedImages}
-                  />
-                )}
-              </div>
-            </div>
-          )}
+         
         </div>
 
 

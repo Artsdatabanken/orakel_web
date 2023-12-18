@@ -2,10 +2,10 @@ import React from "react";
 import "../App.css";
 
 function About() {
+  
   return (
     
-    <div className="scrollable scrollbarless">
-      <h1>Om Artsorakelet</h1>     
+    <>
 
       <img
         src="Artsdatabanken_long_dark.svg"
@@ -67,7 +67,7 @@ function About() {
         />
         <img src="Naturalis.svg" className="aboutLogo" alt="Naturalis" />
       </p>
-    </div>
+    </>
   );
 }
 
