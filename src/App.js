@@ -180,11 +180,16 @@ function App() {
             <>
 
             {/* NOT front page */}
-            <div className="image-section">            
-              <div className={"topContent"}>              
-                <div
-                  className={"images scrollbarless" + (loading ? " loading" : "")}
-                >
+            
+            
+            {inputStage && (              
+              <>
+             
+              
+              <h2>Bildeutvalg</h2> 
+
+                          
+                <div className={"images" + (loading ? " loading" : "")}>
                   {croppedImages.map((img, index) => (
                     <UploadedImage
                       img={img}
@@ -193,22 +198,26 @@ function App() {
                       editImage={editImage}
                     />
                   ))}
-
-                  {!!croppedImages.length && (inputStage || resultStage) && (
-                    <div className="goToInput" onClick={goToInput}></div>
-                  )}
                 </div>
-              </div>
-            </div>
+                <br/>
+                 <hr/>
+                  <button  className="secondary" onClick={goToInput}>
+                    Legg til mer?
+                  </button>
+                
+
             
-            {inputStage && (              
-              <>
-              
-              <h2>"Opplastingsstadiet"</h2>
+
+              <hr/>
               {!!croppedImages.length && (
-                <button className="btn id primary" onClick={getId} tabIndex="0">
+                <>
+                <button className="btn id secondary" onClick={resetImages} >
+                  Tøm utvalg
+                </button>
+                <button className="btn id primary" onClick={getId}>
                   Identifiser
                 </button>
+                  </>
               )}
 
               <UserFeedback
@@ -222,18 +231,24 @@ function App() {
               
               <>
               <h2>"resultatsstadiet"</h2>
-                <button className="btn reset primary" onClick={resetImages}
-                >
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      fill="currentColor"
-                      d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
-                    />
-                  </svg> Tøm utvalg
-                  {/* <ReplayIcon /> */}
-                </button>
 
-                { !!predictions.length && (
+              <div className="image-section">            
+              {/* 
+                TODO:: make short cute display of these thumnails. NOT editable.
+              */}
+                      
+              <div className={"images" + (loading ? " loading" : "")}>
+                {croppedImages.map((img) => (
+                  <img
+                  className="uploadedImage"
+                  src={URL.createObjectURL(img)}
+                  alt="Uploaded"
+                />
+                ))}                  
+              </div>
+            </div>            
+
+            {!!predictions.length && (
                 <div>
                   {predictions.map((prediction) => (
                     <IdResult
@@ -246,17 +261,28 @@ function App() {
                 </div>
               )}
 
-            <Modal 
-              isVisible={chosenPrediction}
-              closeModal={closeModal}
-              header={"Resultater"}
-              children={<chosenPrediction />}
-              subChildren={<ExtendedResult
-                result={chosenPrediction}
-                croppedImages={croppedImages}
-              />
-            }
-          />
+              <button className="btn reset primary" onClick={resetImages}
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
+                  />
+                </svg> Tøm utvalg
+                {/* <ReplayIcon /> */}
+              </button>
+               
+              <Modal 
+                isVisible={chosenPrediction}
+                closeModal={closeModal}
+                header={"Resultater"}
+                children={<chosenPrediction />}
+                subChildren={<ExtendedResult
+                  result={chosenPrediction}
+                  croppedImages={croppedImages}
+                />
+              }
+            />
               </>
             )}
             

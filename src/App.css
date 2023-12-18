@@ -284,6 +284,7 @@ button:hover,
   color: var(--text-clr-on-primary);
 }
 
+
 .menu-icon {
   cursor: pointer;
   color: #fff;
@@ -539,22 +540,30 @@ input {
 
 /* NEI, ikke fjern scrollbars. UU. Ikke selvforklarende */
 
-.images {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  max-height: 100%;
-  flex-grow: 0;
-}
+
 
 .imgContainer {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin: 1rem 0rem;
+  padding: 8px;
+  margin: 0;
+  display: block;
+  width: 112px;
+  text-align: center;
+  position: relative;
+}
+
+.imgContainer button{
+  margin: 0;
+}
+
+.imgContainer .menu-icon{
+  margin: 0;
+  color:var(--body-color);
+  position: absolute;
+  margin-right: -8px;
+  margin-left: -8px;
 }
 
 .uploadedImage {
-  border-radius: 1.5rem;
   height: 6rem;
   max-height: 100%;
 }
