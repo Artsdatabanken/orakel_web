@@ -92,7 +92,10 @@ ul {
   padding-top: env(safe-area-inset-top);
 }
 
+
+
 @import 'styles/buttons.css';
+@import 'styles/action-line.css';
 
 /* OTHER STUFF */
 
@@ -434,8 +437,7 @@ input {
 }
 
 .modal .content .scrollable {
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .modal .content {

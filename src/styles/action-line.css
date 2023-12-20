@@ -1,0 +1,21 @@
+@import './variables.css';
+
+:root {
+--action-line-height:100px;
+}
+
+.stage{
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--header-height));   
+}
+
+.scrollable-field{
+    height: calc(100vh - var(--action-line-height));
+    padding:var(--double-size) var(--base-size);
+    overflow-y: auto;
+}
+
+.page-bottom-actions{
+    border-top:2px solid var(--summer-grass-green);
+}

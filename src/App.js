@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import IdResult from "./components/IdResult";
-import ExtendedResult from "./components/ExtendedResult";
 import ImageCropper from "./components/ImageCropper";
 import About from "./components/About";
 import Modal from "./components/Modal";
@@ -10,6 +9,7 @@ import Header from "./components/Header";
 import Frontpage from "./components/Frontpage";
 import ExtendedManual from "./components/ExtendedManual";
 import InputStage from "./components/InputStage";
+import ResultStage from "./components/ResultStage";
 
 function App() {
   const [croppedImages, setCroppedImages] = useState([]);
@@ -67,8 +67,6 @@ function App() {
     setInputStage(true);
     setResultStage(false);
   };
-
-
 
   const toggleSettings = () => {
     setSettingsVisible(!settingsVisible);
@@ -194,62 +192,16 @@ function App() {
             )}
 
             {resultStage && (
-              
-              <>
-              <h2>"resultatsstadiet"</h2>
-
-              <div className="image-section">            
-              {/* 
-                TODO:: make short cute display of these thumnails. NOT editable.
-              */}
-                      
-              <div className={"images" + (loading ? " loading" : "")}>
-                {croppedImages.map((img) => (
-                  <img
-                  className="uploadedImage"
-                  src={URL.createObjectURL(img)}
-                  alt="Uploaded"
-                />
-                ))}                  
-              </div>
-            </div>            
-
-            {!!predictions.length && (
-                <div>
-                  {predictions.map((prediction) => (
-                    <IdResult
-                      result={prediction}
-                      key={prediction.scientificNameID}
-                      croppedImages={croppedImages}
-                      openResult={setChosenPrediction}
-                    />
-                  ))}
-                </div>
-              )}
-
-              <button className="btn reset primary" onClick={resetImages}
-              >
-                <svg viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
-                  />
-                </svg> Tøm utvalg
-                {/* <ReplayIcon /> */}
-              </button>
-               
-              <Modal 
-                isVisible={chosenPrediction}
-                closeModal={closeModal}
-                header={"Resultater"}
-                children={<chosenPrediction />}
-                subChildren={<ExtendedResult
-                  result={chosenPrediction}
-                  croppedImages={croppedImages}
-                />
-              }
-            />
-              </>
+              <ResultStage 
+              loading={loading}
+              croppedImages={croppedImages}
+              resetImages={resetImages}
+              predictions={predictions}
+              IdResult={IdResult}
+              setChosenPrediction={setChosenPrediction}
+              chosenPrediction={chosenPrediction}
+              closeModal={closeModal}
+              />
             )}
             
             

@@ -3,12 +3,8 @@ import "../App.css";
 import UploadedImage from "./Image";
 import UserFeedback from "./UserFeedback";
 
-
 function InputStage({loading,croppedImages,editImage,resetImages,goToInput,getId,gotError}) {
-
-
   return (         
-         
     <div className="stage">
       <div className="scrollable-field">
         <h2>Bildeutvalg</h2> 
