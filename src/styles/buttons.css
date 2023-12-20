@@ -99,21 +99,6 @@ button:hover,
   min-height: var(--big-round-button-size);
 }
 
-
-/* Are we sure we want these? */
-.danger {
-  background-color: var(--danger);
-  border-color: var(--danger);
-  color: var(--text-clr-on-primary);
-}
-
-.ok {
-  background-color: var(--ok);
-  border-color: var(--ok);
-  color: var(--text-clr-on-primary);
-}
-
-
 .menu-icon {
   cursor: pointer;
   color: #fff;

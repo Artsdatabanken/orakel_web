@@ -25,6 +25,20 @@
   
   .modal .content .scrollable {
     overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .modal .modal-actions{
+    border-top:2px solid var(--summer-grass-green);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    height: 72px;
+  }
+
+  .modal .scrollable.has-actions{
+    height:calc(100% - 100px)
   }
 
   .modal .content > svg {
@@ -39,4 +53,45 @@
   }
     
 
+  /* More Modal stuff?? */
   
+
+#modal .vernacular {
+  font-size: 2em;
+  line-height: 1em;
+}
+
+#modal .resultLabels {
+  border-bottom: 1px solid hsla(0, 0%, 50%, 50%);
+  padding: 1em 0;
+  margin-bottom: 2em;
+  flex-grow: 0;
+}
+
+#modal .resultDescription {
+  font-size: 1em;
+  flex-grow: 1;
+}
+
+#modal .resultDescription > * {
+  margin-top: 1em;
+}
+
+#modal .resultActions {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap:var(--base-size)
+}
+
+#modal .btn {
+  font-size: 0.9rem;
+}
+
+#modal .scientific {
+  font-size: 1.2em;
+  line-height: 1em;
+  margin-top: 0.5em;
+}

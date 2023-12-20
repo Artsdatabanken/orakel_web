@@ -149,27 +149,13 @@ function App() {
 
   return (
     <React.Fragment>
-      
-      {!!uncroppedImages.length &&
-        uncroppedImages.map((ucimg, index) => (
-          <ImageCropper
-            imgFile={ucimg}
-            key={index}
-            imageCropped={imageCropped}
-            imgSize={500}
-            darkMode={darkMode}
-          />
-        ))}
-
-      <div className={"App" +(darkMode ? " darkmode" : " lightmode")}>
-
+      <div className={"app" +(darkMode ? " darkmode" : " lightmode")}>
         <Header
           setAboutVisible={setAboutVisible}
           setExtendedManualVisible={setExtendedManualVisible}
           toggleSettings={toggleSettings}
           setChosenPrediction={setChosenPrediction}
         />          
-
         {/* Faktisk appen */}
         <div id="main">
 
@@ -178,6 +164,7 @@ function App() {
           (!croppedImages.length) ?
            (<Frontpage 
             uploadMore={uploadMore} 
+            goToInput={goToInput}
             setExtendedManualVisible={setExtendedManualVisible}/>)
            :(
             <>
@@ -191,6 +178,7 @@ function App() {
                 goToInput={goToInput}
                 getId={getId}
                 gotError={gotError}
+                uploadMore={uploadMore}
               />
               )}
 
@@ -230,6 +218,25 @@ function App() {
             header={"Bruksanvisning"}
             children={<ExtendedManual />}
           />
+         
+
+          <Modal 
+          hasActions={true}
+            isVisible={!!uncroppedImages.length}
+            closeModal={console.log("must make this one")}
+            header={"Rediger bilde"}
+            children={uncroppedImages.map((ucimg, index) => (
+              <ImageCropper
+                imgFile={ucimg}
+                key={index}
+                imageCropped={imageCropped}
+                imgSize={500}
+                darkMode={darkMode}
+              />
+            ))
+            }
+            
+            />
          
         </div>
       </div>

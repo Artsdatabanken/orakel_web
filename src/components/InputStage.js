@@ -2,8 +2,9 @@ import React from "react";
 import "../App.css";
 import UploadedImage from "./Image";
 import UserFeedback from "./UserFeedback";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
-function InputStage({loading,croppedImages,editImage,resetImages,goToInput,getId,gotError}) {
+function InputStage({loading,croppedImages,editImage,resetImages,goToInput,getId,gotError,uploadMore}) {
   
   
   return (         
@@ -22,6 +23,12 @@ function InputStage({loading,croppedImages,editImage,resetImages,goToInput,getId
         </div>
         <br/>
        <hr/>
+       
+        <input
+          type="file"
+          id="uploaderImages"
+          onChange={uploadMore.bind(this, "uploaderImages")}
+        />
         <button  className="secondary" onClick={goToInput}>
           Legg til mer?
         </button>  

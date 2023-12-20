@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import CloseIcon from "@mui/icons-material/Close";
 
-function Modal({header,children,subChildren,closeModal,isVisible}) {
+function Modal({header,children,subChildren,closeModal,isVisible,hasActions}) {
 
   if (isVisible === false){
     return null;
@@ -25,12 +25,13 @@ function Modal({header,children,subChildren,closeModal,isVisible}) {
           </button>
          
          <h1>{header}</h1>     
-         <div className="scrollable extendedManual">
-         {children}
-        {subChildren}
-          </div>    
+         <div className={"scrollable " + (hasActions ? "has-actions" : "")}>
+          {children}
+          {subChildren}
+        </div>  
         
         </div>
+        
       </div>
     
 

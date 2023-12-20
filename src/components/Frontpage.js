@@ -3,7 +3,7 @@ import "../App.css";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
-function Frontpage({uploadMore,setExtendedManualVisible}) {
+function Frontpage({uploadMore,setExtendedManualVisible,goToInput}) {
   return (                 
     <div className="frontpage">              
     <h1 >Artsorakelet</h1> 
@@ -17,15 +17,16 @@ function Frontpage({uploadMore,setExtendedManualVisible}) {
     onClick={setExtendedManualVisible}>Les Bruksanvisning</button>
 
     <div className={"bottomButtons"}>
-      <button className="bottomButton big-round-button primary clickable" >
-        {/* TODO:: FIX INPUT NOT BEING ABLE TO UPLOAD (focus + click action) DUE TO WRONG ELEMENT TYPE*/}
-        <AddAPhotoIcon />
+
         <input
-          className="clickable"
           type="file"
           id="uploaderImages"
           onChange={uploadMore.bind(this, "uploaderImages")}
         />
+
+      <button className="bottomButton big-round-button primary clickable" onClick={goToInput}>
+        <AddAPhotoIcon />
+
       </button>
     </div>
   </div> 
