@@ -11,7 +11,7 @@ function UploadedImage({ img, imgIndex, editImage }) {
   return (
     <div className="imgContainer" >
        <button
-          class="menu-icon icon-button secondary" 
+          className="menu-icon icon-button secondary" 
           title="Lukk menu" 
           aria-label="Lukk meny">
             <CloseIcon  />

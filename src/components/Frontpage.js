@@ -5,7 +5,7 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
 function Frontpage({uploadMore,setExtendedManualVisible}) {
   return (                 
-    <div class="frontpage">              
+    <div className="frontpage">              
     <h1 >Artsorakelet</h1> 
     <h2> Ta eller velg et bilde for å starte</h2>
     <p className="placeholder-body">

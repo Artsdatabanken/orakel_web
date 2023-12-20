@@ -1,0 +1,87 @@
+
+:root {
+    /* Accent colour chart */
+    --summer-grass-green: #495e2e;
+    --summer-grass-green-80: #a3ae96;
+    --summer-grass-green-50: #c6c7b0;
+    --summer-grass-green-10: #f3f5f2;
+  
+    /* ADB Profile */
+    --font-chivo: 'Chivo', sans-serif;
+    --font-space: 'Space Mono', sans-serif;
+    --overlay-color: pink;
+   
+    --coral-light: #e55440;
+    --coral-dark: #cf3e1c;
+    --winter-green-dark: #007759;
+    --ocean-dark: #262f31;
+    --sand-50: #FFF7EB; /* Header + footer + toppelementbokser*/
+    --sand-10: #FFFCF7; /* Ny bg-farge*/
+    --fresh-water-blue:#005B72;
+    --fresh-water-blue-light: #0283a1; /* Ferskvannblå*/
+    --fresh-water-blue-medium: #017590;
+    --fresh-water-blue-80:#337B8D;
+    --fresh-water-blue-20:#CCDEE3;
+    --fresh-water-blue-10:#E6EFF1;
+    --info:var(--fresh-water-blue);
+  
+    --header-height:46px;
+    --base-size:8px;
+    --half-size:4px;
+    --double-size:16px;
+    --gap:var(--base-size);
+    --focus-border-width: 2px;
+    --button-font-size: 16px;
+    --icon-size: 18px;
+    --button-border-radius: 30px;
+    --border-radius:4px;
+    --padding-horisontal: 22px;
+    --padding-vertical: 14px;
+    --border-width: 2px;
+    --focus-border-width: 3px;
+    --icon-button-size: 40px;
+    --big-round-button-size:60px;
+    --focus-color: var(--fresh-water-blue-light);
+    --focus-outline:var(--focus-border-width) solid var(--focus-color);
+    --body-color:var(--ocean-dark);
+  }
+  
+  /*
+  :root *:focus {
+    outline: none; NOOOO WHYY NEVER EVER EVER DO THIS
+  }*/
+  
+  .lightmode {
+    --bg-clr: var(--summer-grass-green);
+    --box-clr: var(--sand-50);
+    /* Buttons */
+    --primary-clr: var(--fresh-water-blue);
+    --text-clr-on-primary:#fff;
+  
+    --secondary-clr: var(--fresh-water-blue-20);
+    --text-clr-on-secondary:var(--body-color);
+  
+    --primary-color-hover: var(--fresh-water-blue-80);
+    --secondary-color-hover: var(--fresh-water-blue-10);
+  
+    /* Other stuff */
+    
+    --tick-clr: #fff;
+    --text-clr: var(--ocean-dark);
+    --danger: var(--coral-dark);
+    --ok: var(--winter-green-dark);
+    --color: var(--text-clr);
+  }
+  
+  .darkmode {
+    --primary-clr: hsl(35, 93%, 68%);
+    --bg-clr: #121212;
+    --box-clr: hsl(33, 14%, 15%);
+    --tick-clr: hsl(33, 14%, 15%);
+    --text-clr: #eeeeee;
+    --text-clr-on-primary: #121212;
+    --danger: hsl(14, 46%, 68%);
+    --ok: hsl(105, 46%, 68%);
+    color: var(--text-clr);
+  }
+  

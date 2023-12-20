@@ -1,0 +1,169 @@
+
+/* BUTTONS */
+/* Based on design system in AO3. */
+
+button,
+.btn {
+  padding: var(--padding-vertical) var(--padding-horisontal);
+  border-radius: var(--button-border-radius);
+  border-width: var(--border-width);
+  border-style: solid;
+  box-sizing: border-box;
+  font-size: var(--button-font-size);
+  line-height: var(--button-font-size);
+  margin: var(--gap);
+  margin-left: 0;
+}
+
+
+/* Focus */
+*:focus{
+  outline: var(--focus-outline);  
+  border-radius: var(--border-radius);
+}
+
+button:focus,
+.btn:focus{
+    outline: var(--focus-outline);
+    border-color: var(--box-clr);
+    border-radius: var(--button-border-radius);
+}
+
+/* Hover */
+button:hover,
+.btn:hover {
+  cursor: pointer;
+  border-color:pink;
+}
+
+/* Button styles */
+.primary {
+  background-color: var(--primary-clr);
+  color: var(--text-clr-on-primary);
+  border-color: var(--primary-clr);
+}
+
+.primary:hover,
+.primary:active {
+    background: var(--primary-color-hover);
+    border-color: var(--primary-color-hover);
+}
+
+.secondary {
+  background-color: var(--secondary-clr);
+  color: var(--text-clr-on-secondary);
+  border-color: var(--secondary-clr);
+}
+
+.secondary:hover,
+.secondary:active {
+    background: var(--secondary-color-hover);
+    border-color: var(--secondary-color-hover);
+}
+
+/* Specific Buttons */
+
+.menu-button{
+  background:transparent;
+  color:white;
+  border: none;
+}
+
+.menu-button.inverted{
+  color:var(--body-color);
+}
+
+/* Do we need ghost button? I think not? */
+
+/* delete button etc. */
+
+.icon-button,
+.big-round-button{
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+}
+
+.icon-button {    
+  width: var(--icon-button-size);
+  height: var(--icon-button-size);
+  min-width: var(--icon-button-size);
+  min-height: var(--icon-button-size);
+}
+
+
+.big-round-button{
+  width: var(--big-round-button-size);
+  height: var(--big-round-button-size);
+  min-width: var(--big-round-button-size);
+  min-height: var(--big-round-button-size);
+}
+
+
+/* Are we sure we want these? */
+.danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: var(--text-clr-on-primary);
+}
+
+.ok {
+  background-color: var(--ok);
+  border-color: var(--ok);
+  color: var(--text-clr-on-primary);
+}
+
+
+.menu-icon {
+  cursor: pointer;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 0;
+  margin-top: 0;
+  z-index: 1;
+}
+
+.menu-icon.hidden {
+  display: none;
+}
+
+.galleryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  position: absolute;
+  margin-left: -5rem;
+  margin-top: 2rem;
+  transform-origin: center;
+  transform: translateX(-50%);
+}
+
+.hidden.bottomButtons {
+  display: none;
+}
+
+/* Button icons */
+
+button svg,
+.btn svg {
+  vertical-align: text-top;
+  font-size: var(--icon-size);
+  line-height: var(--button-font-size);
+  margin-right: var(--gap);
+  height:var(--icon-size);
+  vertical-align: center;
+}
+
+button.big-round-button svg,
+.btn.big-round-button svg,
+button.icon-button svg,
+.btn.icon-button svg {
+  margin-right: 1px;
+}

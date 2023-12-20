@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import UploadedImage from "./components/Image";
 import IdResult from "./components/IdResult";
 import ExtendedResult from "./components/ExtendedResult";
-import UserFeedback from "./components/UserFeedback";
 import ImageCropper from "./components/ImageCropper";
 import About from "./components/About";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
 import Frontpage from "./components/Frontpage";
 import ExtendedManual from "./components/ExtendedManual";
+import InputStage from "./components/InputStage";
 
 function App() {
   const [croppedImages, setCroppedImages] = useState([]);
@@ -183,48 +182,15 @@ function App() {
             
             
             {inputStage && (              
-              <>
-             
-              
-              <h2>Bildeutvalg</h2> 
-
-                          
-                <div className={"images" + (loading ? " loading" : "")}>
-                  {croppedImages.map((img, index) => (
-                    <UploadedImage
-                      img={img}
-                      key={index}
-                      imgIndex={index}
-                      editImage={editImage}
-                    />
-                  ))}
-                </div>
-                <br/>
-                 <hr/>
-                  <button  className="secondary" onClick={goToInput}>
-                    Legg til mer?
-                  </button>
-                
-
-            
-
-              <hr/>
-              {!!croppedImages.length && (
-                <>
-                <button className="btn id secondary" onClick={resetImages} >
-                  Tøm utvalg
-                </button>
-                <button className="btn id primary" onClick={getId}>
-                  Identifiser
-                </button>
-                  </>
-              )}
-
-              <UserFeedback
-                inputStage={inputStage}
-                gotError={gotError}
-                loading={loading}
-              /></>
+             <InputStage
+              loading={loading}
+              croppedImages={croppedImages}
+              editImage={editImage}
+              resetImages={resetImages}
+              goToInput={goToInput}
+              getId={getId}
+              gotError={gotError}
+             />
             )}
 
             {resultStage && (

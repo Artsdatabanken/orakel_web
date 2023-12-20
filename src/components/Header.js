@@ -31,7 +31,7 @@ function Header({setAboutVisible,setExtendedManualVisible,toggleSettings,setChos
         alt="Artsdatabanken logo"
         className={"logo"}
       />
-      <a href="/" class="clear-link" >Artsorakelet</a>
+      <a href="/" className="clear-link" >Artsorakelet</a>
       <button onClick={toggleMenu} className={
           "menu-button menu-icon icon-button"
         } 
