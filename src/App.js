@@ -140,6 +140,13 @@ function App() {
       });
   };
 
+  const removeId = () =>{
+    setError(false);
+    setInputStage(true);
+    setLoading(false);
+    setPredictions([]);
+  }
+
   return (
     <React.Fragment>
       
@@ -161,8 +168,7 @@ function App() {
           setExtendedManualVisible={setExtendedManualVisible}
           toggleSettings={toggleSettings}
           setChosenPrediction={setChosenPrediction}
-        />
-             
+        />          
 
         {/* Faktisk appen */}
         <div id="main">
@@ -175,39 +181,33 @@ function App() {
             setExtendedManualVisible={setExtendedManualVisible}/>)
            :(
             <>
-
             {/* NOT front page */}
-            
-            
-            {inputStage && (              
-             <InputStage
-              loading={loading}
-              croppedImages={croppedImages}
-              editImage={editImage}
-              resetImages={resetImages}
-              goToInput={goToInput}
-              getId={getId}
-              gotError={gotError}
-             />
-            )}
-
-            {resultStage && (
-              <ResultStage 
-              loading={loading}
-              croppedImages={croppedImages}
-              resetImages={resetImages}
-              predictions={predictions}
-              IdResult={IdResult}
-              setChosenPrediction={setChosenPrediction}
-              chosenPrediction={chosenPrediction}
-              closeModal={closeModal}
+              {inputStage && (              
+              <InputStage
+                loading={loading}
+                croppedImages={croppedImages}
+                editImage={editImage}
+                resetImages={resetImages}
+                goToInput={goToInput}
+                getId={getId}
+                gotError={gotError}
               />
-            )}
-            
-            
+              )}
+
+              {resultStage && (
+                <ResultStage 
+                loading={loading}
+                croppedImages={croppedImages}
+                resetImages={resetImages}
+                predictions={predictions}
+                IdResult={IdResult}
+                setChosenPrediction={setChosenPrediction}
+                chosenPrediction={chosenPrediction}
+                closeModal={closeModal}
+                removeId={removeId}
+                />
+              )}
             </>
-
-
            )
           }
           
@@ -232,9 +232,6 @@ function App() {
           />
          
         </div>
-
-
-
       </div>
     </React.Fragment>
   );

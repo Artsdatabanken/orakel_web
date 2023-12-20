@@ -1,0 +1,42 @@
+
+
+.modal {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.72);
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+}
+  
+  .modal .content {
+    background-color: var(--box-clr);
+    position: relative;
+    width: 100%;
+    z-index: 300;
+    border-radius: var(--border-radius);    
+    margin-top: 20px;
+    height: calc(100% - 40px);
+    margin-left:var(--base-size);
+    margin-right: var(--base-size);
+    width:calc(100% - var(--double-size));
+    padding:var(--double-size);
+    overflow: auto;
+  }
+  
+  .modal .content .scrollable {
+    overflow-y: auto;
+  }
+
+  .modal .content > svg {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+  }
+  
+.modal p {
+    margin-bottom: var(--double-size);
+  }
+    
+
+  

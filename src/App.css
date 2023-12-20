@@ -57,6 +57,7 @@ body {
   font-family: var(--font-chivo);
   overflow: hidden;
   text-align: center;
+  font-size: 14pt;
 }
 
 #root {
@@ -95,6 +96,8 @@ ul {
 
 
 @import 'styles/buttons.css';
+@import 'styles/modal.css';
+@import 'styles/navigation-menu.css'; /* also uses modal names*/
 @import 'styles/action-line.css';
 
 /* OTHER STUFF */
@@ -416,56 +419,7 @@ input {
   cursor: pointer;
 }*/
 
-
-.modal {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.72);
-  width: 100%;
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-}
-
-.modal .content {
-  width: 100%;
-  z-index: 300;
-  padding: 4rem 2rem 2rem 2rem;
-  display: flex;
-  line-height: 1.4em;
-  flex-direction: column;
-  transition: transform 300ms ease-in-out 3ms;
-  will-change: transform;
-}
-
-.modal .content .scrollable {
-  overflow-y: auto;
-}
-
-.modal .content {
-  background-color: var(--box-clr);
-}
-
-#modal .content {
-  position: relative;
-  margin-top: 20px;
-  height: calc(100% - 40px);
-  margin-left:var(--base-size);
-  margin-right: var(--base-size);
-  width:calc(100% - var(--double-size));
-  border-radius: var(--border-radius);
-  font-size: 1.2rem;
-  font-weight: 400;
-  padding:var(--double-size)
-}
-
-#modal p {
-  margin-bottom: 1.2em;
-}
-
-#modal.invisible .content {
-  -webkit-transform: translateX(100%);
-  transform: translateX(100%);
-}
-
+/* is this also modal stuff?*/
 #menu .content {
   top: 0;
   border-radius: 0 0 1.7rem 1.7rem;
@@ -475,13 +429,6 @@ input {
 
 #menu.invisible .content {
   transform: translateY(-100%);
-}
-
-.modal .content > svg {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  cursor: pointer;
 }
 
 .aboutLogo {
@@ -509,90 +456,6 @@ hr {
   border: none;
   background-color: hsla(0, 0%, 50%, 0.5);
 }
-
-/* Navigation menu */
-.modal,
-.modal-wrapper{
-  display: flex;
-  flex-direction: column;
-  height:calc(100vh - var(--header-height));
-  overflow: hidden;
-  z-index: 200;
-  position: absolute;
-  top:var(--header-height);
-  left:0;
-  right:0
-}
-
-.modal{
-  height:100vh;
-  top:0;
-}
-
-.modal-background:hover,
-.modal-background:focus,
-.modal-background{
-  background-color: rgba(0, 0, 0, 0.72);
-  flex:1;
-  border:0;
-  border-radius:0;
-  width: 100%;
-  margin:0
-}
-
-nav ul{
-  padding: 0;
-  list-style: none;
-  background:var(--box-clr);
-  padding:var(--double-size);
-  margin-top:0;
-  max-height:calc(100% - var(--header-height));
-  width: 100%;
-  margin-bottom: 0;
-}
-
-nav li,
-nav li a,
-nav li button {
-  width:100%;
-  margin:0;
-}
-
-nav li a,
-nav li button {
-  width:100%;
-  padding:var(--base-size);  
-  border-radius: 0;
-  border:0;
-  display: flex;
-  justify-content: space-between;
-  background: inherit;
-  border-radius: var(--border-radius);
-}
-
-nav li a span,
-nav li button span{
-  flex:1;
-  padding:0 10px;
-  display: inline-block;
-  text-align: left;
-}
-
-nav li a svg,
-nav li button svg{
-  margin:0
-}
-
-nav li a:hover,
-nav li button:hover{
-  background:var(--secondary-clr)
-}
-
-nav li a:focus,
-nav li button:focus{
-  border-radius: var(--border-radius);
-}
-
 
 /* Other things */
 .resultRow {
