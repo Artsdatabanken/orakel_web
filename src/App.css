@@ -103,8 +103,6 @@ ul {
   padding-top: env(safe-area-inset-top);
 }
 
-
-
 @import 'styles/buttons.css';
 @import 'styles/modal.css';
 @import 'styles/navigation-menu.css'; /* also uses modal names*/
@@ -112,34 +110,12 @@ ul {
 
 /* OTHER STUFF */
 
-.bottom-section::after {
-  content: "";
-  position: absolute;
-  display: block;
-  bottom: calc(var(--vh, 1vh) * -10);
-  height: calc(var(--vh, 1vh) * 10);
-  width: 100vw;
-  left: -1.5em;
-  background-color: var(--box-clr);
-}
+
 
 .App.fullscreen {
   /* what is this? is it relevant? */
   max-width: 100vw !important;
   width: 100vw;
-}
-
-.image-section {
-  padding:var(--base-size);
-  height: 12rem;
-  flex-shrink: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  transition: transform 300ms ease-in-out 3ms;
-  will-change: transform;
 }
 
 .logo {
@@ -154,26 +130,6 @@ ul {
   transform: translateY(33vh);
 }
 
-.image-section {
-  color: #eee;
-}
-
-.image-section .placeholder-container {
-  width: 50%;
-  text-align: center;
-}
-
-.image-section .placeholder-title {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-}
-
-.image-section .placeholder-body {
-  font-weight: 400;
-  font-size: 0.9rem;
-  line-height: 1rem;
-}
-
 #bigDropzone {
   opacity: 0;
   top: 0;
@@ -181,29 +137,6 @@ ul {
   position: absolute;
   width: 100%;
   height: 100%;
-}
-
-.bottom-section {
-  border-radius: 1.8rem 1.8rem 0 0;
-  box-shadow: 0 0.15rem 0.15rem rgba(0, 0, 0, 0.12);
-  padding: 1.5em;
-  display: flex;
-  flex-shrink: 1;
-  flex-grow: 1;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  transition: transform 300ms ease-in-out 3ms;
-}
-
-.bottom-section {
-  background-color: var(--box-clr);
-}
-
-.bottom-section.hidden {
-  -webkit-transform: translateY(100%);
-  transform: translateY(100%);
 }
 
 .manual {
@@ -576,4 +509,11 @@ hr {
   color:white;
   padding:10%;
   font-size: 20px;
+}
+
+.images{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
 }

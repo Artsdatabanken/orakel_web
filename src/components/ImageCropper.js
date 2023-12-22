@@ -185,7 +185,7 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
         />
       </div>
            
-        <div class="modal-actions">      
+        <div className="modal-actions">      
           <button onClick={cancel} className="secondary">
           Slett bilde
           </button>{" "}

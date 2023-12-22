@@ -82,17 +82,12 @@ function App() {
     setExtendedManualVisible(false);
   };
 
-  const goToInput = () => {
+  const goToInputStage = () => {
     setResultStage(false);
     setPredictions([]);
     setInputStage(true);
-    document.getElementById("uploaderImages").click();
   };
 
-  const uploadMore = async (sender) => {
-    await addImage(document.getElementById(sender).files);
-    document.getElementById(sender).value = "";
-  };
 
   const getId = () => {
     setError(false);
@@ -163,22 +158,22 @@ function App() {
           /* Forsiden*/
           (!croppedImages.length) ?
            (<Frontpage 
-            uploadMore={uploadMore} 
-            goToInput={goToInput}
+            addImage={addImage} 
+            goToInputStage={goToInputStage} 
             setExtendedManualVisible={setExtendedManualVisible}/>)
            :(
             <>
-            {/* NOT front page */}
-              {inputStage && (              
+            {/* NOT front page  */}
+              {inputStage && (             
               <InputStage
                 loading={loading}
                 croppedImages={croppedImages}
                 editImage={editImage}
                 resetImages={resetImages}
-                goToInput={goToInput}
                 getId={getId}
                 gotError={gotError}
-                uploadMore={uploadMore}
+                addImage={addImage} 
+                goToInputStage={goToInputStage} 
               />
               )}
 
@@ -221,7 +216,7 @@ function App() {
          
 
           <Modal 
-          hasActions={true}
+            hasActions={true}
             isVisible={!!uncroppedImages.length}
             closeModal={console.log("must make this one")}
             header={"Rediger bilde"}

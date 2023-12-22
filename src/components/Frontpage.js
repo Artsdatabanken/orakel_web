@@ -1,9 +1,11 @@
 import React from "react";
 import "../App.css";
+import Uploader from "./Uploader";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
-function Frontpage({uploadMore,setExtendedManualVisible,goToInput}) {
+function Frontpage({addImage,setExtendedManualVisible,goToInputStage}) {
+
   return (                 
     <div className="frontpage">              
     <h1 >Artsorakelet</h1> 
@@ -17,17 +19,16 @@ function Frontpage({uploadMore,setExtendedManualVisible,goToInput}) {
     onClick={setExtendedManualVisible}>Les Bruksanvisning</button>
 
     <div className={"bottomButtons"}>
+    
+      <Uploader 
+       addImage={addImage} 
+       goToInputStage={goToInputStage} 
+       text={<AddAPhotoIcon />}
+       className={"bottomButton big-round-button primary clickable"}
+       />
 
-        <input
-          type="file"
-          id="uploaderImages"
-          onChange={uploadMore.bind(this, "uploaderImages")}
-        />
-
-      <button className="bottomButton big-round-button primary clickable" onClick={goToInput}>
-        <AddAPhotoIcon />
-
-      </button>
+      
+      
     </div>
   </div> 
   );
