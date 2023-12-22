@@ -10,13 +10,14 @@ function IdResult({ result, openResult, croppedImages }) {
   };
 
   return (
-    <div className="resultRow" onClick={openResultModal}>
-      <div className="resultDonut">
+    <li className="resultRow" onClick={openResultModal}>
+      <button onClick={openResultModal}>
+      
         <TaxonImage
           result={result}
           fullWidth={false}
         />
-      </div>
+        
 
       <div className="resultLabels">
         <div
@@ -50,7 +51,8 @@ function IdResult({ result, openResult, croppedImages }) {
           />
         </svg>
       </div>
-    </div>
+      </button>
+    </li>
   );
 }
 

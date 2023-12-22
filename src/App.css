@@ -60,6 +60,12 @@ h3{
   font-weight: bold;
 }
 
+hr {
+  height: 1px;
+  border: none;
+  background-color: hsla(0, 0%, 50%, 0.5);
+}
+
 body {
   align-items: center;
   justify-content: center;
@@ -82,9 +88,19 @@ body {
   height: 100%;
 }
 
+.darkmode .light {
+  display: none;
+}
+
+.lightmode .dark {
+  display: none;
+}
+
 ul {
-  list-style-type: square;
+  list-style-type: none;
   text-align: left;
+  margin:0;
+  padding:0
 }
 
 .app {
@@ -108,14 +124,17 @@ ul {
 @import 'styles/navigation-menu.css'; /* also uses modal names*/
 @import 'styles/action-line.css';
 
-/* OTHER STUFF */
+/* Header & Footer */
 
-
-
-.App.fullscreen {
-  /* what is this? is it relevant? */
-  max-width: 100vw !important;
-  width: 100vw;
+header {
+  width: 100%;
+  height: var(--header-height);
+  background: var(--bg-clr);
+  position: relative;
+  flex-grow: 0;
+  top: 0;
+  overflow: visible;
+  z-index:100
 }
 
 .logo {
@@ -126,18 +145,20 @@ ul {
   width: 1.5em;
 }
 
-.expanded {
-  transform: translateY(33vh);
+.bottomButtons {
+  z-index: 2;
+  position: absolute;
+  text-align: center;
+  left: 0;
+  width: 100%;
+  right: 0;
+  height: 6rem;
+  bottom: calc(1rem + constant(safe-area-inset-bottom));
+  bottom: calc(1rem + env(safe-area-inset-bottom));
 }
 
-#bigDropzone {
-  opacity: 0;
-  top: 0;
-  z-index: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
+
+/* user-feedback list (error-handling) */
 
 .manual {
   display: flex;
@@ -166,40 +187,8 @@ ul {
   width: 2.5rem;
 }
 
-.bottomButtons {
-  z-index: 2;
-  position: absolute;
-  text-align: center;
-  left: 0;
-  width: 100%;
-  right: 0;
-  height: 6rem;
-  bottom: calc(1rem + constant(safe-area-inset-bottom));
-  bottom: calc(1rem + env(safe-area-inset-bottom));
-}
 
-header {
-  width: 100%;
-  height: var(--header-height);
-  background: var(--bg-clr);
-  position: relative;
-  flex-grow: 0;
-  top: 0;
-  overflow: visible;
-  z-index:100
-}
-
-.topContent {
-  position: relative;
-  flex-grow: 1;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  transition: transform 300ms ease-in-out 3ms;
-  will-change: transform;
-}
-
+/* Page spinner */
 .littleSpinner {
   box-sizing: border-box;
   overflow: hidden;
@@ -215,21 +204,7 @@ header {
   animation: spin 1s linear infinite;
 }
 
-input {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-
-/* NEI, ikke fjern scrollbars. UU. Ikke selvforklarende */
-
-
+/* Image Containers for input page */
 
 .imgContainer {
   padding: 8px;
@@ -257,41 +232,7 @@ input {
   max-height: 100%;
 }
 
-.goToInput {
-  border-radius: 1.5rem;
-  height: 6rem;
-  width: 6rem;
-  min-width: 6rem;
-  max-height: 100%;
-  border: 0.15em dashed hsla(0, 0%, 100%, 0.5);
-  background-color: hsla(0, 0%, 100%, 0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 2;
-  margin: 1rem 0.5rem;
-  position: relative;
-}
-
-.goToInput::after {
-  content: "+";
-  font-family: "Times New Roman", Times, serif;
-  font-size: 5rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.top-btn {
-  position: absolute;
-  transform: translateY(-3em);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  left: 0;
-  z-index: 2;
-}
-
+/* Crop image page */ 
 
 .cropContainer > .cropper {
   flex-grow: 1;
@@ -327,90 +268,50 @@ input {
   margin: 1rem;
 }
 
-
-
 /*
 .cropContainer svg {
   height: 1.5rem;
   cursor: pointer;
 }*/
 
-/* is this also modal stuff?*/
-#menu .content {
-  top: 0;
-  border-radius: 0 0 1.7rem 1.7rem;
-  transition: transform 300ms ease-in-out 3ms;
-  will-change: transform;
+/* Result List */
+
+.result-list li{
+  width:100%;
 }
 
-#menu.invisible .content {
-  transform: translateY(-100%);
-}
-
-.aboutLogo {
-  height: 5rem;
-  width: 50%;
-  padding: 0.5em;
-}
-
-.darkmode .light {
-  display: none;
-}
-
-.lightmode .dark {
-  display: none;
-}
-
-.aboutHeader {
+.result-list li button{
   width: 100%;
-  height: 4em;
-  padding: 1em;
-}
-
-hr {
-  height: 1px;
-  border: none;
-  background-color: hsla(0, 0%, 50%, 0.5);
-}
-
-/* Other things */
-.resultRow {
+  margin:0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1.2rem 0;
-  border-bottom: 1px solid hsla(0, 0%, 50%, 50%);
   cursor: pointer;
   word-break: break-word;
+  margin-bottom: var(--base-size);
 }
 
-.resultDonut {
-  width: 4.5rem;
-  margin-right: 1rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.darkmode .resultDonut svg {
-  opacity: 0.66;
-}
-
-.resultDonut .percentage {
-  position: absolute;
-  font-size: 1em;
-}
-
-.intro {
-  font-size: 1.1em;
-  font-weight: bold;
-}
-
-.resultRow .vernacular {
+.result-list li .vernacular {
   font-size: 1.6em;
 }
+
+
+/* Species presentation */ 
+
+.italics {
+  font-style: italic;
+}
+
+.result-list li .scientific {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+.scientific {
+  font-style: italic;
+  font-weight: 400;
+}
+
 
 .hyphenate {
   -moz-hyphens: auto;
@@ -420,36 +321,24 @@ hr {
   word-wrap: break-word;
 }
 
+/* Text pages */ 
 
-
-/* Species list presultation i presume?*/ 
-
-.italics {
-  font-style: italic;
+.aboutLogo {  
+  width: 50%;
+  padding: 0.5em;
 }
 
-.resultRow .scientific {
-  font-size: 1em;
-  line-height: 1.5em;
+.intro {
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
-
-.extendedManual svg {
-  width: 3rem;
-  margin-right: 0.75em;
-  float: left;
-}
+/* OTHER STUFF */ 
 
 .extendedResult {
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-
-.scientific {
-  font-style: italic;
-  font-weight: 400;
 }
 
 .group {

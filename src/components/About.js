@@ -7,14 +7,6 @@ function About() {
     
     <>
 
-      <img
-        src="Artsdatabanken_long_dark.svg"
-        alt="Artsdatabanken"
-        className="aboutHeader dark"
-      />
-
-      <hr />
-
       <p className="intro">
         Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis
         Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av

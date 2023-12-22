@@ -22,7 +22,7 @@ function ResultStage({loading,croppedImages,resetImages,predictions,IdResult,set
 
         <h2>Resultater</h2>
         {!!predictions.length && (
-          <>
+          <ul className="result-list">
             {predictions.map((prediction) => (
               <IdResult
                 result={prediction}
@@ -31,7 +31,7 @@ function ResultStage({loading,croppedImages,resetImages,predictions,IdResult,set
                 openResult={setChosenPrediction}
               />
             ))}          
-          </>
+          </ul>
         )}
       {chosenPrediction &&
         <Modal 

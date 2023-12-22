@@ -19,7 +19,7 @@ function Modal({header,children,subChildren,closeModal,isVisible,hasActions}) {
         <div className="content" onClick={e => e.stopPropagation()}>
           <button onClick={closeModal}
           className="menu-button menu-icon icon-button inverted" 
-          title="Lukk menu" 
+          title="Lukk meny" 
           aria-label="Lukk meny">
             <CloseIcon  />
           </button>
