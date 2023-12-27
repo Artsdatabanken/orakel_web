@@ -65,6 +65,18 @@ function App() {
     setResultStage(false);
   };
 
+  const deleteImage = (index) => {    
+    setFullImages(
+      fullImages.slice(0, index).concat(fullImages.slice(index + 1))
+    );
+    setCroppedImages(
+      croppedImages.slice(0, index).concat(croppedImages.slice(index + 1))
+    );
+    if(fullImages.length === 0){
+      setInputStage(false);
+    }    
+  };  
+
   const resetImages = () => {
     setError(false);
     setCroppedImages([]);
@@ -107,10 +119,8 @@ function App() {
     );
     setUncroppedImages([]);
     setTemporaryImages([]);
-    }else      
-      if(!!uncroppedImages.length){
-        setUncroppedImages([]);
-      
+    }else if(!!uncroppedImages.length){
+      setUncroppedImages([]);      
     }
   }
 
@@ -200,6 +210,7 @@ function App() {
                 gotError={gotError}
                 addImage={addImage} 
                 goToInputStage={goToInputStage} 
+                deleteImage={deleteImage}
               />
               )}
 

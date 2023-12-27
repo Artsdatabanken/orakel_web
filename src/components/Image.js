@@ -2,18 +2,24 @@ import React from "react";
 import "../App.css";
 import CloseIcon from "@mui/icons-material/Close";
 
-function UploadedImage({ img, imgIndex, editImage }) {
+function UploadedImage({ img, imgIndex, editImage, deleteImage }) {
 
   const doEdit = () => {
     editImage(imgIndex);
   };
+
+  const doDeleteImage = () => {
+    deleteImage(imgIndex)
+  }
 
   return (
     <div className="imgContainer" >
        <button
           className="menu-icon icon-button secondary" 
           title="Lukk menu" 
-          aria-label="Lukk meny">
+          aria-label="Lukk meny"
+          onClick={doDeleteImage}
+          >
             <CloseIcon  />
           </button>
       <img

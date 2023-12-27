@@ -4,7 +4,7 @@ import UploadedImage from "./Image";
 import Uploader from "./Uploader";
 import UserFeedback from "./UserFeedback";
 
-function InputStage({loading,croppedImages,editImage,resetImages,getId,gotError, addImage,goToInputStage}) {
+function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,getId,gotError, addImage,goToInputStage}) {
   
   
   return (         
@@ -18,6 +18,7 @@ function InputStage({loading,croppedImages,editImage,resetImages,getId,gotError,
               key={index}
               imgIndex={index}
               editImage={editImage}
+              deleteImage={deleteImage}
             />
           ))}
         </div>
