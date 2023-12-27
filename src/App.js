@@ -15,6 +15,7 @@ import Settings from "./components/Settings";
 function App() {
   const [croppedImages, setCroppedImages] = useState([]);
   const [uncroppedImages, setUncroppedImages] = useState([]);
+  const [temporaryImages, setTemporaryImages] = useState([]);
   const [fullImages, setFullImages] = useState([]);
   const [predictions, setPredictions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,8 +31,7 @@ function App() {
   // i18 språkstøtte ?
 
   const addImage = async (images) => {
-    setError(false);
-    
+    setError(false);    
     for (let i of images) {
         setUncroppedImages([...uncroppedImages, i]);
     }
@@ -46,10 +46,15 @@ function App() {
       setPredictions([]);
     }
     setUncroppedImages([]);
+    setTemporaryImages([]);
   };
 
   const editImage = (index) => {
     setUncroppedImages([fullImages[index]]);
+
+    // keep a temp file in case we want to cancel the action.
+    setTemporaryImages([croppedImages[index]]);
+
     setFullImages(
       fullImages.slice(0, index).concat(fullImages.slice(index + 1))
     );
@@ -65,6 +70,7 @@ function App() {
     setCroppedImages([]);
     setPredictions([]);
     setFullImages([]);
+    setTemporaryImages([]);
     setInputStage(true);
     setResultStage(false);
   };
@@ -89,6 +95,24 @@ function App() {
     setPredictions([]);
     setInputStage(true);
   };
+
+  const exitUpload = () => {
+    if(!!temporaryImages.length){
+      // cancel ongoing edit by reverting to the previous temporary state.
+    setFullImages(
+      fullImages.concat(uncroppedImages)
+    );
+    setCroppedImages(
+      croppedImages.concat(temporaryImages)
+    );
+    setUncroppedImages([]);
+    setTemporaryImages([]);
+    }else      
+      if(!!uncroppedImages.length){
+        setUncroppedImages([]);
+      
+    }
+  }
 
 
   const getId = () => {
@@ -222,12 +246,11 @@ function App() {
             header={"Innstillinger"}
             children={<Settings toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}
           />
-         
 
           <Modal 
             hasActions={true}
             isVisible={!!uncroppedImages.length}
-            closeModal={console.log("must make this one")}
+            closeModal={exitUpload}
             header={"Rediger bilde"}
             children={uncroppedImages.map((ucimg, index) => (
               <ImageCropper

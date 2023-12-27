@@ -23,7 +23,7 @@ function Frontpage({addImage,setExtendedManualVisible,goToInputStage}) {
       <Uploader 
        addImage={addImage} 
        goToInputStage={goToInputStage} 
-       text={<AddAPhotoIcon />}
+       text={<><AddAPhotoIcon /> <small>Velg bilde</small> </>}
        className={"bottomButton big-round-button primary clickable"}
        />
 

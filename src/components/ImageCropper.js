@@ -27,41 +27,10 @@ if (!HTMLCanvasElement.prototype.toBlob) {
   });
 }
 
-export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
+export const ImageCropper = ({ imgFile, imageCropped, imgSize }) => {
   const [image, setImage] = useState();
   const [cropper, setCropper] = useState();
   const [zoom, setZoom] = useState(.25);
-
-  // const initCropper = () => {
-  //   console.log("trying");
-  //   console.log("trying");
-  //   if (!initialized && cropper && cropper.containerData) {
-  //     console.log("ok");
-
-  //     setInitialized(true);
-
-  //     let cropBoxSize =
-  //       Math.min(cropper.containerData.width, cropper.containerData.height) *
-  //       0.9;
-
-  //     // this.cropper.setCropBoxData({
-  //     //   width: cropBoxSize,
-  //     //   left: (this.cropper.cropper.containerData.width - cropBoxSize) / 2,
-  //     //   top: (this.cropper.cropper.containerData.height - cropBoxSize) / 2,
-  //     // });
-
-  //     // Set the initial zoom to fit the smallest dimension
-  //     let zoomFactor = Math.max(
-  //       cropBoxSize /
-  //         Math.min(
-  //           cropper.canvasData.naturalWidth,
-  //           cropper.canvasData.naturalHeight
-  //         )
-  //     );
-  //     setZoom(zoomFactor);
-  //     cropper.zoomTo(zoomFactor);
-  //   }
-  // };
 
   const getCropData = () => {
     if (cropper && cropper.containerData) {

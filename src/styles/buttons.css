@@ -91,12 +91,21 @@ button:hover,
   min-height: var(--icon-button-size);
 }
 
-
 .big-round-button{
   width: var(--big-round-button-size);
   height: var(--big-round-button-size);
   min-width: var(--big-round-button-size);
   min-height: var(--big-round-button-size);
+}
+
+.big-round-button small{
+  display: block;
+  font-size: 10pt;
+}
+
+.big-round-button svg{
+  height:30px;
+  width:30px;
 }
 
 .menu-icon {

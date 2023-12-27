@@ -37,7 +37,7 @@
     --border-width: 2px;
     --focus-border-width: 3px;
     --icon-button-size: 40px;
-    --big-round-button-size:60px;
+    --big-round-button-size:80px;
     --focus-color: var(--fresh-water-blue-light);
     --focus-outline:var(--focus-border-width) solid var(--focus-color);
     --body-color:var(--ocean-dark);
