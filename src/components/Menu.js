@@ -1,6 +1,5 @@
 import React from "react";
 import "../App.css";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
 import AppleIcon from "@mui/icons-material/Apple";
 import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -76,20 +75,7 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
           </li>
 
         </ul>
-{/*
-      <h2>Settings</h2>
-       Move to settings
-        <div  onClick={toggleDarkMode}>
-        <div>Slå {darkMode ? "av" : "på"} nattmodus</div>
-        <Brightness4Icon />
-      </div>*/}
-      
-      
-   {/* 
-      <div  onClick={resetImages}>
-        <div>Restart appen</div>
-        <ReplayIcon />
-      </div>*/}
+
     
       <button className="modal-background" onClick={toggleMenu}></button>
       </nav>

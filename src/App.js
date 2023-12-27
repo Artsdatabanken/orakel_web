@@ -10,6 +10,7 @@ import Frontpage from "./components/Frontpage";
 import ExtendedManual from "./components/ExtendedManual";
 import InputStage from "./components/InputStage";
 import ResultStage from "./components/ResultStage";
+import Settings from "./components/Settings";
 
 function App() {
   const [croppedImages, setCroppedImages] = useState([]);
@@ -80,6 +81,7 @@ function App() {
     setChosenPrediction(false);
     setAboutVisible(false);
     setExtendedManualVisible(false);
+    setSettingsVisible(false);
   };
 
   const goToInputStage = () => {
@@ -212,6 +214,13 @@ function App() {
             closeModal={closeModal}
             header={"Bruksanvisning"}
             children={<ExtendedManual />}
+          />
+         
+         <Modal 
+            isVisible={settingsVisible}
+            closeModal={closeModal}
+            header={"Innstillinger"}
+            children={<Settings toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}
           />
          
 
