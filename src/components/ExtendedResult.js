@@ -1,62 +1,47 @@
 import React from "react";
 import "../App.css";
 import ReportButton from "./ReportButton";
+import SpeciesName from "./SpeciesName";
 import WarningIcon from "@mui/icons-material/Warning"
-
+import TaxonImage from "./taxonImage";
 
 function ExtendedResult({ result, croppedImages, preventClick }) {
   const percentage = Math.round(result.probability * 100);
   const n_pics = croppedImages.length;
 
   return (
-    <div className="extendedResult scrollable scrollbarless">
-      <div
-        className="resultLabels"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <div
-          className={
-            result.vernacularName.toLowerCase() ===
-            result.name.toLowerCase()
-              ? "hyphenate vernacular italics"
-              : "hyphenate vernacular"
-          }
-        >
-          {result.vernacularName.charAt(0).toUpperCase()}
-          &#8288;
-          {result.vernacularName.slice(1)}
-        </div>
-        <div className="scientific hyphenate">
-          {result.name.charAt(0)}
-          &#8288;
-          {result.name.slice(1)}
-        </div>
-      </div>
+    <>      
+      <SpeciesName 
+        vernacularName={result.vernacularName}
+        scientificName={result.name}  
+        isTitle={true} 
+      />   
 
-      <div className="resultDescription">
+      <TaxonImage
+          result={result}
+          fullWidth={false}
+        />
+
+      <p className="resultDescription">
         Artsorakelet gir {percentage} % treff for{" "}
-        <span
-          className={
-            result.vernacularName.toLowerCase() ===
-            result.name.toLowerCase()
-              ? "italics"
-              : ""
-          }
-        >
-          {result.vernacularName}
-        </span>{" "}
+        <SpeciesName 
+          vernacularName={result.vernacularName}
+          scientificName={result.name}   
+          inText={true}     
+        />
         basert på {n_pics === 1 ? "bildet ditt" : "dine " + n_pics + " bilder"}.
         Det er ikke sagt at det stemmer, du må selv kontrollere at det er
         riktig, særlig hvis du skal rapportere funnet.
-        {result.groupName === "Sopper" && (
-          <div className="danger">
-            <WarningIcon /> ALDRI SPIS NOE BASERT PÅ ARTSORAKELETS SVAR
-          </div>
-        )}
-      </div>
-      <div className="resultActions">
+       
+      </p>
+
+      {result.groupName === "Sopper" && (
+        <p className="danger">
+          <WarningIcon /> ALDRI SPIS NOE BASERT PÅ ARTSORAKELETS SVAR
+        </p>
+      )}
+
+      <div className="modal-actions">
         <a
           href={result.infoUrl}
           target={"_blank"}
@@ -70,7 +55,7 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
           preventClick={preventClick}
         />
       </div>
-    </div>
+    </>
   );
 }
 

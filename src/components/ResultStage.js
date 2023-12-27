@@ -35,9 +35,9 @@ function ResultStage({loading,croppedImages,resetImages,predictions,IdResult,set
         )}
       {chosenPrediction &&
         <Modal 
+            hasActions={true}
             isVisible={chosenPrediction}
             closeModal={closeModal}
-            header={"Resultater"}
             children={<chosenPrediction />}
             subChildren={<ExtendedResult
               result={chosenPrediction}

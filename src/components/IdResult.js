@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import TaxonImage from "./taxonImage";
 import ResultGauge from "./resultGauge";
+import SpeciesName from "./SpeciesName";
 
 function IdResult({ result, openResult, croppedImages }) {
 
@@ -10,32 +11,19 @@ function IdResult({ result, openResult, croppedImages }) {
   };
 
   return (
-    <li className="resultRow" onClick={openResultModal}>
-      <button onClick={openResultModal}>
-      
+    <li className="resultRow">
+      <button className="secondary" onClick={openResultModal}>      
         <TaxonImage
           result={result}
           fullWidth={false}
-        />
-        
-
+        />       
       <div className="resultLabels">
-        <div
-          className={
-            result.vernacularName.toLowerCase() === result.name.toLowerCase()
-              ? "hyphenate vernacular italics"
-              : "hyphenate vernacular"
-          }
-        >
-          {result.vernacularName.charAt(0).toUpperCase()}
-          &#8288;
-          {result.vernacularName.slice(1)}
-        </div>
-        <div className="hyphenate scientific">
-          {result.name.charAt(0)}
-          &#8288;
-          {result.name.slice(1)}
-        </div>
+        <SpeciesName 
+          vernacularName={result.vernacularName} 
+          scientificName={result.name}
+        />
+
+
         <div className="group">{result.groupName}</div>
         {result.groupName === "Sopper" && (
           <div className="danger">ALDRI SPIS NOE PGA APPEN</div>

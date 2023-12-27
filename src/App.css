@@ -280,6 +280,7 @@ header {
   width:100%;
 }
 
+
 .result-list li button{
   width: 100%;
   margin:0;
@@ -295,6 +296,12 @@ header {
   font-size: 1.6em;
 }
 
+.result-list li button,
+.adb-big-card /* From the NiN-system*/{
+  border-radius: 17px;
+  border: 1px solid #d9d9d9;
+  background:white;
+}
 
 /* Species presentation */ 
 
@@ -302,16 +309,9 @@ header {
   font-style: italic;
 }
 
-.result-list li .scientific {
-  font-size: 1em;
-  line-height: 1.5em;
-}
-
 .scientific {
   font-style: italic;
-  font-weight: 400;
 }
-
 
 .hyphenate {
   -moz-hyphens: auto;
@@ -335,20 +335,8 @@ header {
 
 /* OTHER STUFF */ 
 
-.extendedResult {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.group {
+.species-group {
   font-size: 1em;
-  font-variant: small-caps;
-}
-
-.resultLabels {
-  flex-grow: 1;
-  flex-shrink: 1;
 }
 
 .tick {
