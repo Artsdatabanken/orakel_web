@@ -283,6 +283,9 @@ header {
 
 .result-list li{
   width:100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
