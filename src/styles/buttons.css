@@ -70,7 +70,7 @@ button:hover,
 }
 
 .menu-button.inverted{
-  color:var(--body-color);
+  color:var(--text-clr);
 }
 
 /* Do we need ghost button? I think not? */

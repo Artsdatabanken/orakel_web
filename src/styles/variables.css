@@ -18,6 +18,7 @@
     --fresh-water-blue-light: #0283a1; /* Ferskvannblå*/
     --fresh-water-blue-medium: #017590;
     --fresh-water-blue-80:#337B8D;
+    --fresh-water-blue-40: #99BDC6;
     --fresh-water-blue-20:#CCDEE3;
     --fresh-water-blue-10:#E6EFF1;
     --info:var(--fresh-water-blue);
@@ -49,6 +50,7 @@
   }*/
   
   .lightmode {
+    --link-clr: var(--fresh-water-blue-medium);
     --bg-clr: var(--summer-grass-green);
     --box-clr: var(--sand-50);
     /* Buttons */
@@ -67,18 +69,29 @@
     --text-clr: var(--ocean-dark);
     --danger: var(--coral-dark);
     --ok: var(--winter-green-dark);
-    --color: var(--text-clr);
   }
-  
+
+
+  /* 
+  Have to make custom dark theme colours to ensure contrast. Battle Tove at will.
+  */ 
+
   .darkmode {
-    --primary-clr: hsl(35, 93%, 68%);
-    --bg-clr: #121212;
-    --box-clr: hsl(33, 14%, 15%);
-    --tick-clr: hsl(33, 14%, 15%);
-    --text-clr: #eeeeee;
-    --text-clr-on-primary: #121212;
-    --danger: hsl(14, 46%, 68%);
-    --ok: hsl(105, 46%, 68%);
-    color: var(--text-clr);
+    --link-clr: #09a7e5;
+    --bg-clr: #273219;
+    --box-clr: #14181a;
+    /* Buttons */
+    --secondary-clr: var(--fresh-water-blue);
+    --text-clr-on-secondary:#fff;
+  
+    --primary-clr: var(--fresh-water-blue-40);
+    --text-clr-on-primary:var(--body-color);
+  
+    --secondary-color-hover: var(--fresh-water-blue-80);
+    --primary-color-hover: var(--fresh-water-blue-10);
+  
+    /* Other stuff */
+    --tick-clr: #fff;
+    --text-clr: #fff;
   }
   

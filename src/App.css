@@ -3,23 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 @import 'styles/variables.css';
-/*
-v beige der hvit på forsiden (bg)
-v Sommergress mørk der organge, (evnt. bittelitt mørekere om vi må)
-v rød/grønn knapp korall + vintergrønn
-- knappesystem rigget til artsobs
-- stripp skygger
-- helene grubler på bue på hovedseksjon
-- delete knapp siden og "handlekurv-siden" må bli mer selvforklarende (bilde-actions)
-- chevron -> open in 
-- font + farge 
-- om arten: utadgående lenker, kanskje tenke på tekst, plassering, og action
-- få toril og wouter til å debattere om navn bør være fulle.
-- helene gruble på actions i meny, gjør hvis ikke  (kan restart dø?) (darktheme inn i settings)
-- meny på forside? gruble litt
-- vurdere tekst i knapp (hvor?)
-
-*/
 
 *,
 *::before,
@@ -33,9 +16,37 @@ v rød/grønn knapp korall + vintergrønn
   }
 }
 
+body {
+  align-items: center;
+  justify-content: center;
+  background-color: var(--sand-50);
+  font-family: var(--font-chivo);
+  overflow: hidden;
+  text-align: center;
+  font-size: 14pt;
+}
+
+.app {
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /*max-width: 900px;*/
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  background-color: var(--box-clr);
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  
+  color:var(--text-clr);
+}
+
 
 a {
-  color: var(--fresh-water-blue-medium);
+  color: var(--link-clr);
   text-decoration: underline;
 }
 
@@ -66,15 +77,7 @@ hr {
   background-color: hsla(0, 0%, 50%, 0.5);
 }
 
-body {
-  align-items: center;
-  justify-content: center;
-  background-color: var(--sand-50);
-  font-family: var(--font-chivo);
-  overflow: hidden;
-  text-align: center;
-  font-size: 14pt;
-}
+
 
 #root {
   width: 100vw;
@@ -103,21 +106,6 @@ ul {
   padding:0
 }
 
-.app {
-  height: 100%;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  /*max-width: 900px;*/
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-  background-color: var(--box-clr);
-  padding-top: constant(safe-area-inset-top);
-  padding-top: env(safe-area-inset-top);
-}
 
 @import 'styles/buttons.css';
 @import 'styles/modal.css';
@@ -221,7 +209,7 @@ header {
 
 .imgContainer .menu-icon{
   margin: 0;
-  color:var(--body-color);
+  color:var(--text-clr);
   position: absolute;
   margin-right: -8px;
   margin-left: -8px;
@@ -249,7 +237,7 @@ header {
 }
 
 .editing .MuiSlider-root {
-  color: black;
+  color: var(--text-clr);
 }
 
 .cropContainer > .editing svg {
@@ -300,7 +288,7 @@ header {
 .adb-big-card /* From the NiN-system*/{
   border-radius: 17px;
   border: 1px solid #d9d9d9;
-  background:white;
+  background:var(--text-clr-on-primary);
 }
 
 /* Species presentation */ 
