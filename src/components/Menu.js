@@ -76,7 +76,6 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
 
         </ul>
 
-    
       <button className="modal-background" onClick={toggleMenu}></button>
       </nav>
 

@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import ExtendedResult from "./ExtendedResult";
 import Modal from "./Modal";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function ResultStage({loading,croppedImages,resetImages,predictions,IdResult,setChosenPrediction,chosenPrediction,closeModal,removeId}) {
   return (         
@@ -48,7 +49,7 @@ function ResultStage({loading,croppedImages,resetImages,predictions,IdResult,set
       </div>      
       <div className="page-bottom-actions">
         <button className="btn reset secondary" onClick={removeId}>
-              Rediger Utvalg 
+            <EditOutlinedIcon/>  Rediger utvalg 
         </button>
         <button className="btn reset primary" onClick={resetImages}>
           <svg viewBox="0 0 24 24">

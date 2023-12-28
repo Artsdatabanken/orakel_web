@@ -3,6 +3,9 @@ import "../App.css";
 import UploadedImage from "./Image";
 import Uploader from "./Uploader";
 import UserFeedback from "./UserFeedback";
+import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import ImageSearchOutlined from '@mui/icons-material/ImageSearchOutlined';
 
 function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,getId,gotError, addImage,goToInputStage}) {
   
@@ -28,7 +31,7 @@ function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,get
        <Uploader 
        addImage={addImage} 
        goToInputStage={goToInputStage} 
-       text={"Legg til flere"}
+       text={<><AddAPhotoOutlinedIcon/>  Legg til flere</>}
        className={"secondary"}
        />
 
@@ -43,10 +46,10 @@ function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,get
         {!!croppedImages.length && (
           <>
           <button className="btn id secondary" onClick={resetImages} type="button" >
-            Tøm utvalg
+            <DeleteOutlineOutlinedIcon/> Tøm utvalg
           </button>
           <button className="btn id primary" onClick={getId} type="button" >
-            Identifiser
+            <ImageSearchOutlined/> Finn forslag
           </button>
             </>
         )}

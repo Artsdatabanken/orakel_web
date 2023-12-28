@@ -35,6 +35,7 @@
     width: 100%;
     left: 0;
     height: 72px;
+    background: var(--box-clr);
   }
 
   .modal .scrollable.has-actions{

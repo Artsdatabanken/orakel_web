@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 import Uploader from "./Uploader";
-
+import OpenInFullOutlinedIcon from '@mui/icons-material/OpenInFullOutlined';
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
 function Frontpage({addImage,setExtendedManualVisible,goToInputStage}) {
@@ -16,7 +16,9 @@ function Frontpage({addImage,setExtendedManualVisible,goToInputStage}) {
     </p>
 
     <button className="secondary" 
-    onClick={setExtendedManualVisible}>Les Bruksanvisning</button>
+    onClick={setExtendedManualVisible}>
+    Les bruksanvisning
+    </button>
 
     <div className={"bottomButtons"}>
     

@@ -8,6 +8,7 @@ import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContentText from "@mui/material/DialogContentText";
+import LaunchOutlinedIcon from '@mui/icons-material/LaunchOutlined';
 
 function ReportButton({ reportResult, croppedImages }) {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -90,7 +91,7 @@ function ReportButton({ reportResult, croppedImages }) {
   return (
     <React.Fragment>
       <button className="btn secondary" onClick={openDialog.bind(this)}>
-        Rapporter funn
+       Rapporter funn <LaunchOutlinedIcon/>
         {uploadingImages && <span className="littleSpinner"></span>}
       </button>
 

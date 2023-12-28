@@ -7,6 +7,7 @@ import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 if (!HTMLCanvasElement.prototype.toBlob) {
   Object.defineProperty(HTMLCanvasElement.prototype, "toBlob", {
@@ -156,10 +157,10 @@ export const ImageCropper = ({ imgFile, imageCropped, imgSize }) => {
            
         <div className="modal-actions">      
           <button onClick={cancel} className="secondary">
-          Slett bilde
-          </button>{" "}
+          <DeleteOutlineOutlinedIcon/> Slett bilde
+          </button>
           <button onClick={getCropData} className="primary">
-            <DoneIcon /> Lagre og fortsett
+            <DoneIcon /> Lagre bilde
           </button>
         </div>
       

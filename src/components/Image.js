@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
 import CloseIcon from "@mui/icons-material/Close";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function UploadedImage({ img, imgIndex, editImage, deleteImage }) {
 
@@ -28,7 +29,7 @@ function UploadedImage({ img, imgIndex, editImage, deleteImage }) {
         alt="Uploaded"
       />
       <button className="secondary" onClick={doEdit}>
-        Rediger
+        <EditOutlinedIcon/> Rediger
       </button>
     </div>
   );
