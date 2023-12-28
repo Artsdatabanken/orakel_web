@@ -69,7 +69,7 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
           <li>
             <button onClick={openSettings} >
               <SettingsIcon />
-              <span>Settings</span>              
+              <span>Innstillinger</span>              
               <ChevronRightIcon />  
             </button>
           </li>

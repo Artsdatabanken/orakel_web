@@ -240,7 +240,7 @@ function App() {
           <Modal 
             isVisible={aboutVisible}
             closeModal={closeModal}
-            header={"Om Artsobservasjoner"}
+            header={"Om Artsorakelet"}
             children={<About />}
           />
 

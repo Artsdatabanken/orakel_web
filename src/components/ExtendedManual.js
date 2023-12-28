@@ -3,14 +3,22 @@ import "../App.css";
 
 function ExtendedManual() {
   return (
-    <>
+    <div className="information-page">
       <p className="intro">
         Artsdatabankens Artsorakel prøver å artsbestemme bilder ved hjelp av
-        maskinlæring. Artsorakelet kjenner kun viltlevende arter (ingen husdyr,
-        hageplanter, osv.) og gir svar på artsnivå (og noen underarter).
+        maskinlæring. 
       </p>
+
+      <h3>Hva kan orakelet kjenne igjen?</h3>
+      <p>Orakelet kan kun kjenne igjen arter den har sett gode bilder av. Det vil si arter som er:</p>
+      <ul className="bullet-list">
+        <li>viltlevende</li>
+        <li>norske</li>
+        <li>ikke et husdyr eller en hageplanter, osv.</li>
+      </ul>
+      
       <h3>Kom i gang</h3>
-      <ul>
+      <ol className="how-to-list">
         <li>
           <svg viewBox="0 0 24 24">
             <path
@@ -67,7 +75,7 @@ function ExtendedManual() {
           det ikke blitt trent med i det hele tatt, og heller ikke bilder som er
           unntatt offentlighet, som bilder av store rovdyr.
         </li>
-      </ul>
+      </ol>
 
       <p>
         Trykker du på et resultat kan du lese mer om det, klikke videre og se
@@ -80,7 +88,7 @@ function ExtendedManual() {
       </p>
       <div>
         <h3>Noen tips:</h3>
-        <ul>
+        <ul  className="bullet-list">
           <li>
             Det er helt ok å teste appen med en selfie, et kjæledyr, eller noe
             eksotisk. Det er både gøy og en god måte å få erfaring med appen på.
@@ -115,7 +123,7 @@ function ExtendedManual() {
           </li>
         </ul>
         </div>
-      </>
+      </div>
   );
 }
 

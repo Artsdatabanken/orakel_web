@@ -20,10 +20,10 @@
     margin-right: var(--base-size);
     width:calc(100% - var(--double-size));
     padding:var(--double-size);
-    overflow: auto;
   }
   
   .modal .content .scrollable {
+    height:calc(100% - 48px);
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -47,36 +47,7 @@
     top: 1rem;
     cursor: pointer;
   }
-  
-.modal p {
-    margin-bottom: var(--double-size);
-  }
-    
-
-  /* More Modal stuff?? */
-  
-
-#modal .vernacular {
-  font-size: 2em;
-  line-height: 1em;
-}
-
-#modal .resultLabels {
-  border-bottom: 1px solid hsla(0, 0%, 50%, 50%);
-  padding: 1em 0;
-  margin-bottom: 2em;
-  flex-grow: 0;
-}
-
-#modal .resultDescription {
-  font-size: 1em;
-  flex-grow: 1;
-}
-
-#modal .resultDescription > * {
-  margin-top: 1em;
-}
-
+      
 #modal .resultActions {
   margin-top: 1em;
   display: flex;
@@ -86,7 +57,7 @@
   gap:var(--base-size)
 }
 
-#modal .btn {
-  font-size: 0.9rem;
+.information-page{
+  text-align: left;
+  font-size: 12pt;
 }
-

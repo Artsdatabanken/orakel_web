@@ -39,8 +39,7 @@ body {
   overflow: hidden;
   background-color: var(--box-clr);
   padding-top: constant(safe-area-inset-top);
-  padding-top: env(safe-area-inset-top);
-  
+  padding-top: env(safe-area-inset-top);  
   color:var(--text-clr);
 }
 
@@ -71,13 +70,15 @@ h3{
   font-weight: bold;
 }
 
+h1, h2, h3{
+  margin-top:var(--double-size)
+}
+
 hr {
   height: 1px;
   border: none;
   background-color: hsla(0, 0%, 50%, 0.5);
 }
-
-
 
 #root {
   width: 100vw;
@@ -104,6 +105,11 @@ ul {
   text-align: left;
   margin:0;
   padding:0
+}
+
+.bullet-list{
+  list-style-type: circle;
+  padding: 4px 16px;
 }
 
 
@@ -170,11 +176,22 @@ header {
   padding-left: 1.5em;
 }
 
-.manual-item svg {
-  min-width: 2.5rem;
-  width: 2.5rem;
+.how-to-list{
+  padding:0
 }
 
+.how-to-list svg {
+  min-width: 2.5rem;
+  width: 2.5rem;
+  float:left;
+  margin:8px
+}
+
+.how-to-list li{
+  display: flex;
+  margin-bottom: var(--double-size);
+  padding-right:8px
+}
 
 /* Page spinner */
 .littleSpinner {

@@ -5,20 +5,15 @@ function About() {
   
   return (
     
-    <>
+    <div className="information-page">
 
       <p className="intro">
-        Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis
-        Biodiversity Center. Appen prøver å artsbestemme bilder ved hjelp av
+        Appen prøver å artsbestemme bilder ved hjelp av
         maskinlæring.
       </p>
 
-      <img
-        src="Artsorakel_logo_trans.svg"
-        alt="Artsorakelet"
-        className="aboutHeader"
-      />
 
+      <h3>Treningsgrunnlag</h3>
       <p>
         Gjenkjenningsmodellen trenes hos Naturalis Biodiversity Center, med
         bilder som er offentlig tilgjengelig på artsobservasjoner.no. Når appen
@@ -29,11 +24,23 @@ function About() {
         og gir svar på artsnivå (og noen underarter).
       </p>
 
+      <h3>Hvor havner bildene mine?</h3>
       <p>
-      Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon
+        Bilder sendes til serveren til gjenkjenning. Bilder og brukerinformasjon
         blir ikke tilgjengelige for Artsdatabanken eller andre.
       </p>
 
+      <h3>Hvem står bak applikasjonen?</h3>
+      <p>Artsorakelet er utviklet av Artsdatabanken i samarbeid med Naturalis
+        Biodiversity Center. </p>
+      
+      <img
+        src="Artsorakel_logo_trans.svg"
+        alt="Artsorakelet"
+        className="aboutHeader"
+      />
+
+      <h3>Videre lesning</h3>
       <p>
         Du kan lese mer om Artsorakelet på{" "}
         <a href="https://www.artsdatabanken.no/Pages/299643">
@@ -59,7 +66,7 @@ function About() {
         />
         <img src="Naturalis.svg" className="aboutLogo" alt="Naturalis" />
       </p>
-    </>
+    </div>
   );
 }
 
