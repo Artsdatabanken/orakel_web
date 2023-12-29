@@ -16,7 +16,6 @@ function IdResult({ result, openResult, croppedImages }) {
       <button className="secondary" onClick={openResultModal}>      
         <TaxonImage
           result={result}
-          fullWidth={false}
         />       
       <div className="resultLabels">
         <SpeciesName 

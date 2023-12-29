@@ -13,7 +13,7 @@ function ResultStage({loading,croppedImages,resetImages,predictions,IdResult,set
             <div className={"images" + (loading ? " loading" : "")}>
               {croppedImages.map((img) => (
                 <img
-                className="uploadedImage"
+                className="uploadedImage mini-thumb"
                 src={URL.createObjectURL(img)}
                 alt="Uploaded"
               />

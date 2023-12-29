@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import Slider from "@mui/material/Slider";
 import DoneIcon from "@mui/icons-material/Done";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
@@ -55,12 +53,6 @@ export const ImageCropper = ({ imgFile, imageCropped, imgSize }) => {
     imageCropped();
   };
 
-  const rotateLeft = () => {
-    if (cropper && cropper.containerData) {
-      cropper.rotate(-90);
-    }
-  };
-
   const rotateRight = () => {
     if (cropper && cropper.containerData) {
       cropper.rotate(90);
@@ -83,35 +75,20 @@ export const ImageCropper = ({ imgFile, imageCropped, imgSize }) => {
     setZoom(event.detail.ratio);
   };
 
-  const slideZoom = (event, newValue) => {
-    cropper.zoomTo(newValue);
-    setZoom(newValue);
-  };
-
   return (
     <div className="cropContainer">
       <p>Zoom og flytt til motivet fyller firkanten</p>
       <div className="editing">
-        <RotateLeftIcon
-          className="clickable imageEditButton"
-          onClick={rotateLeft}
-        />
-        <ZoomOutIcon className="clickable imageEditButton" onClick={zoomOut} />
-        <div className="slider">
-          <Slider
-            value={zoom}
-            onChange={slideZoom}
-            step={0.01}
-            min={0}
-            max={2}
-            aria-labelledby="zoom-slider"
-          />
-        </div>
-        <ZoomInIcon className="clickable imageEditButton" onClick={zoomIn} />
-        <RotateRightIcon
-          className="clickable imageEditButton"
-          onClick={rotateRight}
-        />
+        <button className="secondary image-edit-button" onClick={zoomOut} >
+        <ZoomOutIcon />Zoom ut</button>
+
+        <button className="secondary image-edit-button" onClick={zoomIn} >
+        <ZoomInIcon /> Zoom inn</button>
+
+        <button className="secondary image-edit-button"
+          onClick={rotateRight}>
+        <RotateRightIcon/> Roter
+        </button>
       </div>
       <div className="cropper">
         <Cropper

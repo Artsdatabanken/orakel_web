@@ -19,7 +19,7 @@ function ExtendedResult({ result, croppedImages, preventClick }) {
 
       <TaxonImage
           result={result}
-          fullWidth={false}
+          bigImage={true}
         />
 
       <p className="resultDescription">

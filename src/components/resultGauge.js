@@ -7,6 +7,7 @@ function ResultGauge({ result, theme, ranking }) {
 
   const percentageWidth =
     percentage ** 1.75 * (100 / 100 ** 1.75) * (gaugeWidth / 100) + "%";
+
   const colors = [
     [170, 0, 0],
     [220, 214, 43],
@@ -35,6 +36,42 @@ function ResultGauge({ result, theme, ranking }) {
   for (let i = 10; i < 100; i = i + 10) {
     ticks = ticks.concat([i]);
   }
+
+  const getText = (percentage) =>{
+    if(percentage > 90){
+      return "svært høy treffprosent"
+    }else if(percentage > 70){
+      return "høy treffprosent"
+    }
+    else if(percentage > 40){
+      return "medium treffprosent"
+    }
+    else if(percentage > 25){
+      return "lav treffprosent"
+    }    
+    else {
+      return "svært lav treffprosent"
+    }
+  }
+
+   return (
+    <>
+    <div
+        style={{
+          width:"20px",
+          height:"20px",
+          backgroundColor: color,
+          borderRadius:"50%",
+          display:"inline-block",
+          marginRight:"4px"
+        }}
+      />
+      
+     { getText(percentage)}
+
+      
+    </>
+  )
 
   return (
     <>

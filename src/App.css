@@ -237,47 +237,40 @@ header {
   max-height: 100%;
 }
 
+.mini-thumb{
+  height:60px
+}
+
+.taxon-image{
+  border-radius: 90px;
+  width: 60px;
+  height: 60px;
+}
+
+.taxon-image.big-image{
+  width:80%;
+  height:auto
+}
+
 /* Crop image page */ 
 
 .cropContainer > .cropper {
   flex-grow: 1;
 }
 
-.cropContainer > .editing {
+.cropContainer .editing {
   display: flex;
   width: 100%;
+  gap:4px;
+  margin:4px 0
 }
 
-.cropContainer > .editing .slider {
-  flex-grow: 1;
-  padding: 0 1rem;
+.image-edit-button{
+  padding:4px;
+  flex:1;
+  margin:0;
 }
 
-.editing .MuiSlider-root {
-  color: var(--text-clr);
-}
-
-.cropContainer > .editing svg {
-  width: 3.5rem;
-  height: 2.5rem;
-}
-
-.cropContainer > .buttons {
-  display: flex;
-  padding-bottom: calc(1rem + constant(safe-area-inset-bottom));
-  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
-}
-
-.cropContainer > .buttons > div {
-  padding: 0.5rem 2rem;
-  margin: 1rem;
-}
-
-/*
-.cropContainer svg {
-  height: 1.5rem;
-  cursor: pointer;
-}*/
 
 /* Result List */
 
