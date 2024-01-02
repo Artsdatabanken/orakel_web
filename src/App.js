@@ -236,7 +236,6 @@ function App() {
 
           */} 
                     
-
           <Modal 
             isVisible={aboutVisible}
             closeModal={closeModal}

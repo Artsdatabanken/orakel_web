@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
 import CloseIcon from "@mui/icons-material/Close";
+import FocusTrap from "focus-trap-react"
 
 function Modal({header,children,subChildren,closeModal,isVisible,hasActions}) {
 
@@ -10,7 +11,7 @@ function Modal({header,children,subChildren,closeModal,isVisible,hasActions}) {
   // TODO:: TRAP FOCUS
   // TODO:: TRAP SCROLL
   return (
-   
+    <FocusTrap>
       <div
         id="modal"
         className="modal"
@@ -33,7 +34,7 @@ function Modal({header,children,subChildren,closeModal,isVisible,hasActions}) {
         </div>
         
       </div>
-    
+    </FocusTrap>
 
   );
 }
