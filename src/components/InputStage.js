@@ -24,23 +24,29 @@ function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,get
               deleteImage={deleteImage}
             />
           ))}
-        </div>
-        <br/>
-       <hr/>     
+        
 
-       <Uploader 
-       addImage={addImage} 
-       goToInputStage={goToInputStage} 
-       text={<><AddAPhotoOutlinedIcon/>  Legg til flere</>}
-       className={"secondary"}
-       />
-
-        <UserFeedback
-        inputStage={true}
-        gotError={gotError}
-        loading={loading}
-      /> 
+      
+      <div class="imgContainer">        
+            <div className="add-more-info uploadedImage">
+                <span>Last opp flere bilder</span>
+            </div>
+          <Uploader 
+          addImage={addImage} 
+          goToInputStage={goToInputStage} 
+          text={<><AddAPhotoOutlinedIcon/> Velg bilde</>}
+          className={"secondary"}
+          />
+        </div>          
       </div>      
+      
+
+      <UserFeedback
+          inputStage={true}
+          gotError={gotError}
+          loading={loading}
+        /> 
+      </div>
 
       <div className="page-bottom-actions">
         {!!croppedImages.length && (

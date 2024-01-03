@@ -212,12 +212,13 @@ header {
 /* Image Containers for input page */
 
 .imgContainer {
-  padding: 8px;
+  padding: 0;
   margin: 0;
   display: block;
-  width: 112px;
+  max-width: 148px;
   text-align: center;
   position: relative;
+  padding-top:8px;
 }
 
 .imgContainer button{
@@ -228,13 +229,26 @@ header {
   margin: 0;
   color:var(--text-clr);
   position: absolute;
-  margin-right: -8px;
   margin-left: -8px;
 }
 
 .uploadedImage {
   height: 6rem;
   max-height: 100%;
+}
+
+.add-more-info{
+  height: 96px;
+  margin:auto;
+  border:2px dashed var(--text-clr);
+  margin-bottom:4px;
+  display: flex;
+  padding: 8px;
+}
+
+.add-more-info span{
+  margin:auto;
+  font-size: 12pt;
 }
 
 .mini-thumb{
