@@ -1,67 +1,75 @@
 import React from "react";
 
-function ResultGauge({ result}) {
+function ResultGauge({ result }) {
   const percentage = result.probability * 100;
-
-  const colors = [
-    [170, 0, 0],
-    [220, 214, 43],
-    [76, 175, 80],
-  ];
-
-  const getColor = (percent) => {
-    // TODO: choose some specific colors instead of a whole range.
-    const colorIndex = (percent / 100.0) * (colors.length - 1);
-    const lowFactor = 1 - (colorIndex % 1);
-    const lowIndex = Math.floor(colorIndex);
-    const highIndex = Math.min(lowIndex + 1, colors.length - 1);
-
-    const r =
-      colors[lowIndex][0] * lowFactor + colors[highIndex][0] * (1 - lowFactor);
-    const g =
-      colors[lowIndex][1] * lowFactor + colors[highIndex][1] * (1 - lowFactor);
-    const b =
-      colors[lowIndex][2] * lowFactor + colors[highIndex][2] * (1 - lowFactor);
-
-    return `rgb(${parseInt(r)},${parseInt(g)},${parseInt(b)})`;
-  };
-
-  let color = getColor(percentage);
+  let gaugeWidth = 100;
+  const steps=[90,70,40,20]
 
   const getText = (percentage) =>{
     // TODO: Adjust text and also steps
-    if(percentage > 90){
-      return "svært høy treffprosent"
-    }else if(percentage > 70){
-      return "høy treffprosent"
+    if(percentage > steps[0]){
+      return "svært høy"
+    }else if(percentage > steps[1]){
+      return "høy"
     }
-    else if(percentage > 40){
-      return "medium treffprosent"
+    else if(percentage > steps[2]){
+      return "medium"
     }
-    else if(percentage > 25){
-      return "lav treffprosent"
+    else if(percentage > steps[3]){
+      return "lav"
     }    
     else {
-      return "svært lav treffprosent"
+      return "svært lav"
     }
   }
 
-   return (
-    <>
-    <div
-        style={{
-          width:"20px",
-          height:"20px",
-          backgroundColor: color,
-          borderRadius:"50%",
-          display:"inline-block",
-          marginRight:"4px"
-        }}
-      />      
-     { getText(percentage)}      
-    </>
-  )
+  const getColor = (percentage) =>{
+    if(percentage > steps[0]){
+      return "clr-very-high"
+    }else if(percentage > steps[1]){
+      return "clr-high"
+    }
+    else if(percentage > steps[2]){
+      return "clr-medium"
+    }
+    else if(percentage > steps[3]){
+      return "clr-low"
+    }    
+    else {
+      return "clr-very-low"
+    }
+  }
 
+  let ticks = [];
+
+  for (let i = 10; i < 100; i = i + 10) {
+    ticks = ticks.concat([i]);
+  }
+
+  // TODO: fix tick width, should be steps of 10
+
+  return (
+    <div className="result-bar-wrapper">    
+      <div className="result-bar unfilled"/>
+      <div className={"result-bar filled " + getColor(percentage)}
+          style={{
+            width: percentage +"%",    
+          }}
+      />
+      {ticks.map((t) => (
+        <div
+          key={t}
+          style={{            
+            marginLeft:
+              t ** 1.75 * (100 / 100 ** 1.75) * (gaugeWidth / 100) + "%",
+          }}
+          className="tick"
+        />
+      ))}
+
+<span>{getText(percentage)} overbevisning <small>(~{Math.round(percentage)}%)</small></span>
+    </div>
+  );
 }
 
 export default ResultGauge;

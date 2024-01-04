@@ -17,14 +17,12 @@ function IdResult({ result, openResult, croppedImages }) {
         <TaxonImage
           result={result}
         />       
-      <div className="resultLabels">
+      <div className="result-labels">
         <SpeciesName 
           vernacularName={result.vernacularName} 
           scientificName={result.name}
         />
-
-
-        <div className="group">{result.groupName}</div>
+        <div className="species-group">{result.groupName}</div>
         {result.groupName === "Sopper" && (
           <div className="danger">ALDRI SPIS NOE PGA APPEN</div>
         )}

@@ -5,7 +5,6 @@ import "../App.css";
 // The flaw in this is that the first word is still considered unbreakeable name for scientific names.
 
 function noVernacularName(vernacularName,scientificName){
-
   if(vernacularName.toLowerCase() === scientificName.toLowerCase()){
     return true}
   return false;
@@ -19,11 +18,8 @@ function vernacularFormatter(vernacularName,scientificName){
 }
 
 function SpeciesName({vernacularName,scientificName,inText,isTitle}) {
-
   // TODO: presentationstring? Why doesnt api deliver full preformatted string? 
-   
-  // In text we only want one name, preferrably vernacular.
-  if(inText){
+     if(inText){
     return vernacularFormatter(vernacularName,scientificName)    
   }
 
@@ -45,7 +41,7 @@ function SpeciesName({vernacularName,scientificName,inText,isTitle}) {
 
   return (         
    <>
-    <strong>{vernacularFormatter(vernacularName,scientificName)}</strong>
+    <strong className="species-name-title">{vernacularFormatter(vernacularName,scientificName)}</strong>
 
     {!noVernacularName(vernacularName,scientificName) &&      
       <i className="scientific hyphenate">{scientificName}</i>      

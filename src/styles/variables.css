@@ -2,6 +2,7 @@
 :root {
     /* Accent colour chart */
     --summer-grass-green: #495e2e;
+    --summer-grass-light: #9b9921; 
   
     /* ADB Profile */
     --font-chivo: 'Chivo', sans-serif;
@@ -10,6 +11,8 @@
    
     --coral-light: #e55440;
     --coral-dark: #cf3e1c;
+    --sun-dark: #b67717; 
+    --sun-light: #f8ae00; 
     --winter-green-dark: #007759;
     --ocean-dark: #262f31;
     --sand-50: #FFF7EB; /* Header + footer + toppelementbokser*/
@@ -65,10 +68,8 @@
   
     /* Other stuff */
     
-    --tick-clr: #fff;
     --text-clr: var(--ocean-dark);
-    --danger: var(--coral-dark);
-    --ok: var(--winter-green-dark);
+    --gauge-border-clr:var(--text-clr);
   }
 
 
@@ -91,7 +92,7 @@
     --primary-color-hover: var(--fresh-water-blue-10);
   
     /* Other stuff */
-    --tick-clr: #fff;
     --text-clr: #fff;
+    --gauge-border-clr:var(--text-clr);
   }
   

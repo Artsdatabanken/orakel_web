@@ -6,6 +6,7 @@ import UserFeedback from "./UserFeedback";
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import ImageSearchOutlined from '@mui/icons-material/ImageSearchOutlined';
+import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 
 function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,getId,gotError, addImage,goToInputStage}) {
   
@@ -14,6 +15,13 @@ function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,get
     <div className="stage">
       <div className="scrollable-field">
         <h2>Bildeutvalg</h2> 
+
+        <div className="image-intro">
+          <CollectionsOutlinedIcon/>
+          <p>Flere bilder gir sikrere gjenkjenning</p>
+        </div>
+
+
         <div className={"images" + (loading ? " loading" : "")}>
           {croppedImages.map((img, index) => (
             <UploadedImage
@@ -25,13 +33,11 @@ function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,get
             />
           ))}
         
-
       
-      <div class="imgContainer">        
-            <div className="add-more-info uploadedImage">
-                <span>Last opp flere bilder</span>
-            </div>
+      <div className="imgContainer">        
+           
           <Uploader 
+          showDashedBorderElement={true}
           addImage={addImage} 
           goToInputStage={goToInputStage} 
           text={<><AddAPhotoOutlinedIcon/> Velg bilde</>}

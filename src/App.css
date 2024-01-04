@@ -211,6 +211,12 @@ header {
 
 /* Image Containers for input page */
 
+.image-intro{
+  display: flex;
+  padding: var(--double-size);
+  gap:var(--base-size)
+}
+
 .imgContainer {
   padding: 0;
   margin: 0;
@@ -246,6 +252,10 @@ header {
   padding: 8px;
 }
 
+.add-more-info:hover{
+  cursor: pointer;
+}
+
 .add-more-info span{
   margin:auto;
   font-size: 12pt;
@@ -259,6 +269,7 @@ header {
   border-radius: 90px;
   width: 60px;
   height: 60px;
+  margin:0
 }
 
 .taxon-image.big-image{
@@ -304,7 +315,8 @@ header {
   align-items: center;
   cursor: pointer;
   word-break: break-word;
-  margin-bottom: var(--base-size);
+  margin-bottom: var(--half-size);
+  padding:var(--base-size)
 }
 
 .result-list li .vernacular {
@@ -350,22 +362,6 @@ header {
 
 /* OTHER STUFF */ 
 
-.species-group {
-  font-size: 1em;
-}
-
-.tick {
-  background-color: var(--tick-clr);
-}
-
-.chevron-right {
-  flex-shrink: 0;
-  color: hsla(0, 0%, 50%, 75%);
-}
-
-.chevron-right svg {
-  height: 3em;
-}
 
 .loading .imgContainer {
   animation: blink 1s ease-in-out infinite;
@@ -385,8 +381,6 @@ header {
     transform: rotate(360deg);
   }
 }
-
-
 .clear-link{
   text-align: center;
   padding-top:var(--double-size);
@@ -408,4 +402,31 @@ header {
   flex-wrap: wrap;
   gap: 16px;
   justify-content: center;
+}
+
+@import 'styles/result-gauge.css';
+
+.result-labels{
+  flex:1;
+  padding: var(--half-size) var(--base-size);
+  text-align: left;
+  line-height:14pt;
+}
+
+.species-name-title{
+  display: block;  
+}
+
+.species-name-title:first-letter {
+  text-transform: uppercase;
+}
+
+.species-group {
+  font-size: 12px;
+}
+
+button .chevron-right .MuiSvgIcon-root{
+  height:30px;
+  width:30px;
+  margin:0
 }

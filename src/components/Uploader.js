@@ -2,7 +2,7 @@ import React from "react";
 import { useRef } from 'react';
 import "../App.css";
 
-function Uploader({goToInputStage,text, className,addImage}) {
+function Uploader({goToInputStage,text, className,addImage,showDashedBorderElement}) {
 
   const uploadImages = async (files) => {
     console.log("uploading time yeah");
@@ -22,6 +22,11 @@ function Uploader({goToInputStage,text, className,addImage}) {
 
   return(
     <>
+    {showDashedBorderElement &&
+     <div className="add-more-info uploadedImage" onClick={handleClick}>
+        <span>Last opp flere bilder</span>
+    </div>
+    }
     <button className={className} onClick={handleClick}>
         {text}
       </button>

@@ -21,7 +21,7 @@ function ResultStage({loading,croppedImages,resetImages,predictions,IdResult,set
             </div>
           </div>  
 
-        <h2>Resultater</h2>
+        <h2>Artsforslag</h2>
         {!!predictions.length && (
           <ul className="result-list">
             {predictions.map((prediction) => (

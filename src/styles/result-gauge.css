@@ -1,0 +1,64 @@
+.result-bar-wrapper{
+    text-align: left;
+    font-size: 13px;
+    padding-top:var(--half-size)
+}
+
+.result-bar{
+    position: relative;
+    height:var(--base-size);
+    border-radius: var(--border-radius);
+    border:1px solid var(--gauge-border-clr);
+}
+
+.result-bar.unfilled{    
+    background:var(--fresh-water-blue-20);
+    position: relative;
+    width:100%;
+    margin-top: 0;
+    border-radius: var(--border-radius);
+}
+
+.result-bar.filled:not(.clr-very-high){
+    padding-left: 2%;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    border-width: 2px;
+}
+
+.tick,
+.result-bar.filled{
+    margin-top: calc(var(--base-size) * -1);
+}
+
+.tick{
+    position: relative;
+    width:1px;
+    height:var(--base-size);
+    background:var(--gauge-border-clr);
+}
+
+.clr-very-high{
+    background:var(--summer-grass-green);
+    
+}
+
+.clr-high{
+    background:var(--summer-grass-light);
+}
+
+.clr-medium{
+    background:var(--sun-light);
+}
+
+.clr-low{
+    background:var(--sun-light);
+}
+
+.clr-very-low{
+    background:var(--coral-dark);
+}
+
+small{
+    font-size: 10px;
+}

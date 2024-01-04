@@ -145,7 +145,7 @@ button:hover,
 
 /* Button icons */
 
-button .MuiSvgIcon-root,
+button:not(.icon-button) .MuiSvgIcon-root,
 button svg,
 .btn svg {
   vertical-align: text-top;
