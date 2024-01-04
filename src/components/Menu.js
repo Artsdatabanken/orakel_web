@@ -30,7 +30,31 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
   return (
      <nav className="modal-wrapper">
         <ul> 
+        <li>
+            <button onClick={openSettings} >
+              <SettingsIcon />
+              <span>Innstillinger</span>              
+              <ChevronRightIcon />  
+            </button>
+          </li>
+
           <li>
+            <button onClick={openManual}>
+              <MenuBookIcon />
+              <span>Bruksanvisning</span>             
+              <ChevronRightIcon />    
+            </button>
+          </li>
+
+          <li>
+            <button onClick={openAbout} >
+              <InfoOutlinedIcon />
+              <span>Om Artsorakelet</span>              
+              <ChevronRightIcon />  
+            </button>
+          </li>
+          
+          <li className="new-section">
             <a href="https://play.google.com/store/apps/details?id=no.artsdatabanken.orakel"
                 target="_blank"
                 rel="noopener noreferrer" onClick={toggleMenu}>
@@ -49,29 +73,6 @@ function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual
               <span>Artsorakelet i App Store</span>
               <LaunchIcon />                  
             </a>
-          </li>
-
-          <li>
-            <button onClick={openManual}>
-              <MenuBookIcon />
-              <span>Bruksanvisning</span>             
-              <ChevronRightIcon />    
-            </button>
-          </li>
-
-          <li>
-            <button onClick={openAbout} >
-              <InfoOutlinedIcon />
-              <span>Om Artsorakelet</span>              
-              <ChevronRightIcon />  
-            </button>
-          </li>
-          <li>
-            <button onClick={openSettings} >
-              <SettingsIcon />
-              <span>Innstillinger</span>              
-              <ChevronRightIcon />  
-            </button>
           </li>
 
         </ul>

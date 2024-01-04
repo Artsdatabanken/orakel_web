@@ -22,22 +22,28 @@
 .modal-background:focus,
 .modal-background{
   background-color: rgba(0, 0, 0, 0.72);
-  flex:1;
   border:0;
   border-radius:0;
   width: 100%;
-  margin:0
+  margin:0;
+  z-index: 0;
+  position: absolute;
+  height: 100%;
 }
 
+
 nav ul{
-  padding: 0;
+  padding: calc(var(--double-size)*2) ;
   list-style: none;
   background:var(--box-clr);
-  padding:var(--double-size);
   margin-top:0;
   max-height:calc(100% - var(--header-height));
   width: 100%;
   margin-bottom: 0;
+  max-width:500px;
+  margin-left: auto;
+  z-index: 2;
+  border:1px solid var(--text-clr)
 }
 
 nav li,
@@ -57,7 +63,13 @@ nav li button {
   justify-content: space-between;
   background: inherit;
   border-radius: var(--border-radius);
+  font-size: 12pt;
+  text-decoration: none;
+  color:var(--text-clr);
+  margin:var(--base-size);
+  font-weight:bold
 }
+
 
 nav li a span,
 nav li button span{
@@ -72,9 +84,18 @@ nav li button span{
 }
 
 nav li a svg,
-nav li button svg{
+nav li button svg,
+nav li button:not(.icon-button) .MuiSvgIcon-root{
   margin:0;
   color:var(--text-clr);
+  width: 20px !important;
+  height: 20px !important;;
+  padding: 0;
+}
+
+nav li a svg:last-child,
+nav li button:not(.icon-button) .MuiSvgIcon-root:last-child{
+  color:var(--coral-light)
 }
 
 nav li a:hover,
@@ -87,3 +108,8 @@ nav li button:focus{
   border-radius: var(--border-radius);
 }
 
+.new-section{
+  margin-top: var(--double-size);
+  padding-top:var(--double-size);
+  border-top:1px solid var(--summer-grass-green);
+}
