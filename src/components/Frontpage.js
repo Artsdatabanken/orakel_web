@@ -7,18 +7,20 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 function Frontpage({addImage,setExtendedManualVisible,goToInputStage}) {
 
   return (                 
-    <div className="frontpage">              
-    <h1 >Artsorakelet</h1> 
-    <h2> Ta eller velg et bilde for å starte</h2>
-    <p className="placeholder-body">
-      Artsorakelet kjenner ikke igjen mennesker, husdyr,
-      hageplanter, osv.
-    </p>
+    <div className="frontpage">  
+      <div className="frontpage-body">       
+        <h1 >Artsorakelet</h1> 
+        <h2> Ta eller velg et bilde for å starte</h2>
+        <p className="placeholder-body">
+          Artsorakelet kjenner ikke igjen mennesker, husdyr,
+          hageplanter, osv.
+        </p>
 
-    <button className="secondary" 
-    onClick={setExtendedManualVisible}>
-    Les bruksanvisning
-    </button>
+        <button className="secondary" 
+        onClick={setExtendedManualVisible}>
+        Les bruksanvisning
+        </button>
+      </div>     
 
     <div className={"bottomButtons"}>
     

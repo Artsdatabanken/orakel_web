@@ -36,6 +36,12 @@
     left: 0;
     height: 72px;
     background: var(--box-clr);
+    border-bottom-left-radius: var(--border-radius);   
+    border-bottom-right-radius: var(--border-radius);   
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    gap:var(--base-size)
   }
 
   .modal .scrollable.has-actions{
@@ -64,10 +70,9 @@
 }
 
 
-
-@media screen and (min-width:800px){
+@media screen and (min-width:600px){
   .modal .content{
-    max-width: 800px;
+    max-width: var(--max-width);
     margin-left:auto;
     margin-right:auto;
   }

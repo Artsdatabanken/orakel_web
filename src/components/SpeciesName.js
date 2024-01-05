@@ -26,7 +26,7 @@ function SpeciesName({vernacularName,scientificName,inText,isTitle}) {
   if(isTitle){
   return (         
     <>
-     <h2>
+     <h2 className="species-name-title">
      {vernacularFormatter(vernacularName,scientificName)}
      </h2>
  

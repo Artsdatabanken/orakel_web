@@ -15,12 +15,10 @@ function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,get
     <div className="stage">
       <div className="scrollable-field">
         <h2>Bildeutvalg</h2> 
-
-        <div className="image-intro">
-          <CollectionsOutlinedIcon/>
-          <p>Flere bilder gir sikrere gjenkjenning</p>
-        </div>
-
+          <p className="image-intro">
+            <CollectionsOutlinedIcon/> 
+            <span>Flere bilder gir sikrere gjenkjenning</span>
+          </p>
 
         <div className={"images" + (loading ? " loading" : "")}>
           {croppedImages.map((img, index) => (
@@ -61,7 +59,7 @@ function InputStage({loading,croppedImages,editImage,deleteImage,resetImages,get
             <DeleteOutlineOutlinedIcon/> Tøm utvalg
           </button>
           <button className="btn id primary" onClick={getId} type="button" >
-            <ImageSearchOutlined/> Finn forslag
+            <ImageSearchOutlined/> Identifiser
           </button>
             </>
         )}

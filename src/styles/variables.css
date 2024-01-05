@@ -45,6 +45,7 @@
     --focus-color: var(--fresh-water-blue-light);
     --focus-outline:var(--focus-border-width) solid var(--focus-color);
     --body-color:var(--ocean-dark);
+    --max-width:600px
   }
   
   /*

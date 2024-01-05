@@ -10,6 +10,16 @@
     height: calc(100vh - var(--header-height));   
 }
 
+.frontpage-body,
+.stage .image-intro,
+.stage .result-list li,
+.stage .image-section,
+.stage p{
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .scrollable-field{
     height: calc(100vh - var(--action-line-height));
     padding:var(--double-size) var(--base-size);

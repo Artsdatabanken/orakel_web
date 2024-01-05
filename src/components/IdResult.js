@@ -4,6 +4,7 @@ import TaxonImage from "./taxonImage";
 import ResultGauge from "./resultGauge";
 import SpeciesName from "./SpeciesName";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import WarningIcon from "@mui/icons-material/Warning"
 
 function IdResult({ result, openResult, croppedImages }) {
 
@@ -23,10 +24,14 @@ function IdResult({ result, openResult, croppedImages }) {
           scientificName={result.name}
         />
         <div className="species-group">{result.groupName}</div>
-        {result.groupName === "Sopper" && (
-          <div className="danger">ALDRI SPIS NOE PGA APPEN</div>
-        )}
+        
         <ResultGauge result={result} />
+
+        {result.groupName === "Sopper" && (
+         <p className="danger info-box tiny">
+         <WarningIcon /> Aldri spis noe basert på forslag fra Artsorakelet!
+       </p>
+        )}
       </div>
 
       <div className="chevron-right">

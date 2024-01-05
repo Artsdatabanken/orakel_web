@@ -92,11 +92,7 @@ export const ImageCropper = ({ imgFile, imageCropped, imgSize }) => {
       </div>
       <div className="cropper">
         <Cropper
-          style={{
-            width: "calc(100vw - 48px)",
-            height: window.innerHeight - 65 - 150 + "px",            
-
-          }}
+          className="cropper-box"
           aspectRatio={1}
           viewMode={0}
           dragMode={"move"}
@@ -107,7 +103,7 @@ export const ImageCropper = ({ imgFile, imageCropped, imgSize }) => {
           toggleDragModeOnDblclick={false}
           highlight={false}
           background={false}
-          scalable={false}
+          scalable={true}
           rotatable={true}
           wheelZoomRatio={0.2}
           guides={false}

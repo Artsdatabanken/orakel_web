@@ -22,6 +22,9 @@ function ResultStage({loading,croppedImages,resetImages,predictions,IdResult,set
           </div>  
 
         <h2>Artsforslag</h2>
+        <p>
+          Artsorakelet synes disse artene ligner mest på dine bildeutvalget. De som ligner mest kommer først.
+        </p>
         {!!predictions.length && (
           <ul className="result-list">
             {predictions.map((prediction) => (

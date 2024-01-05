@@ -8,7 +8,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import LaunchIcon from '@mui/icons-material/Launch';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-function Menu({ resetImages, toggleDarkMode, darkMode, toggleAbout, toggleManual,toggleMenu,toggleSettings }) {
+function Menu({ toggleAbout, toggleManual,toggleMenu,toggleSettings }) {
 
   const openAbout = () => {
     toggleMenu();
