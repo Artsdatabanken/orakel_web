@@ -118,10 +118,19 @@ function App() {
       formdata.append("image", image);
     }
 
+    // get the url of the current page
+    var url = window.location.href;
+    console.log(url);
+
+    var api = "https://ai.artsdatabanken.no/";
+
+    // if the url does not start with https://orakel.artsdatabanken.no/ then we are in development mode
+    if (!url.startsWith("https://orakel.artsdatabanken.no")) {
+      api = "https://ai.test.artsdatabanken.no/";
+    }
+
     axios
-      .post("https://ai.artsdatabanken.no/", formdata)
-      // .post("http://localhost:5000/", formdata)
-      // .post("https://airesearch.artsdatabanken.no/", formdata)
+      .post(api, formdata)
       .then((res) => {
         let predictions = res.data.predictions[0].taxa.items.filter(
           (pred) => pred.probability > 0.02

@@ -43,14 +43,14 @@ function ReportButton({ reportResult, croppedImages }) {
       // TODO: Await update from artsobsmobile before update, to ensure we don't redirect user to nonexistent page
       platform = `platform%3D${"web"
         }`;
-      reporttype = `?scientificname=${reportResult.scientificNameID}%26`;
+      reporttype = `?scientificnameid=${reportResult.scientificNameID}%26`;
       
       url = "https://mobil.artsobservasjoner.no/#/";
       // REDIRECT TO THIS ONE
       // url += "report";
       url += "orakel";
     } else if (reportResult.scientificNameID) {
-      reporttype = `ReportByScientificName/${reportResult.scientificNameID}?`;
+      reporttype = `ReportByScientificNameId/${reportResult.scientificNameID}?`;
     }
     return url + reporttype + from + platform + percentage;
   }
