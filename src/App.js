@@ -18,6 +18,7 @@ function App() {
   const [uncroppedImages, setUncroppedImages] = useState([]);
   const [fullImages, setFullImages] = useState([]);
   const [predictions, setPredictions] = useState([]);
+  const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [inputStage, setInputStage] = useState(true);
   const [resultStage, setResultStage] = useState(false);
@@ -53,6 +54,7 @@ function App() {
       setCroppedImages([...croppedImages, img]);
       setFullImages([...fullImages, ...uncroppedImages]);
       setPredictions([]);
+      setAlerts([]);
     }
     setUncroppedImages([]);
   };
@@ -74,6 +76,7 @@ function App() {
     setError(false);
     setCroppedImages([]);
     setPredictions([]);
+    setAlerts([]);
     setFullImages([]);
     setInputStage(true);
     setResultStage(false);
@@ -96,6 +99,7 @@ function App() {
   const goToInput = () => {
     setResultStage(false);
     setPredictions([]);
+    setAlerts([]);
     setInputStage(true);
     document.getElementById("uploaderImages").click();
   };
@@ -119,7 +123,7 @@ function App() {
     }
 
     axios
-      .post("https://ai.artsdatabanken.no/", formdata)
+      .post("https://ai.test.artsdatabanken.no/", formdata)
       // .post("http://localhost:5000/", formdata)
       // .post("https://airesearch.artsdatabanken.no/", formdata)
       .then((res) => {
@@ -136,6 +140,7 @@ function App() {
         }
 
         setPredictions(predictions);
+        setAlerts(res.data.alerts);
         setLoading(false);
         setResultStage(true);
       })
@@ -298,6 +303,25 @@ function App() {
               </div>
             </div>
           )}
+
+          {resultStage &&
+            !!alerts.filter((alert) => alert.alert.type === "pest").length && (
+              <div>
+                {alerts
+                  .filter((alert) => alert.alert.type === "pest")
+                  .map((alert) => (
+                    <div className="danger" key={alert.scientific_name_id}>
+                      Artsorakelet har en mistanke ({alert.probability * 100} %)
+                      om at dette er{" "}
+                      <span className="italics">{alert.scientific_name}</span>.
+                      Denne planteskadegjøreren er meldepliktig:{" "}
+                      <a href="https://www.mattilsynet.no/skjemaer/planter-og-planteskadegjorer/skjema/om-varselet">
+                        meld fra til Mattilsynet
+                      </a>
+                    </div>
+                  ))}
+              </div>
+            )}
 
           {resultStage && !!predictions.length && (
             <div>
