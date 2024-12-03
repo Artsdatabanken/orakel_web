@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
@@ -38,9 +38,11 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
   const [zoom, setZoom] = useState(0.25);
   const [exifdump, setExifdump] = useState();
 
-  getExif(imgFile).then((exif) => {
-    setExifdump(exif);
-  });
+  useEffect(() => {
+    getExif(imgFile).then((exif) => {
+      setExifdump(exif);
+    });
+  }, [imgFile]);
 
   const getCropData = () => {
     if (cropper && cropper.containerData) {

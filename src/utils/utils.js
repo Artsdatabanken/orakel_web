@@ -23,8 +23,11 @@ export const getApiUrl = () => {
 const piexif = require("piexifjs");
 
 export const getExif = (imgFile) => {
-  const reader = new FileReader();
+  if (imgFile.type !== "image/jpeg") {
+    return Promise.resolve(undefined);
+  }
 
+  const reader = new FileReader();
   reader.readAsDataURL(imgFile);
 
   return new Promise((resolve, reject) => {
@@ -33,6 +36,7 @@ export const getExif = (imgFile) => {
         var exif = piexif.load(reader.result);
         resolve(exif);
       } catch (error) {
+        console.error("Error reading exif data", error);
         reject(error);
       }
     };
