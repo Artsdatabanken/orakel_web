@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
-import { runningOnMobile } from "../utils/utils";
+import { runningOnMobile, getApiUrl } from "../utils/utils";
 import axios from "axios";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -55,6 +55,7 @@ function ReportButton({ reportResult, croppedImages }) {
     return url + reporttype + from + platform + percentage;
   }
 
+
   function saveImages(croppedImages) {
     setUploadingImages(true);
     // Only use if on mobile for now
@@ -62,10 +63,10 @@ function ReportButton({ reportResult, croppedImages }) {
     for (let image of croppedImages) {
       formdata.append("image", image);
     }
-    let url = "https://ai.artsdatabanken.no";
-    // url = "http://localhost:5000"; // For testing the ai server script locally
+
+  
     axios
-      .post(url + "/save", formdata)
+      .post(getApiUrl() + "/save", formdata)
       .then((res) => {
         setEncryptionData(res.data);
         setDialogOpen(true);
