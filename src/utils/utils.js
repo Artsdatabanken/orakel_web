@@ -11,11 +11,10 @@ export const runningOnMobile = () => {
 };
 
 export const getApiUrl = () => {
-  var url = window.location.href;
   var api = "https://ai.artsdatabanken.no/";
 
   // if the url does not start with https://orakel.artsdatabanken.no/ then we are in development mode
-  if (!url.startsWith("https://orakel.artsdatabanken.no")) {
+  if (window.location.hostname !== "orakel.artsdatabanken.no") {
     api = "https://ai.test.artsdatabanken.no/";
   }
   return api;
