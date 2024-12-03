@@ -13,6 +13,7 @@
     "axios": "^1.4.0",
     "crypto": "^1.0.1",
     "libheif-js": "^1.15.1",
+    "piexifjs": "^1.0.6",
     "pngjs": "^7.0.0",
     "react": "^18.2.0",
     "react-cropper": "^2.3.3",

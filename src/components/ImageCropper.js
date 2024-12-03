@@ -9,8 +9,9 @@ import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 
-import "../App.css";
+import { getExif, writeExif } from "../utils/utils";
 
+import "../App.css";
 
 if (!HTMLCanvasElement.prototype.toBlob) {
   Object.defineProperty(HTMLCanvasElement.prototype, "toBlob", {
@@ -34,38 +35,12 @@ if (!HTMLCanvasElement.prototype.toBlob) {
 export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
   const [image, setImage] = useState();
   const [cropper, setCropper] = useState();
-  const [zoom, setZoom] = useState(.25);
+  const [zoom, setZoom] = useState(0.25);
+  const [exifdump, setExifdump] = useState();
 
-  // const initCropper = () => {
-  //   console.log("trying");
-  //   console.log("trying");
-  //   if (!initialized && cropper && cropper.containerData) {
-  //     console.log("ok");
-
-  //     setInitialized(true);
-
-  //     let cropBoxSize =
-  //       Math.min(cropper.containerData.width, cropper.containerData.height) *
-  //       0.9;
-
-  //     // this.cropper.setCropBoxData({
-  //     //   width: cropBoxSize,
-  //     //   left: (this.cropper.cropper.containerData.width - cropBoxSize) / 2,
-  //     //   top: (this.cropper.cropper.containerData.height - cropBoxSize) / 2,
-  //     // });
-
-  //     // Set the initial zoom to fit the smallest dimension
-  //     let zoomFactor = Math.max(
-  //       cropBoxSize /
-  //         Math.min(
-  //           cropper.canvasData.naturalWidth,
-  //           cropper.canvasData.naturalHeight
-  //         )
-  //     );
-  //     setZoom(zoomFactor);
-  //     cropper.zoomTo(zoomFactor);
-  //   }
-  // };
+  getExif(imgFile).then((exif) => {
+    setExifdump(exif);
+  });
 
   const getCropData = () => {
     if (cropper && cropper.containerData) {
@@ -77,7 +52,14 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
         })
         .toBlob(
           (blob) => {
-            imageCropped(blob);
+            if (exifdump) {
+              writeExif(blob, exifdump).then((blob) => {
+                imageCropped(blob);
+                setExifdump(undefined);
+              });
+            } else {
+              imageCropped(blob);
+            }
           },
           "image/jpeg",
           0.7
@@ -158,7 +140,6 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
               setImage("data:image/jpeg;base64," + imgFile);
               // initCropper();
             }
-
           }}
           // ready={initCropper}
           src={image}
