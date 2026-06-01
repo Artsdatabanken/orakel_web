@@ -76,7 +76,7 @@ function ExtendedManual() {
         Artsobservasjoner.no. Vennligst ikke rapporter funn kun basert på
         Artsorakelets svar.
       </p>
-      <p>
+      <div className="tips">
         <span className="intro">Noen tips:</span>
         <ul>
           <li>
@@ -112,7 +112,7 @@ function ExtendedManual() {
             eksempel.
           </li>
         </ul>
-      </p>
+      </div>
     </div>
   );
 }

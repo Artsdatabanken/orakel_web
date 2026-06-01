@@ -301,10 +301,10 @@ function App() {
 
           {resultStage && !!predictions.length && (
             <div>
-              {predictions.map((prediction) => (
+              {predictions.map((prediction, index) => (
                 <IdResult
                   result={prediction}
-                  key={prediction.scientificNameID}
+                  key={prediction.scientificNameID ?? index}
                   croppedImages={croppedImages}
                   openResult={setChosenPrediction}
                 />
