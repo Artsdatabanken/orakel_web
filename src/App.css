@@ -205,7 +205,6 @@ ul {
   align-items: center;
   justify-content: flex-start;
   transition: transform 300ms ease-in-out 3ms;
-  will-change: transform;
 }
 
 .logo {
@@ -334,7 +333,6 @@ ul {
   justify-content: center;
   align-items: center;
   transition: transform 300ms ease-in-out 3ms;
-  will-change: transform;
 }
 
 .newImageButton {
@@ -564,14 +562,12 @@ input {
   z-index: -2;
   opacity: 0;
   transition: opacity 100ms linear 203ms, z-index 0ms linear 303ms;
-  will-change: opacity, z-index;
 }
 
 .modal.visible {
   opacity: 1;
   z-index: 3;
   transition: opacity 100ms linear 3ms;
-  will-change: opacity;
 }
 
 .modal .content {
@@ -582,7 +578,6 @@ input {
   line-height: 1.4em;
   flex-direction: column;
   transition: transform 300ms ease-in-out 3ms;
-  will-change: transform;
 }
 
 .modal .content .scrollable {
@@ -615,7 +610,6 @@ input {
   top: 0;
   border-radius: 0 0 1.7rem 1.7rem;
   transition: transform 300ms ease-in-out 3ms;
-  will-change: transform;
 }
 
 #menu.invisible .content {
