@@ -6,8 +6,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.1",
-    "@mui/material": "^5.14.2",
+    "@mui/icons-material": "^9.0.1",
+    "@mui/material": "^9.0.1",
     "axios": "^1.4.0",
     "react": "^19.2.7",
     "react-cropper": "^2.3.3",
