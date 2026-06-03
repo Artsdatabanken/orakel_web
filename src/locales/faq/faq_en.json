@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "question": "What species can the app identify?",
+      "answer": "The app can identify wild species, and has been trained mainly on images from artsobservasjoner.no. It does not recognize humans, pets, domestic animals, or cultivated plants."
+    },
+    {
+      "question": "How accurate are the identifications?",
+      "answer": "The app uses artificial intelligence, so results are predictions, not definitive identifications. Always verify with field guides or experts for important decisions."
+    },
+    {
+      "question": "What makes a good photo for identification?",
+      "answer": "Take clear, well-lit photos showing distinctive features. Include multiple pictures taken from different angles when possible."
+    },
+    {
+      "question": "Is my data stored or shared?",
+      "answer": "Images are sent to the server for processing but are not stored or otherwise available to Artsdatabanken or others."
+    },
+    {
+      "question": "Why didn't the app identify my species?",
+      "answer": "The species might not be in the training data, the photo quality might be poor, or it might not be a wild species."
+    }
+  ]
+}

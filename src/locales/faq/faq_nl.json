@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "question": "Welke soorten kan de app identificeren?",
+      "answer": "De app kan wilde soorten identificeren, en is voornamelijk getraind met afbeeldingen van artsobservasjoner.no. Het herkent geen mensen, huisdieren of gekweekte planten."
+    },
+    {
+      "question": "Hoe nauwkeurig zijn de identificaties?",
+      "answer": "De app gebruikt kunstmatige intelligentie, dus resultaten zijn voorspellingen, geen definitieve identificaties. Verifieer altijd met veldgidsen of experts voor belangrijke beslissingen."
+    },
+    {
+      "question": "Wat maakt een goede foto voor identificatie?",
+      "answer": "Maak heldere, goed verlichte foto's die onderscheidende kenmerken tonen. Voeg indien mogelijk meerdere foto's toe die vanuit verschillende hoeken zijn genomen."
+    },
+    {
+      "question": "Worden mijn gegevens opgeslagen of gedeeld?",
+      "answer": "Afbeeldingen worden naar de server gestuurd voor verwerking, maar worden niet opgeslagen of anderszins beschikbaar gesteld aan Artsdatabanken of anderen."
+    },
+    {
+      "question": "Waarom heeft de app mijn soort niet geïdentificeerd?",
+      "answer": "De soort ontbreekt mogelijk in de trainingsgegevens, de fotokwaliteit is slecht, of het is geen wilde soort."
+    }
+  ]
+}

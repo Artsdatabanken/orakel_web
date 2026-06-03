@@ -8,8 +8,11 @@ import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContentText from "@mui/material/DialogContentText";
+import { aiApiUrl, aiAuthHeaders } from "../config";
+import { useTranslation } from "../i18n";
 
 function ReportButton({ reportResult, croppedImages }) {
+  const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [encryptionData, setEncryptionData] = useState(false);
   const [uploadingImages, setUploadingImages] = useState(false);
@@ -62,10 +65,8 @@ function ReportButton({ reportResult, croppedImages }) {
     for (let image of croppedImages) {
       formdata.append("image", image);
     }
-    let url = "https://ai.artsdatabanken.no";
-    // url = "http://localhost:5000"; // For testing the ai server script locally
     axios
-      .post(url + "/save", formdata)
+      .post(`${aiApiUrl}/save`, formdata, { headers: aiAuthHeaders })
       .then((res) => {
         setEncryptionData(res.data);
         setDialogOpen(true);
@@ -90,7 +91,7 @@ function ReportButton({ reportResult, croppedImages }) {
   return (
     <React.Fragment>
       <div className="btn primary" onClick={openDialog.bind(this)}>
-        Rapporter funn
+        {t("report_dialog_title")}
         {uploadingImages && <span className="littleSpinner"></span>}
       </div>
 
@@ -101,19 +102,18 @@ function ReportButton({ reportResult, croppedImages }) {
         fullWidth={true}
       >
         <DialogTitle id="alert-dialog-title">
-          {"Har du bekreftet arten?"}
+          {t("report_dialog_title")}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Sjekk artsbestemmelsen selv før du rapporterer. Artsorakelet kan ta
-            feil også ved høy treffprosent. Vil du fortsette?
+            {t("report_dialog_message")}
           </DialogContentText>
 
           <form action="" method="post" encType="multipart/form-data"></form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose} color="primary">
-            Avbryt
+            {t("cancel")}
           </Button>
           <Button
             onClick={(e) => {
@@ -122,7 +122,7 @@ function ReportButton({ reportResult, croppedImages }) {
             color="primary"
             autoFocus
           >
-            Fortsett
+            {t("report_dialog_continue")}
           </Button>
         </DialogActions>
       </Dialog>

@@ -93,15 +93,13 @@ html {
 
 body {
   line-height: 1;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Chivo", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(245, 245, 245);
+  background-color: var(--adb-background-default);
+  color: var(--adb-text-primary);
 }
-
-html, body { height: 100% } 
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -109,6 +107,5 @@ code {
 }
 
 #root {
-  height: 100%;
   margin: 0;
 }

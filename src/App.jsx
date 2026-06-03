@@ -1,342 +1,217 @@
-import React, { useState } from "react";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./App.css";
-import UploadedImage from "./components/Image";
-import IdResult from "./components/IdResult";
-import ExtendedResult from "./components/ExtendedResult";
-import UserFeedback from "./components/UserFeedback";
+import { aiApiUrl, aiAuthHeaders } from "./config";
+import { useTranslation } from "./i18n";
+import SiteHeader from "./components/SiteHeader";
+import SiteFooter from "./components/SiteFooter";
+import StartPage from "./components/StartPage";
+import ResultListPage from "./components/ResultListPage";
 import ImageCropper from "./components/ImageCropper";
-import Menu from "./components/Menu";
 import About from "./components/About";
 import ExtendedManual from "./components/ExtendedManual";
 
 function App() {
+  const { t } = useTranslation();
+  const [view, setView] = useState("start");
   const [croppedImages, setCroppedImages] = useState([]);
   const [uncroppedImages, setUncroppedImages] = useState([]);
-  const [fullImages, setFullImages] = useState([]);
   const [predictions, setPredictions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [inputStage, setInputStage] = useState(true);
-  const [resultStage, setResultStage] = useState(false);
-  const [chosenPrediction, setChosenPrediction] = useState(false);
-  const [aboutVisible, setAboutVisible] = useState(false);
-  const [extendedManualVisible, setExtendedManualVisible] = useState(false);
+  const [error, setError] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [gotError, setError] = useState(false);
+  const [modal, setModal] = useState(null);
+  // null when the cropper is processing a brand-new upload, or an
+  // index into croppedImages when the user is re-cropping an
+  // existing thumbnail. The pending uncropped file is the same either
+  // way — uncroppedImages[0] — but the disposition of the result
+  // (append vs replace, or remove if the user trashes it) differs.
+  const [editIndex, setEditIndex] = useState(null);
+  const abortRef = useRef(null);
 
-  document.addEventListener("backbutton", onBackKeyDown, false);
+  useEffect(() => {
+    return () => {
+      croppedImages.forEach((p) => URL.revokeObjectURL(p.url));
+    };
+  }, [croppedImages]);
 
-  function onBackKeyDown() {
-    // Handle the back button
-    setMenuVisible(false);
-    setChosenPrediction(false);
-    setAboutVisible(false);
-    setExtendedManualVisible(false);
-  }
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      darkMode ? "dark" : "light"
+    );
+  }, [darkMode]);
 
-  const addImage = async (images) => {
-    setError(false);
-
-    for (let i of images) {
-      setUncroppedImages([...uncroppedImages, i]);
-    }
+  const addFiles = (files) => {
+    if (!files || files.length === 0) return;
+    setUncroppedImages((prev) => [...prev, ...files]);
   };
 
-  const imageCropped = (img) => {
-    if (img) {
-      img.lastModifiedDate = new Date();
-      img.name = new Date() + ".png";
-      setCroppedImages([...croppedImages, img]);
-      setFullImages([...fullImages, ...uncroppedImages]);
+  const onImageCropped = (blob) => {
+    const original = uncroppedImages[0];
+    if (editIndex !== null) {
+      setCroppedImages((prev) => {
+        if (!blob) {
+          // Trash button while editing → remove the entry entirely.
+          const removed = prev[editIndex];
+          if (removed) URL.revokeObjectURL(removed.url);
+          return prev.filter((_, i) => i !== editIndex);
+        }
+        // Confirm → replace at the same index, carry forward the
+        // original file so the user can re-crop again later.
+        const url = URL.createObjectURL(blob);
+        blob.lastModifiedDate = new Date();
+        blob.name = new Date().toISOString() + ".jpg";
+        return prev.map((p, i) => {
+          if (i !== editIndex) return p;
+          URL.revokeObjectURL(p.url);
+          return { blob, url, name: blob.name, original: p.original ?? original };
+        });
+      });
+      // Re-cropping invalidates any predictions that referred to the
+      // previous crop; force the user to re-identify.
       setPredictions([]);
+      setError(null);
+      setView("start");
+      setEditIndex(null);
+    } else if (blob) {
+      const url = URL.createObjectURL(blob);
+      blob.lastModifiedDate = new Date();
+      blob.name = new Date().toISOString() + ".jpg";
+      setCroppedImages((prev) => [
+        ...prev,
+        { blob, url, name: blob.name, original },
+      ]);
     }
-    setUncroppedImages([]);
+    setUncroppedImages((prev) => prev.slice(1));
   };
 
-  const editImage = (index) => {
-    setUncroppedImages([fullImages[index]]);
-    setFullImages(
-      fullImages.slice(0, index).concat(fullImages.slice(index + 1))
-    );
-    setCroppedImages(
-      croppedImages.slice(0, index).concat(croppedImages.slice(index + 1))
-    );
-    setInputStage(true);
-    setResultStage(false);
+  const editPreview = (index) => {
+    const item = croppedImages[index];
+    if (!item?.original) return;
+    setEditIndex(index);
+    setUncroppedImages((prev) => [item.original, ...prev]);
   };
 
-  const resetImages = () => {
-    setMenuVisible(false);
-    setError(false);
-    setCroppedImages([]);
-    setPredictions([]);
-    setFullImages([]);
-    setInputStage(true);
-    setResultStage(false);
-  };
-
-  const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
-  const closeModal = () => {
-    setChosenPrediction(false);
-    setAboutVisible(false);
-    setExtendedManualVisible(false);
-  };
-
-  const goToInput = () => {
-    setResultStage(false);
-    setPredictions([]);
-    setInputStage(true);
-    document.getElementById("uploaderImages").click();
-  };
-
-  const uploadMore = async (sender) => {
-    await addImage(document.getElementById(sender).files);
-    document.getElementById(sender).value = "";
-  };
-
-  const getId = () => {
-    setError(false);
-    setInputStage(false);
+  const identify = async () => {
+    if (croppedImages.length === 0) return;
+    setError(null);
     setLoading(true);
 
-    var formdata = new FormData();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
+    const formdata = new FormData();
     formdata.append("application", "Artsorakel Web");
-
-    for (let image of croppedImages) {
-      formdata.append("image", image);
+    for (const img of croppedImages) {
+      formdata.append("image", img.blob);
     }
 
-    axios
-      .post("https://ai.artsdatabanken.no/", formdata)
-      // .post("http://localhost:5000/", formdata)
-      // .post("https://airesearch.artsdatabanken.no/", formdata)
-      .then((res) => {
-        let predictions = res.data.predictions[0].taxa.items.filter(
-          (pred) => pred.probability > 0.02
-        );
-
-        if (predictions.length === 0) {
-          predictions = res.data.predictions[0].taxa.items;
-        }
-
-        if (predictions.length > 5) {
-          predictions = res.data.predictions.slice(0, 5);
-        }
-
-        setPredictions(predictions);
-        setLoading(false);
-        setResultStage(true);
-      })
-      .catch((error) => {
-        if (error.response && error.response.status) {
-          setError(error.response.status);
-        } else {
-          setError(1);
-        }
-        setResultStage(false);
-        setInputStage(true);
-        setLoading(false);
+    try {
+      const res = await axios.post(aiApiUrl, formdata, {
+        headers: aiAuthHeaders,
+        signal: controller.signal,
       });
+      let preds = res.data.predictions[0].taxa.items.filter(
+        (p) => p.probability > 0.02
+      );
+      if (preds.length === 0) preds = res.data.predictions[0].taxa.items;
+      if (preds.length > 5) preds = preds.slice(0, 5);
+      preds = preds.map((p) => {
+        const fullId = p.scientific_name_id || p.scientificNameID || "";
+        const extracted = fullId.includes(":") ? fullId.split(":").pop() : fullId;
+        return { ...p, scientificNameID: extracted || null };
+      });
+      setPredictions(preds);
+      setView("results");
+    } catch (err) {
+      if (axios.isCancel(err) || err.name === "CanceledError") return;
+      setError(err?.response?.status ?? "?");
+    } finally {
+      setLoading(false);
+      abortRef.current = null;
+    }
   };
 
-  return (
-    <React.Fragment>
-      {!!uncroppedImages.length &&
-        uncroppedImages.map((ucimg, index) => (
-          <ImageCropper
-            imgFile={ucimg}
-            key={index}
-            imageCropped={imageCropped}
-            imgSize={500}
-            darkMode={darkMode}
-          />
-        ))}
+  const abortIdentify = () => {
+    abortRef.current?.abort();
+  };
 
-      <div
-        id="AppContainer"
-        className={"App" + (darkMode ? " darkmode" : " lightmode")}
-      >
+  const reset = () => {
+    setCroppedImages([]);
+    setPredictions([]);
+    setError(null);
+    setView("start");
+  };
+
+  const closeModal = () => setModal(null);
+
+  return (
+    <div className="App">
+      <SiteHeader
+        darkMode={darkMode}
+        onToggleTheme={() => setDarkMode((d) => !d)}
+        onOpenAbout={() => setModal("about")}
+        onOpenManual={() => setModal("manual")}
+      />
+
+      {uncroppedImages.length > 0 && (
+        <ImageCropper
+          imgFile={uncroppedImages[0]}
+          imageCropped={onImageCropped}
+          imgSize={500}
+          darkMode={darkMode}
+        />
+      )}
+
+      {modal && (
         <div
-          id="modal"
-          className={
-            "modal " +
-            (!!chosenPrediction | aboutVisible | extendedManualVisible
-              ? "visible"
-              : "invisible")
-          }
+          className="overlay"
+          role="dialog"
+          aria-modal="true"
           onClick={closeModal}
         >
           <div
-            className="content"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
+            className="overlay__content"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="modalHeader">
-              <CloseIcon onClick={closeModal} />
-            </div>
-
-            {!!chosenPrediction && (
-              <ExtendedResult
-                result={chosenPrediction}
-                croppedImages={croppedImages}
-              />
-            )}
-
-            {aboutVisible && <About />}
-
-            {extendedManualVisible && <ExtendedManual />}
+            <button
+              type="button"
+              className="overlay__close"
+              onClick={closeModal}
+              aria-label={t("close")}
+            >
+              ×
+            </button>
+            {modal === "about" && <About />}
+            {modal === "manual" && <ExtendedManual />}
           </div>
         </div>
+      )}
 
-        <div
-          id="menu"
-          className={"modal " + (menuVisible ? "visible" : "invisible")}
-          onClick={toggleMenu}
-        >
-          <Menu
-            resetImages={resetImages}
-            toggleDarkMode={toggleDarkMode}
-            toggleAbout={setAboutVisible}
-            toggleManual={setExtendedManualVisible}
+      <main className="App__main" id="top">
+        {view === "start" ? (
+          <StartPage
+            previews={croppedImages}
+            onAddFiles={addFiles}
+            onEditPreview={editPreview}
+            onIdentify={identify}
+            onAbort={abortIdentify}
+            loading={loading}
+            error={error}
             darkMode={darkMode}
           />
-        </div>
-
-        <div className="image-section">
-          <div className="topBar">
-            <MenuIcon
-              className={
-                "menu-icon" + (!inputStage && !resultStage ? " hidden" : "")
-              }
-              style={{ fontSize: "2em" }}
-              onClick={toggleMenu}
-            />
-
-            <img
-              src="Artsdatabanken_notext_mono_white.svg"
-              alt="Artsdatabanken"
-              className={
-                "logo" + (!inputStage && !resultStage ? " hidden" : "")
-              }
-            />
-          </div>
-          <div
-            className={
-              "topContent" + (!inputStage && !resultStage ? " expanded" : "")
-            }
-          >
-            {!croppedImages.length && (
-              <div className="placeholder-container">
-                <h1 className="placeholder-title">
-                  Ta eller velg et bilde for å starte
-                </h1>
-                <p className="placeholder-body">
-                  Artsorakelet kjenner ikke igjen mennesker, husdyr,
-                  hageplanter, osv.
-                </p>
-              </div>
-            )}
-
-            <div
-              className={"images scrollbarless" + (loading ? " loading" : "")}
-            >
-              {croppedImages.map((img, index) => (
-                <UploadedImage
-                  img={img}
-                  key={index}
-                  imgIndex={index}
-                  editImage={editImage}
-                />
-              ))}
-
-              {!!croppedImages.length && (inputStage || resultStage) && (
-                <div className="goToInput" onClick={goToInput}></div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={
-            "bottom-section scrollbarless " +
-            (inputStage || resultStage ? "" : "hidden")
-          }
-        >
-          {inputStage && !!croppedImages.length && (
-            <div className="top-btn" onClick={getId} tabIndex="0">
-              <div className="btn id primary">Identifiser</div>
-            </div>
-          )}
-
-          {resultStage && (
-            <div className="top-btn">
-              <div
-                className="btn reset primary"
-                onClick={resetImages}
-                tabIndex="0"
-              >
-                <svg viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
-                  />
-                </svg>
-                {/* <ReplayIcon /> */}
-              </div>
-            </div>
-          )}
-
-          {resultStage && !!predictions.length && (
-            <div>
-              {predictions.map((prediction, index) => (
-                <IdResult
-                  result={prediction}
-                  key={prediction.scientificNameID ?? index}
-                  croppedImages={croppedImages}
-                  openResult={setChosenPrediction}
-                />
-              ))}
-            </div>
-          )}
-
-          {inputStage && (
-            <UserFeedback
-              inputStage={inputStage}
-              gotError={gotError}
-              loading={loading}
-            />
-          )}
-
-          <div className={"bottomButtons " + (inputStage ? "" : "hidden")}>
-            <div
-              className="bottomButton newImageButton primary clickable"
-              tabIndex="0"
-            >
-              <AddAPhotoIcon style={{ fontSize: ".8em" }} />
-              <input
-                className="clickable"
-                type="file"
-                id="uploaderImages"
-                onChange={uploadMore.bind(this, "uploaderImages")}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </React.Fragment>
+        ) : (
+          <ResultListPage
+            previews={croppedImages}
+            predictions={predictions}
+            onAddFiles={addFiles}
+            onBack={reset}
+          />
+        )}
+      </main>
+      <SiteFooter />
+    </div>
   );
 }
 

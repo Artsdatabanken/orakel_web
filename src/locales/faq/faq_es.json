@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "question": "¿Qué especies puede identificar la aplicación?",
+      "answer": "La aplicación puede identificar especies silvestres, y ha sido entrenada principalmente con imágenes de artsobservasjoner.no. No reconoce humanos, mascotas, animales domésticos o plantas cultivadas."
+    },
+    {
+      "question": "¿Qué tan precisas son las identificaciones?",
+      "answer": "La aplicación usa inteligencia artificial, por lo que los resultados son predicciones, no identificaciones definitivas. Siempre verifica con guías de campo o expertos para decisiones importantes."
+    },
+    {
+      "question": "¿Qué hace una buena foto para identificación?",
+      "answer": "Toma fotos claras y bien iluminadas que muestren características distintivas. Incluye múltiples fotos tomadas desde diferentes ángulos cuando sea posible."
+    },
+    {
+      "question": "¿Se almacenan o comparten mis datos?",
+      "answer": "Las imágenes se envían al servidor para procesamiento pero no se almacenan ni están disponibles de otra manera para Artsdatabanken u otros."
+    },
+    {
+      "question": "¿Por qué la aplicación no identificó mi especie?",
+      "answer": "La especie podría no estar en los datos de entrenamiento, la calidad de la foto podría ser pobre, o podría no ser una especie silvestre."
+    }
+  ]
+}

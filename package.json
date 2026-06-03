@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@artsdatabanken/components": "^1.1.2",
+    "@artsdatabanken/icons": "^1.1.1",
+    "@artsdatabanken/tokens": "^1.1.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^9.0.1",
