@@ -1,3 +1,6 @@
 node_modules
 build
-.aider*
+.env.local
+.env.*.local
+CLAUDE.md
+.claude/

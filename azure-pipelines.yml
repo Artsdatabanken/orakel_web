@@ -6,15 +6,13 @@
 trigger:
 - main
 
-pr: none
-
 pool:
   vmImage: ubuntu-latest
 
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '20.x'
+    versionSpec: '24.x'
   displayName: 'Install Node.js'
 
 - script: |

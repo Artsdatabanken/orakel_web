@@ -1,3 +1,5 @@
+import piexif from "piexifjs";
+
 export const runningOnMobile = () => {
   return (
     navigator.userAgent.match(/Android/i) ||
@@ -10,17 +12,26 @@ export const runningOnMobile = () => {
   );
 };
 
-export const getApiUrl = () => {
-  var api = "https://ai.artsdatabanken.no/";
-
-  // if the url does not start with https://orakel.artsdatabanken.no/ then we are in development mode
-  if (window.location.hostname !== "orakel.artsdatabanken.no") {
-    api = "https://ai.test.artsdatabanken.no/";
-  }
-  return api;
+// EXIF GPS is stored as DMS rationals plus an N/S/E/W ref. Convert to a
+// signed decimal degree, matching what the AI endpoint's latitude/longitude
+// fields expect.
+const rationalToFloat = ([num, den]) => num / den;
+const dmsToDeg = (dms, ref) => {
+  const [d, m, s] = dms.map(rationalToFloat);
+  const sign = ref === "S" || ref === "W" ? -1 : 1;
+  return sign * (d + m / 60 + s / 3600);
 };
 
-const piexif = require("piexifjs");
+export const gpsFromExif = (exif) => {
+  const gps = exif?.GPS;
+  if (!gps) return null;
+  const lat = gps[piexif.GPSIFD.GPSLatitude];
+  const latRef = gps[piexif.GPSIFD.GPSLatitudeRef];
+  const lon = gps[piexif.GPSIFD.GPSLongitude];
+  const lonRef = gps[piexif.GPSIFD.GPSLongitudeRef];
+  if (!lat || !latRef || !lon || !lonRef) return null;
+  return { lat: dmsToDeg(lat, latRef), lon: dmsToDeg(lon, lonRef) };
+};
 
 export const getExif = (imgFile) => {
   if (imgFile.type !== "image/jpeg") {
@@ -33,44 +44,37 @@ export const getExif = (imgFile) => {
   return new Promise((resolve, reject) => {
     reader.onloadend = () => {
       try {
-        var exif = piexif.load(reader.result);
-        resolve(exif);
+        resolve(piexif.load(reader.result));
       } catch (error) {
         console.error("Error reading exif data", error);
         reject(error);
       }
     };
-
-    reader.onerror = (error) => {
-      reject(error);
-    };
+    reader.onerror = reject;
   });
 };
 
-
-// write exif data to an image provided as a blob
 export const writeExif = (imgBlob, exif) => {
   return new Promise((resolve, reject) => {
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsArrayBuffer(imgBlob);
     reader.onloadend = () => {
-      var buf = reader.result;
-      var newData = piexif.dump(exif);
-      var base64String = btoa(
-        new Uint8Array(buf)
-          .reduce((data, byte) => data + String.fromCharCode(byte), '')
+      const exifBytes = piexif.dump(exif);
+      const base64 = btoa(
+        new Uint8Array(reader.result).reduce(
+          (acc, byte) => acc + String.fromCharCode(byte),
+          "",
+        ),
       );
-      var result = piexif.insert(newData, "data:image/jpeg;base64," + base64String);
-      var byteString = atob(result.split(',')[1]);
-      var ab = new ArrayBuffer(byteString.length);
-      var ia = new Uint8Array(ab);
-      for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
+      const inserted = piexif.insert(exifBytes, "data:image/jpeg;base64," + base64);
+      const binary = atob(inserted.split(",")[1]);
+      const buf = new ArrayBuffer(binary.length);
+      const view = new Uint8Array(buf);
+      for (let i = 0; i < binary.length; i++) {
+        view[i] = binary.charCodeAt(i);
       }
-      resolve(new Blob([ab], { type: "image/jpeg" }));
+      resolve(new Blob([buf], { type: "image/jpeg" }));
     };
-    reader.onerror = (error) => {
-      reject(error);
-    };
+    reader.onerror = reject;
   });
 };
