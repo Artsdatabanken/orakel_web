@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./App.css";
-import { aiApiUrl, aiAuthHeaders } from "./config";
+import { aiApiUrl } from "./config";
 import { useTranslation } from "./i18n";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
@@ -109,7 +109,6 @@ function App() {
 
     try {
       const res = await axios.post(aiApiUrl, formdata, {
-        headers: aiAuthHeaders,
         signal: controller.signal,
       });
       let preds = res.data.predictions[0].taxa.items.filter(

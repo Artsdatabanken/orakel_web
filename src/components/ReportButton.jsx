@@ -8,7 +8,7 @@ import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContentText from "@mui/material/DialogContentText";
-import { aiApiUrl, aiAuthHeaders } from "../config";
+import { aiApiUrl } from "../config";
 import { useTranslation } from "../i18n";
 
 function ReportButton({ reportResult, croppedImages }) {
@@ -66,7 +66,7 @@ function ReportButton({ reportResult, croppedImages }) {
       formdata.append("image", image);
     }
     axios
-      .post(`${aiApiUrl}/save`, formdata, { headers: aiAuthHeaders })
+      .post(`${aiApiUrl}/save`, formdata)
       .then((res) => {
         setEncryptionData(res.data);
         setDialogOpen(true);
