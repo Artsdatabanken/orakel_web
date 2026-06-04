@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
@@ -11,6 +11,7 @@ import RotateRightIcon from "@mui/icons-material/RotateRight";
 
 import "../App.css";
 import { useTranslation } from "../i18n";
+import { getExif, writeExif } from "../utils/utils";
 
 
 if (!HTMLCanvasElement.prototype.toBlob) {
@@ -40,6 +41,12 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
   // Min zoom is set once the image loads (in `ready`) — the value
   // where the smaller natural dimension exactly fills the crop box.
   const [minZoom, setMinZoom] = useState(0);
+  const [exifdump, setExifdump] = useState();
+
+  useEffect(() => {
+    if (typeof imgFile !== "object") return;
+    getExif(imgFile).then(setExifdump).catch(() => setExifdump(undefined));
+  }, [imgFile]);
 
   // const initCropper = () => {
   //   console.log("trying");
@@ -82,7 +89,18 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
         })
         .toBlob(
           (blob) => {
-            imageCropped(blob);
+            if (exifdump) {
+              // Strip GPS from the embedded EXIF: location is sent to
+              // the API as separate latitude/longitude form fields, so
+              // leaving it inside the JPEG would mean shipping precise
+              // coordinates alongside the coarsened fields.
+              writeExif(blob, { ...exifdump, GPS: {} }).then((withExif) => {
+                imageCropped(withExif);
+                setExifdump(undefined);
+              });
+            } else {
+              imageCropped(blob);
+            }
           },
           "image/jpeg",
           0.7

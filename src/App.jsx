@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import { aiApiUrl } from "./config";
+import { getExif, gpsFromExif } from "./utils/utils";
 import { useTranslation } from "./i18n";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
@@ -105,6 +106,24 @@ function App() {
     formdata.append("application", "Artsorakel Web");
     for (const img of croppedImages) {
       formdata.append("image", img.blob);
+    }
+
+    // Mirror the native apps: latitude/longitude as separate fields,
+    // rounded to 1 decimal (~11 km). Source the GPS from the first
+    // image's untouched original — the cropped blob has had its GPS
+    // IFD stripped.
+    const firstOriginal = croppedImages[0]?.original;
+    if (firstOriginal) {
+      try {
+        const exif = await getExif(firstOriginal);
+        const gps = gpsFromExif(exif);
+        if (gps) {
+          formdata.append("latitude", gps.lat.toFixed(1));
+          formdata.append("longitude", gps.lon.toFixed(1));
+        }
+      } catch {
+        // No GPS / unreadable EXIF — fall through without location.
+      }
     }
 
     try {
