@@ -30,18 +30,12 @@ p {
   line-height: var(--adb-font-line-height);
 }
 
-/* The @artsdatabanken/tokens package ships dark overrides for
-   --adb-surface-brand-3 and -3a but skipped -3c (light hero green).
-   Per shared/designsystem/Semantic tokens.txt the intended dark
-   value is summer-grass-90. Patch here. Remove once tokens >= 1.x
-   ships a full -3c override. */
-[data-theme="dark"] {
-  --adb-surface-brand-3c: var(--adb-brand-summer-grass-90);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --adb-surface-brand-3c: var(--adb-brand-summer-grass-90);
-  }
+/* Figma's border/base/border-strong is neutrals-ocean-40 (#8C9799),
+   but @artsdatabanken/tokens currently maps --adb-border-strong to
+   ocean-50 (#768083). Override here so the dropzone outline matches
+   the design. */
+:root {
+  --adb-border-strong: var(--adb-neutrals-ocean-40);
 }
 
 .App__main {
@@ -59,7 +53,7 @@ p {
 
 /* Hero */
 .hero {
-  background-color: var(--adb-surface-brand-3c);
+  background-color: var(--adb-surface-brand-3);
   padding: 3rem var(--adb-spacing-md);
 }
 
@@ -99,8 +93,22 @@ p {
 /* Dropzone */
 .dropzone {
   margin-top: var(--adb-spacing-xl);
-  border: 2px dashed var(--adb-border-strong);
+  /* Figma uses ~3px dashes / ~3px gaps with a 2px stroke. CSS border
+     styles can't reach that density (browser `dashed` ≈6px dashes,
+     `dotted` ≈1.5px round dots), so we paint the four sides with
+     repeating-linear-gradients. Stays pixel-stable at any container
+     size. The 8px border-radius rounds the corners by clipping the
+     dashes — close enough to Figma at this resolution. */
+  border: 0;
   border-radius: var(--adb-radius-md);
+  background-image:
+    repeating-linear-gradient(90deg, #8C9799 0 3px, transparent 3px 6px),
+    repeating-linear-gradient(90deg, #8C9799 0 3px, transparent 3px 6px),
+    repeating-linear-gradient(0deg, #8C9799 0 3px, transparent 3px 6px),
+    repeating-linear-gradient(0deg, #8C9799 0 3px, transparent 3px 6px);
+  background-size: 100% 2px, 100% 2px, 2px 100%, 2px 100%;
+  background-position: left top, left bottom, left top, right top;
+  background-repeat: no-repeat;
   min-height: 24rem;
   display: flex;
   align-items: center;
@@ -110,6 +118,9 @@ p {
 }
 
 .dropzone__content {
+  /* Figma stacks three groups: (hint + Velg-bilder button), thumbs,
+     Identifiser button. The outer gap is ~32px; the hint and the
+     button inside the first group sit much tighter together. */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,10 +129,17 @@ p {
   max-width: 24rem;
 }
 
+.dropzone__choose {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--adb-spacing-xsm);
+}
+
 .dropzone__hint {
   color: var(--adb-text-secondary);
   font-size: var(--adb-font-size-3);
-  margin: 0 0 var(--adb-spacing-xsm);
+  margin: 0;
 }
 
 .dropzone__button {
@@ -134,6 +152,10 @@ p {
   border-radius: var(--adb-radius-3xl);
   padding: var(--adb-spacing-xsm) var(--adb-spacing-md);
   font-size: var(--adb-font-size-5);
+  /* Pin line-height so the <label> doesn't inherit the body's
+     1.55 multiplier and end up taller than the <button>-based
+     Identifiser button. */
+  line-height: 1.2;
   font-family: inherit;
   cursor: pointer;
   position: relative;
@@ -187,10 +209,13 @@ p {
   gap: var(--adb-spacing-2xsm);
   background-color: var(--adb-surface-accent);
   color: var(--adb-text-invert);
-  border: 0;
+  /* Transparent 2px border so the filled pill matches the
+     bordered Velg-bilder pill exactly in height/width. */
+  border: 2px solid transparent;
   border-radius: var(--adb-radius-3xl);
   padding: var(--adb-spacing-xsm) var(--adb-spacing-md);
   font-size: var(--adb-font-size-5);
+  line-height: 1.2;
   font-family: inherit;
   cursor: pointer;
 }
@@ -259,14 +284,32 @@ p {
   line-height: 1.6;
 }
 
+.disclaimer p {
+  margin: 0;
+  max-width: 70ch;
+}
+
 .disclaimer__icons {
   margin-top: var(--adb-spacing-2xsm);
-  width: 14rem;
-  /* text-secondary is muted-but-visible in both themes
-     (ocean-60 on light bg, ocean-10 on dark bg). The previous
-     surface-subtle-active token maps to ocean-90 in dark mode,
-     which made the icons invisible against the dark background. */
-  color: var(--adb-text-secondary);
+  /* Figma renders the trio at ~154×41 frame-px. The SVG viewBox
+     aspect (21.27 × 5.25) gives ~3.76:1, so 10rem ≈ 160px wide
+     yields ~40px tall — matches Figma. */
+  width: 10rem;
+  /* Figma uses #A3AEB0 (neutrals-ocean-30) for these disabled-state
+     icons (its text/visited/surface-visited/surface-subtle-active all
+     resolve to this primitive). The semantic token --adb-surface-
+     subtle-active matches in light mode but flips to ocean-90 in
+     dark mode, hiding the icons — so the dark override below keeps
+     them legible against the dark surface. */
+  color: var(--adb-neutrals-ocean-30);
+}
+[data-theme="dark"] .disclaimer__icons {
+  color: var(--adb-neutrals-ocean-20);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .disclaimer__icons {
+    color: var(--adb-neutrals-ocean-20);
+  }
 }
 
 .disclaimer__icons svg {
@@ -927,8 +970,16 @@ p {
 }
 
 .siteHeader__breadcrumbSep {
-  color: var(--adb-text-secondary);
-  padding: 0 var(--adb-spacing-3xsm);
+  display: inline-flex;
+  align-items: center;
+  color: var(--adb-text-brand-1);
+  padding: 0 var(--adb-spacing-2xsm);
+}
+
+.siteHeader__breadcrumbSep svg {
+  display: block;
+  height: 1em;
+  width: 1em;
 }
 
 .siteHeader__breadcrumbCurrent {
@@ -939,7 +990,10 @@ p {
    SiteFooter
    ───────────────────────────────────────────────────────────────────── */
 .siteFooter {
-  background-color: var(--adb-surface-brand-5a);
+  /* Figma uses freshwater-blue-base-negative for the footer band;
+     the semantic --adb-surface-brand-5 alias is the light variant,
+     so we hit the primitive directly. */
+  background-color: var(--adb-brand-freshwater-blue-base-negative);
   color: var(--adb-text-invert);
   padding: var(--adb-spacing-2xl) var(--adb-spacing-lg);
 }
@@ -956,11 +1010,15 @@ p {
 }
 
 .siteFooter__toTopBtn {
+  /* Figma: subtle dark pill on the dark footer (#394244 =
+     neutrals-ocean-80) with freshwater-blue-30 ink. The local
+     --adb-surface-subtle alias maps to ocean-10 (the opposite end
+     of the ramp), so we hit the primitive directly. */
   display: inline-flex;
   align-items: center;
   gap: var(--adb-spacing-2xsm);
-  background-color: var(--adb-surface-brand-5);
-  color: var(--adb-surface-brand-5b);
+  background-color: var(--adb-neutrals-ocean-80);
+  color: var(--adb-brand-freshwater-blue-30);
   padding: var(--adb-spacing-2xsm) var(--adb-spacing-sm);
   border-radius: var(--adb-radius-3xl);
   font-size: var(--adb-font-size-3);
@@ -997,8 +1055,8 @@ p {
 }
 
 .siteFooter__col a {
-  color: var(--adb-surface-brand-5b);
-  border-bottom: 2px solid var(--adb-surface-brand-5b);
+  color: var(--adb-brand-freshwater-blue-30);
+  border-bottom: 2px solid var(--adb-brand-freshwater-blue-30);
 }
 
 .siteFooter__linkList {
@@ -1026,7 +1084,7 @@ p {
 .siteFooter__social a {
   border: 0;
   display: inline-flex;
-  color: var(--adb-surface-brand-5b);
+  color: var(--adb-brand-freshwater-blue-30);
 }
 
 .siteFooter__social a svg {
@@ -1047,8 +1105,8 @@ p {
 }
 
 .siteFooter__colophon a {
-  color: var(--adb-surface-brand-5b);
-  border-bottom: 2px solid var(--adb-surface-brand-5b);
+  color: var(--adb-brand-freshwater-blue-30);
+  border-bottom: 2px solid var(--adb-brand-freshwater-blue-30);
   font-size: var(--adb-font-size-3);
 }
 

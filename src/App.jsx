@@ -171,6 +171,8 @@ function App() {
         onToggleTheme={() => setDarkMode((d) => !d)}
         onOpenAbout={() => setModal("about")}
         onOpenManual={() => setModal("manual")}
+        breadcrumbCurrentKey={view === "results" ? "web_breadcrumb_results" : null}
+        onGoHome={reset}
       />
 
       {uncroppedImages.length > 0 && (

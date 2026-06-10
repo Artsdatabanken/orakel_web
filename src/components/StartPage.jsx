@@ -16,6 +16,25 @@ function StartPage({ previews, onAddFiles, onEditPreview, onIdentify, onAbort, l
     event.target.value = "";
   };
 
+  // The drop target stays visually identical to Figma — no
+  // dragover highlight — so preventDefault is the only thing we
+  // need here to make the browser actually accept the drop.
+  const handleDragOver = (e) => {
+    if (loading) return;
+    if (!Array.from(e.dataTransfer?.types || []).includes("Files")) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+  };
+
+  const handleDrop = (e) => {
+    if (loading) return;
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer?.files || []).filter((f) =>
+      f.type.startsWith("image/")
+    );
+    if (files.length) onAddFiles(files);
+  };
+
   const hasImages = previews.length > 0;
 
   return (
@@ -39,23 +58,29 @@ function StartPage({ previews, onAddFiles, onEditPreview, onIdentify, onAbort, l
       </section>
 
       <section className="startPage__inner">
-        <div className="dropzone">
+        <div
+          className="dropzone"
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+        >
           {loading ? (
             <LoadingPanel onAbort={onAbort} />
           ) : (
             <div className="dropzone__content">
-              <p className="dropzone__hint">{t("web_dropzone_hint")}</p>
-              <label className="dropzone__button">
-                {t("web_choose_images")}
-                <input
-                  type="file"
-                  id="uploaderImages"
-                  accept="image/*"
-                  multiple
-                  className="dropzone__input"
-                  onChange={handleFiles}
-                />
-              </label>
+              <div className="dropzone__choose">
+                <p className="dropzone__hint">{t("web_dropzone_hint")}</p>
+                <label className="dropzone__button">
+                  {t("web_choose_images")}
+                  <input
+                    type="file"
+                    id="uploaderImages"
+                    accept="image/*"
+                    multiple
+                    className="dropzone__input"
+                    onChange={handleFiles}
+                  />
+                </label>
+              </div>
 
               {hasImages && (
                 <>

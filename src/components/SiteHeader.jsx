@@ -4,10 +4,19 @@ import adbLogoLight from "../assets/adb-logo-light.svg";
 import adbLogoDark from "../assets/adb-logo-dark.svg";
 import chevronSeparatorRaw from "../assets/chevron-separator.svg?raw";
 import icLanguageRaw from "../assets/ic-language.svg?raw";
-import icThemeRaw from "../assets/ic-theme.svg?raw";
+import icThemeMoonRaw from "../assets/ic-theme-moon.svg?raw";
+import icThemeSunRaw from "../assets/ic-theme-sun.svg?raw";
 import icArrowDropDownRaw from "../assets/ic-arrow-drop-down.svg?raw";
+import breadcrumbBeakRaw from "../assets/breadcrumb-beak.svg?raw";
 
-function SiteHeader({ darkMode, onToggleTheme, onOpenAbout, onOpenManual }) {
+function SiteHeader({
+  darkMode,
+  onToggleTheme,
+  onOpenAbout,
+  onOpenManual,
+  breadcrumbCurrentKey,
+  onGoHome,
+}) {
   const { t, selection, setLanguage } = useTranslation();
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef(null);
@@ -121,19 +130,39 @@ function SiteHeader({ darkMode, onToggleTheme, onOpenAbout, onOpenManual }) {
             <span
               className="siteHeader__icon"
               aria-hidden
-              dangerouslySetInnerHTML={{ __html: icThemeRaw }}
+              dangerouslySetInnerHTML={{
+                __html: darkMode ? icThemeSunRaw : icThemeMoonRaw,
+              }}
             />
           </button>
         </div>
       </div>
 
-      <div className="siteHeader__tertiary">
-        <nav className="siteHeader__breadcrumb" aria-label={t("web_breadcrumb_label")}>
-          <a href="#" className="siteHeader__breadcrumbLink">{t("web_breadcrumb_forside")}</a>
-          <span className="siteHeader__breadcrumbSep" aria-hidden>›</span>
-          <span className="siteHeader__breadcrumbCurrent">Artsorakel</span>
-        </nav>
-      </div>
+      {breadcrumbCurrentKey && (
+        <div className="siteHeader__tertiary">
+          <nav className="siteHeader__breadcrumb" aria-label={t("web_breadcrumb_label")}>
+            <a
+              href="#"
+              className="siteHeader__breadcrumbLink"
+              onClick={(e) => {
+                if (!onGoHome) return;
+                e.preventDefault();
+                onGoHome();
+              }}
+            >
+              {t("web_breadcrumb_forside")}
+            </a>
+            <span
+              className="siteHeader__breadcrumbSep"
+              aria-hidden
+              dangerouslySetInnerHTML={{ __html: breadcrumbBeakRaw }}
+            />
+            <span className="siteHeader__breadcrumbCurrent">
+              {t(breadcrumbCurrentKey)}
+            </span>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
