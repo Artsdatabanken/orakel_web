@@ -39,8 +39,8 @@ p {
 
   /* Red-list and alien-species badge colors. Source of truth:
      ../artsorakel/shared/designsystem/Variables listcategories.txt
-     (kept in sync with the native apps' Color_redlist*/Color_invasive*
-     asset entries). */
+     (kept in sync with the native apps' Color_redlist and
+     Color_invasive asset entries). */
   --redlist-cr: #D61900;
   --redlist-en: #F34F39;
   --redlist-vu: #EB8107;
