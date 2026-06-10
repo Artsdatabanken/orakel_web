@@ -165,7 +165,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" id="main-content">
       <SiteHeader
         darkMode={darkMode}
         onToggleTheme={() => setDarkMode((d) => !d)}
@@ -184,7 +184,7 @@ function App() {
         />
       )}
 
-      <main className="App__main" id="top">
+      <main className="App__main">
         {view === "start" && (
           <StartPage
             previews={croppedImages}
