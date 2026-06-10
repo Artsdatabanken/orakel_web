@@ -34,7 +34,7 @@ function inlineSharedLogos(html) {
 }
 
 function About() {
-  const { activeCode } = useTranslation();
+  const { t, activeCode } = useTranslation();
   const html = useMemo(() => {
     const raw = pickLanguage(activeCode);
     const version = import.meta.env.ORAKEL_VERSION ?? "dev";
@@ -42,10 +42,10 @@ function About() {
   }, [activeCode]);
 
   return (
-    <div
-      className="aboutModal"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <div className="aboutModal">
+      <h1 className="aboutModal__heading">{`${t("about")} Artsorakel`}</h1>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </div>
   );
 }
 

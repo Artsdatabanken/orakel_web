@@ -20,7 +20,7 @@ function ExtendedManual() {
 
   return (
     <div className="faqModal">
-      <h2 className="faqModal__heading">{t("faq")}</h2>
+      <h1 className="faqModal__heading">{t("faq")}</h1>
       <dl className="faqModal__list">
         {items.map((item, i) => (
           <React.Fragment key={i}>

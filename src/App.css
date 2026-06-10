@@ -36,6 +36,22 @@ p {
    the design. */
 :root {
   --adb-border-strong: var(--adb-neutrals-ocean-40);
+
+  /* Red-list and alien-species badge colors. Source of truth:
+     ../artsorakel/shared/designsystem/Variables listcategories.txt
+     (kept in sync with the native apps' Color_redlist*/Color_invasive*
+     asset entries). */
+  --redlist-cr: #D61900;
+  --redlist-en: #F34F39;
+  --redlist-vu: #EB8107;
+  --redlist-nt: #E6C000;
+  --redlist-dd: #6C6C6C;
+  --redlist-lc: #61A360;
+  --invasive-se: #4E1A53;
+  --invasive-hi: #17467C;
+  --invasive-ph: #286371;
+  --invasive-lo: #7CB1AC;
+  --invasive-nk: #D2CF84;
 }
 
 .App__main {
@@ -393,6 +409,7 @@ p {
   border-bottom: 2px solid var(--adb-border-accent);
   font-family: inherit;
   font-size: var(--adb-font-size-5);
+  line-height: 1;
   cursor: pointer;
   margin-bottom: var(--adb-spacing-lg);
   align-self: center;
@@ -405,25 +422,35 @@ p {
 }
 
 .resultPage--split .resultPage__layout {
-  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
-  align-items: start;
-}
-
-.resultPage--split .resultPage__gallery {
-  grid-template-columns: 1fr;
-}
-
-.resultPage--split .resultPage__addMore {
-  display: none;
+  grid-template-columns: minmax(0, 448px) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0;
 }
 
 .resultPage__detailCol {
   position: sticky;
   top: 96px;
+  border-left: 2px solid var(--adb-border-default);
+  padding-left: var(--adb-spacing-lg);
+  padding-top: var(--adb-spacing-lg);
+}
+
+.resultPage__detailPlaceholder {
+  border: 1px dashed var(--adb-border-default);
+  border-radius: var(--adb-radius-md);
+  color: var(--adb-text-secondary);
+  font-size: var(--adb-font-size-4);
+  text-align: center;
+  padding: var(--adb-spacing-2xl) var(--adb-spacing-md);
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .resultPage__backArrow {
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 1;
 }
 
@@ -432,6 +459,7 @@ p {
   grid-template-columns: 1fr 1fr;
   gap: var(--adb-spacing-sm);
   margin-bottom: var(--adb-spacing-lg);
+  padding: 0 var(--adb-spacing-sm);
 }
 
 .resultPage__hero {
@@ -456,7 +484,9 @@ p {
 
 .resultPage__addMore {
   aspect-ratio: 214 / 215;
-  border: 2px dashed var(--adb-border-accent);
+  /* 1px dashed → ~2/2 dash pattern in Chrome; 2px renders ~6/4 chunks
+     that don't match the Figma. */
+  border: 1px dashed var(--adb-border-accent);
   border-radius: var(--adb-radius-md);
   display: flex;
   flex-direction: column;
@@ -492,7 +522,8 @@ p {
 }
 
 .resultRow--selected {
-  border-left: 4px solid var(--adb-border-accent);
+  border-bottom-color: var(--adb-surface-accent);
+  border-bottom-width: 4px;
 }
 
 .resultRow__btn {
@@ -532,7 +563,7 @@ p {
 
 .resultRow__name {
   font-weight: var(--adb-font-weight-bold);
-  color: var(--adb-surface-accent);
+  color: var(--adb-text-primary);
   font-size: var(--adb-font-size-6);
   line-height: 1.2;
 }
@@ -556,9 +587,18 @@ p {
 
 .resultRow__chevron {
   flex: 0 0 auto;
-  color: var(--adb-surface-brand-1a);
-  font-size: 1.5rem;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--adb-surface-brand-1b);
+  width: 24px;
+  height: 24px;
+}
+
+.resultRow__chevron svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* Certainty dots — non-linear gauge.
@@ -602,13 +642,6 @@ p {
    SpeciesDetail
    ───────────────────────────────────────────────────────────────────── */
 .speciesDetail {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--adb-spacing-xl);
-  align-items: start;
-}
-
-.speciesDetail__main {
   display: flex;
   flex-direction: column;
   gap: var(--adb-spacing-md);
@@ -618,12 +651,13 @@ p {
   display: flex;
   gap: var(--adb-spacing-sm);
   align-items: center;
+  padding: 0 var(--adb-spacing-lg) 0 var(--adb-spacing-sm);
 }
 
 .speciesCard__thumb {
   flex: 0 0 auto;
-  width: 64px;
-  height: 64px;
+  width: 89px;
+  height: 89px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -643,7 +677,7 @@ p {
 
 .speciesCard__name {
   font-weight: var(--adb-font-weight-bold);
-  color: var(--adb-surface-accent);
+  color: var(--adb-text-primary);
   font-size: var(--adb-font-size-6);
   line-height: 1.2;
 }
@@ -660,6 +694,37 @@ p {
   line-height: 1.6;
 }
 
+.categoryBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--adb-spacing-md);
+}
+
+.categoryBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--adb-spacing-2xsm);
+}
+
+.categoryBadge__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--badge-color, var(--adb-surface-subtle));
+  color: #fff;
+  font-size: var(--adb-font-size-3);
+  font-weight: var(--adb-font-weight-bold);
+  flex: 0 0 auto;
+}
+
+.categoryBadge__label {
+  font-size: var(--adb-font-size-3);
+  color: var(--adb-text-primary);
+}
+
 .speciesDetail__readMore {
   display: inline-flex;
   align-items: center;
@@ -672,8 +737,18 @@ p {
 }
 
 .speciesDetail__external {
-  font-size: 1em;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--adb-text-accent);
+}
+
+.speciesDetail__external svg {
+  width: 75%;
+  height: 75%;
+  display: block;
 }
 
 .speciesDetail__score {
@@ -691,12 +766,23 @@ p {
   gap: var(--adb-spacing-2xsm);
   font-weight: var(--adb-font-weight-bold);
   font-size: var(--adb-font-size-4);
-  color: var(--adb-text-accent);
+  color: var(--adb-text-primary);
 }
 
 .speciesDetail__scoreIcon {
-  font-size: 1.1em;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--adb-functional-blue-50);
+  flex: 0 0 auto;
+}
+
+.speciesDetail__scoreIcon svg {
+  width: calc(100% - 16.66%);
+  height: calc(100% - 16.66%);
+  display: block;
 }
 
 .speciesDetail__scoreBody {
@@ -737,24 +823,31 @@ p {
   align-items: center;
   gap: var(--adb-spacing-2xsm);
   color: var(--adb-text-accent);
+  border: 0;
   border-bottom: 2px solid var(--adb-border-accent);
+  border-radius: 0;
+  background: transparent;
   padding: 5px 0;
   align-self: flex-start;
-  font-size: var(--adb-font-size-3);
-}
-
-/* ReportButton trigger inside the map column */
-.speciesDetail__map .btn.primary {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--adb-spacing-2xsm);
-  background-color: var(--adb-surface-accent);
-  color: var(--adb-text-invert);
-  border-radius: var(--adb-radius-3xl);
-  padding: var(--adb-spacing-xsm) var(--adb-spacing-md);
+  font-family: inherit;
   font-size: var(--adb-font-size-3);
   cursor: pointer;
-  align-self: flex-start;
+}
+
+.speciesDetail__beak {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--adb-surface-brand-1b);
+  flex: 0 0 auto;
+}
+
+.speciesDetail__beak svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .littleSpinner {
@@ -901,10 +994,6 @@ p {
   font-size: var(--adb-font-size-3);
 }
 
-.siteHeader__themeBtn {
-  color: var(--adb-text-primary);
-}
-
 .siteHeader__caret {
   font-size: 0.8em;
   line-height: 1;
@@ -972,7 +1061,7 @@ p {
 .siteHeader__breadcrumbSep {
   display: inline-flex;
   align-items: center;
-  color: var(--adb-text-brand-1);
+  color: var(--adb-surface-brand-1b);
   padding: 0 var(--adb-spacing-2xsm);
 }
 
@@ -984,130 +1073,6 @@ p {
 
 .siteHeader__breadcrumbCurrent {
   color: var(--adb-text-primary);
-}
-
-/* ─────────────────────────────────────────────────────────────────────
-   SiteFooter
-   ───────────────────────────────────────────────────────────────────── */
-.siteFooter {
-  /* Figma uses freshwater-blue-base-negative for the footer band;
-     the semantic --adb-surface-brand-5 alias is the light variant,
-     so we hit the primitive directly. */
-  background-color: var(--adb-brand-freshwater-blue-base-negative);
-  color: var(--adb-text-invert);
-  padding: var(--adb-spacing-2xl) var(--adb-spacing-lg);
-}
-
-.siteFooter__inner {
-  max-width: var(--adb-max-content-width);
-  margin: 0 auto;
-}
-
-.siteFooter__toTop {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: var(--adb-spacing-xl);
-}
-
-.siteFooter__toTopBtn {
-  /* Figma: subtle dark pill on the dark footer (#394244 =
-     neutrals-ocean-80) with freshwater-blue-30 ink. The local
-     --adb-surface-subtle alias maps to ocean-10 (the opposite end
-     of the ramp), so we hit the primitive directly. */
-  display: inline-flex;
-  align-items: center;
-  gap: var(--adb-spacing-2xsm);
-  background-color: var(--adb-neutrals-ocean-80);
-  color: var(--adb-brand-freshwater-blue-30);
-  padding: var(--adb-spacing-2xsm) var(--adb-spacing-sm);
-  border-radius: var(--adb-radius-3xl);
-  font-size: var(--adb-font-size-3);
-}
-
-.siteFooter__columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--adb-spacing-xl);
-  align-items: start;
-}
-
-.siteFooter__col--social {
-  justify-self: end;
-  width: 100%;
-  max-width: 18rem;
-}
-
-.siteFooter__heading {
-  font-weight: var(--adb-font-weight-bold);
-  font-size: var(--adb-font-size-4);
-  margin: 0 0 var(--adb-spacing-xsm);
-  line-height: 1.2;
-}
-
-.siteFooter__heading--spaced {
-  margin-top: var(--adb-spacing-md);
-}
-
-.siteFooter__col p {
-  font-size: var(--adb-font-size-3);
-  line-height: 1.6;
-  margin: var(--adb-spacing-2xsm) 0;
-}
-
-.siteFooter__col a {
-  color: var(--adb-brand-freshwater-blue-30);
-  border-bottom: 2px solid var(--adb-brand-freshwater-blue-30);
-}
-
-.siteFooter__linkList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--adb-spacing-xsm);
-}
-
-.siteFooter__linkList a {
-  display: inline-block;
-  padding-bottom: 2px;
-}
-
-.siteFooter__social {
-  list-style: none;
-  margin: var(--adb-spacing-md) 0 0;
-  padding: 0;
-  display: flex;
-  gap: var(--adb-spacing-lg);
-}
-
-.siteFooter__social a {
-  border: 0;
-  display: inline-flex;
-  color: var(--adb-brand-freshwater-blue-30);
-}
-
-.siteFooter__social a svg {
-  font-size: 1.6875rem; /* 27px — design spec */
-}
-
-.siteFooter__contact {
-  margin-top: var(--adb-spacing-md) !important;
-}
-
-.siteFooter__colophon {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--adb-spacing-lg);
-  margin-top: var(--adb-spacing-xl);
-  padding-top: var(--adb-spacing-md);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.siteFooter__colophon a {
-  color: var(--adb-brand-freshwater-blue-30);
-  border-bottom: 2px solid var(--adb-brand-freshwater-blue-30);
-  font-size: var(--adb-font-size-3);
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -1197,46 +1162,16 @@ p {
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   Overlay (About / ExtendedManual modal)
+   About / FAQ pages
    ───────────────────────────────────────────────────────────────────── */
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 800;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: var(--adb-spacing-xl) var(--adb-spacing-md);
-  overflow-y: auto;
+.infoPage {
+  padding-top: var(--adb-spacing-md);
+  padding-bottom: var(--adb-spacing-2xl);
 }
 
-.overlay__content {
-  position: relative;
-  background-color: var(--adb-background-default);
-  color: var(--adb-text-primary);
-  border-radius: var(--adb-radius-md);
-  padding: var(--adb-spacing-xl) var(--adb-spacing-lg);
-  max-width: 640px;
-  width: 100%;
-}
-
-.overlay__close {
-  position: absolute;
-  top: var(--adb-spacing-2xsm);
-  right: var(--adb-spacing-2xsm);
-  background: transparent;
-  border: 0;
-  color: var(--adb-text-primary);
-  font-size: 2rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: var(--adb-spacing-2xsm) var(--adb-spacing-xsm);
-}
-
-/* About modal — mirrors AboutView.swift CSS so the shared HTML
-   renders identically across platforms. The native style caps both
-   logos at 300×100 — without this they blew up to the modal width. */
+/* About — mirrors AboutView.swift CSS so the shared HTML renders
+   identically across platforms. The native style caps both logos at
+   300×100 — without this they blew up to the page width. */
 .aboutModal {
   font-size: var(--adb-font-size-4);
   line-height: 1.5;
@@ -1269,7 +1204,8 @@ p {
 }
 
 /* FAQ modal */
-.faqModal__heading {
+.faqModal__heading,
+.aboutModal__heading {
   margin: 0 0 var(--adb-spacing-md);
   font-size: var(--adb-font-size-8);
   font-weight: var(--adb-font-weight-bold);
@@ -1284,7 +1220,7 @@ p {
 
 .faqModal__question {
   font-weight: var(--adb-font-weight-bold);
-  color: var(--adb-text-accent);
+  color: var(--adb-text-primary);
   margin: 0;
 }
 
@@ -1328,11 +1264,11 @@ p {
 
   .resultPage__detailCol {
     position: static;
-  }
-
-  /* Species detail two columns become one */
-  .speciesDetail {
-    grid-template-columns: 1fr;
+    border-left: 0;
+    border-top: 2px solid var(--adb-border-default);
+    padding-left: 0;
+    padding-top: var(--adb-spacing-lg);
+    margin-top: var(--adb-spacing-md);
   }
 
   .siteHeader__bar {
@@ -1344,15 +1280,6 @@ p {
     padding: var(--adb-spacing-md) var(--adb-spacing-2xsm);
   }
 
-  .siteFooter__columns {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .siteFooter__col--social {
-    grid-column: 1 / -1;
-    justify-self: stretch;
-    max-width: none;
-  }
 }
 
 @media (max-width: 768px) {
@@ -1407,14 +1334,6 @@ p {
     display: none;
   }
 
-  .siteFooter__columns {
-    grid-template-columns: 1fr;
-  }
-
-  .siteFooter__col--social {
-    justify-self: stretch;
-  }
-
   .appDownload__badges {
     flex-direction: column;
     align-items: stretch;
@@ -1430,10 +1349,6 @@ p {
 }
 
 @media (max-width: 480px) {
-  .siteFooter {
-    padding: var(--adb-spacing-xl) var(--adb-spacing-sm);
-  }
-
   .resultRow__btn {
     gap: var(--adb-spacing-xsm);
     padding: var(--adb-spacing-xsm);

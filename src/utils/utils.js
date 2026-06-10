@@ -1,5 +1,18 @@
 import piexif from "piexifjs";
 
+// API returns localized name maps (vernacularNames, groupNames) keyed by
+// ISO 639-1. Pick the active language, falling back to English, then any
+// available entry, then the legacy singular field.
+export const pickLocalized = (map, fallback, activeCode) => {
+  if (map && typeof map === "object") {
+    if (map[activeCode]) return map[activeCode];
+    if (map.en) return map.en;
+    const first = Object.values(map).find(Boolean);
+    if (first) return first;
+  }
+  return fallback;
+};
+
 export const runningOnMobile = () => {
   return (
     navigator.userAgent.match(/Android/i) ||

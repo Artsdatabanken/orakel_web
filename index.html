@@ -5,7 +5,7 @@
 
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' http://localhost:5000 http://ai.artsdatabanken.no https://ai.artsdatabanken.no https://ai.test.artsdatabanken.no data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' https://artsdatabanken.no https://artskart.artsdatabanken.no blob: data: content:;"
+      content="default-src 'self' http://localhost:5000 http://ai.artsdatabanken.no https://ai.artsdatabanken.no https://ai.test.artsdatabanken.no data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' https://artsdatabanken.no 'unsafe-inline'; font-src 'self' https://artsdatabanken.no data:; media-src *; img-src 'self' https://artsdatabanken.no https://artskart.artsdatabanken.no blob: data: content:;"
     />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -55,6 +55,7 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script type="module" src="/components/adb-site-footer.js"></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

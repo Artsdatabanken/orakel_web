@@ -3,9 +3,7 @@ import axios from "axios";
 import "./App.css";
 import { aiApiUrl } from "./config";
 import { getExif, gpsFromExif } from "./utils/utils";
-import { useTranslation } from "./i18n";
 import SiteHeader from "./components/SiteHeader";
-import SiteFooter from "./components/SiteFooter";
 import StartPage from "./components/StartPage";
 import ResultListPage from "./components/ResultListPage";
 import ImageCropper from "./components/ImageCropper";
@@ -13,7 +11,6 @@ import About from "./components/About";
 import ExtendedManual from "./components/ExtendedManual";
 
 function App() {
-  const { t } = useTranslation();
   const [view, setView] = useState("start");
   const [croppedImages, setCroppedImages] = useState([]);
   const [uncroppedImages, setUncroppedImages] = useState([]);
@@ -21,7 +18,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
-  const [modal, setModal] = useState(null);
   // null when the cropper is processing a brand-new upload, or an
   // index into croppedImages when the user is re-cropping an
   // existing thumbnail. The pending uncropped file is the same either
@@ -162,16 +158,20 @@ function App() {
     setView("start");
   };
 
-  const closeModal = () => setModal(null);
+  const BREADCRUMB_KEYS = {
+    results: "web_breadcrumb_results",
+    about: "about",
+    faq: "faq",
+  };
 
   return (
     <div className="App">
       <SiteHeader
         darkMode={darkMode}
         onToggleTheme={() => setDarkMode((d) => !d)}
-        onOpenAbout={() => setModal("about")}
-        onOpenManual={() => setModal("manual")}
-        breadcrumbCurrentKey={view === "results" ? "web_breadcrumb_results" : null}
+        onOpenAbout={() => setView("about")}
+        onOpenManual={() => setView("faq")}
+        breadcrumbCurrentKey={BREADCRUMB_KEYS[view] ?? null}
         onGoHome={reset}
       />
 
@@ -184,33 +184,8 @@ function App() {
         />
       )}
 
-      {modal && (
-        <div
-          className="overlay"
-          role="dialog"
-          aria-modal="true"
-          onClick={closeModal}
-        >
-          <div
-            className="overlay__content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="overlay__close"
-              onClick={closeModal}
-              aria-label={t("close")}
-            >
-              ×
-            </button>
-            {modal === "about" && <About />}
-            {modal === "manual" && <ExtendedManual />}
-          </div>
-        </div>
-      )}
-
       <main className="App__main" id="top">
-        {view === "start" ? (
+        {view === "start" && (
           <StartPage
             previews={croppedImages}
             onAddFiles={addFiles}
@@ -221,7 +196,8 @@ function App() {
             error={error}
             darkMode={darkMode}
           />
-        ) : (
+        )}
+        {view === "results" && (
           <ResultListPage
             previews={croppedImages}
             predictions={predictions}
@@ -229,8 +205,18 @@ function App() {
             onBack={reset}
           />
         )}
+        {view === "about" && (
+          <div className="infoPage startPage__inner">
+            <About />
+          </div>
+        )}
+        {view === "faq" && (
+          <div className="infoPage startPage__inner">
+            <ExtendedManual />
+          </div>
+        )}
       </main>
-      <SiteFooter />
+      <adb-site-footer />
     </div>
   );
 }

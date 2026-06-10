@@ -18,6 +18,10 @@
     "react-dom": "^19.2.7"
   },
   "scripts": {
+    "snapshot:footer": "node scripts/snapshot-adb-footer.mjs",
+    "predev": "npm run snapshot:footer",
+    "prestart": "npm run snapshot:footer",
+    "prebuild": "npm run snapshot:footer",
     "dev": "vite",
     "start": "vite",
     "build": "vite build",

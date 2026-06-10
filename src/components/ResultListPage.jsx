@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SpeciesDetail from "./SpeciesDetail";
 import TaxonImage from "./taxonImage";
 import { useTranslation } from "../i18n";
+import { pickLocalized } from "../utils/utils";
+import beakRaw from "../assets/breadcrumb-beak.svg?raw";
 
 // Non-linear gauge: first dot always filled, then each threshold the
 // probability exceeds adds one more dot. All filled dots take the
@@ -37,10 +39,19 @@ function capitalizeFirst(s) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-function ResultRow({ prediction, isSelected, onSelect, t }) {
+function ResultRow({ prediction, isSelected, onSelect, t, activeCode }) {
   const probability = prediction.probability ?? 0;
   const filled = probabilityToFilledCount(probability);
-  const vernacular = prediction.vernacularName;
+  const vernacular = pickLocalized(
+    prediction.vernacularNames,
+    prediction.vernacularName,
+    activeCode,
+  );
+  const groupName = pickLocalized(
+    prediction.groupNames,
+    prediction.groupName,
+    activeCode,
+  );
   const scientific = prediction.name;
   const sameName =
     vernacular && vernacular.toLowerCase() === scientific.toLowerCase();
@@ -61,21 +72,32 @@ function ResultRow({ prediction, isSelected, onSelect, t }) {
           {vernacular && !sameName && (
             <span className="resultRow__sci">{scientific}</span>
           )}
-          <span className="resultRow__group">{prediction.groupName}</span>
+          <span className="resultRow__group">{groupName}</span>
           <CertaintyRange
             probability={probability}
             label={t("match_label", { 1: filled }) || `${filled} / 5`}
           />
         </span>
-        <span className="resultRow__chevron" aria-hidden>›</span>
+        <span
+          className="resultRow__chevron"
+          aria-hidden
+          dangerouslySetInnerHTML={{ __html: beakRaw }}
+        />
       </button>
     </li>
   );
 }
 
 function ResultListPage({ previews, predictions, onAddFiles, onBack }) {
-  const { t } = useTranslation();
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const { t, activeCode } = useTranslation();
+  // Auto-select only when there's exactly one prediction (no choice to
+  // make). Multiple predictions start unselected so the user picks.
+  const defaultIndex = predictions.length === 1 ? 0 : null;
+  const [selectedIndex, setSelectedIndex] = useState(defaultIndex);
+
+  useEffect(() => {
+    setSelectedIndex(predictions.length === 1 ? 0 : null);
+  }, [predictions]);
 
   const handleFiles = (event) => {
     const files = Array.from(event.target.files || []);
@@ -88,7 +110,7 @@ function ResultListPage({ previews, predictions, onAddFiles, onBack }) {
     selectedIndex !== null && predictions[selectedIndex]
       ? predictions[selectedIndex]
       : null;
-  const isSplit = selected !== null;
+  const isSplit = predictions.length > 0;
 
   return (
     <div className={`resultPage startPage__inner${isSplit ? " resultPage--split" : ""}`}>
@@ -133,18 +155,25 @@ function ResultListPage({ previews, predictions, onAddFiles, onBack }) {
                   isSelected={i === selectedIndex}
                   onSelect={() => setSelectedIndex(i)}
                   t={t}
+                  activeCode={activeCode}
                 />
               ))}
             </ul>
           )}
         </div>
 
-        {selected && (
+        {isSplit && (
           <div className="resultPage__detailCol">
-            <SpeciesDetail
-              prediction={selected}
-              croppedImages={previews}
-            />
+            {selected ? (
+              <SpeciesDetail
+                prediction={selected}
+                croppedImages={previews}
+              />
+            ) : (
+              <p className="resultPage__detailPlaceholder">
+                {t("web_select_match_hint")}
+              </p>
+            )}
           </div>
         )}
       </div>
