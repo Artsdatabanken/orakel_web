@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "question": "Kva artar kan appen identifisere?",
+      "answer": "Appen kan identifisere ville artar, og har vorte trena hovudsakleg på bilete frå artsobservasjoner.no. Ho gjenkjenner ikkje menneske, kjæledyr, husdyr eller kultiverte plantar."
+    },
+    {
+      "question": "Kor nøyaktige er identifikasjonane?",
+      "answer": "Appen brukar kunstig intelligens, så resultata er prediksjonar, ikkje definitive identifikasjonar. Verifiser alltid med feltguider eller ekspertar for viktige avgjerder."
+    },
+    {
+      "question": "Kva utgjer eit godt foto for identifikasjon?",
+      "answer": "Ta klåre, godt opplyste bilete som viser karakteristiske trekk. Inkluder fleire bilete tekne frå ulike vinklar når mogleg."
+    },
+    {
+      "question": "Blir mine data lagra eller delte?",
+      "answer": "Bilete vert sende til serveren for prosessering, men vert ikkje lagra eller er på annan måte tilgjengelege for Artsdatabanken eller andre."
+    },
+    {
+      "question": "Kvifor identifiserte ikkje appen arten min?",
+      "answer": "Arten kan mangle i treningsdataa, fotokvaliteten kan vere dårleg, eller det er kanskje ikkje ein vill art."
+    }
+  ]
+}

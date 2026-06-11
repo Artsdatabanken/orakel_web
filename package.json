@@ -1,50 +1,40 @@
 {
-  "name": "web-scratch",
+  "name": "orakel-web",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
+    "@artsdatabanken/components": "^1.1.2",
+    "@artsdatabanken/icons": "^1.1.1",
+    "@artsdatabanken/tokens": "^1.1.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.1",
-    "@mui/material": "^5.14.2",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.4.0",
-    "crypto": "^1.0.1",
-    "libheif-js": "^1.15.1",
-    "pngjs": "^7.0.0",
-    "react": "^18.2.0",
+    "@mui/icons-material": "^9.1.1",
+    "@mui/material": "^9.1.1",
+    "axios": "^1.17.0",
+    "piexifjs": "^1.0.6",
+    "react": "^19.2.7",
     "react-cropper": "^2.3.3",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-dom": "^19.2.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "snapshot:footer": "node scripts/snapshot-adb-footer.mjs",
+    "predev": "npm run snapshot:footer",
+    "prestart": "npm run snapshot:footer",
+    "prebuild": "npm run snapshot:footer",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^6.0.2",
+    "jsdom": "^29.1.1",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8"
   }
 }
