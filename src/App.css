@@ -1329,9 +1329,24 @@ p {
     display: none;
   }
 
-  /* Collapse language label to just the icon */
-  .siteHeader__langBtn span:not(.siteHeader__caret) {
+  /* Collapse language label to just the icons (globe + caret).
+     The original `:not(.siteHeader__caret)` matched no element — the
+     caret span uses `siteHeader__icon--caret` — and hid every child,
+     erasing the whole button. */
+  .siteHeader__langBtn > span:not(.siteHeader__icon) {
     display: none;
+  }
+
+  /* Tighten the right edge so the theme toggle sits close to it and
+     there's room for both language + theme icons. */
+  .siteHeader__bar {
+    padding-right: 0;
+  }
+
+  .siteHeader__langBtn,
+  .siteHeader__themeBtn {
+    padding-left: var(--adb-spacing-xsm);
+    padding-right: var(--adb-spacing-xsm);
   }
 
   .appDownload__badges {
@@ -1357,6 +1372,14 @@ p {
   .resultRow__thumb {
     width: 56px;
     height: 56px;
+  }
+
+  /* TaxonImage writes inline `width/height: 69px` from its size prop;
+     without this override the image overflows the 56px flex item and
+     visually overlaps the name column. */
+  .resultRow__thumb > * {
+    width: 100% !important;
+    height: 100% !important;
   }
 
   .resultRow__name {
