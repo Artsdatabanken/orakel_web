@@ -10,6 +10,14 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'prod-deploy-code'
+    KeyVaultName: 'adbprodorakelkv'
+    SecretsFilter: 'ORAKEL-API-TOKEN'
+    RunAsPreJob: true
+  displayName: 'Fetch ORAKEL-API-TOKEN from Key Vault'
+
 - task: NodeTool@0
   inputs:
     versionSpec: '24.x'
