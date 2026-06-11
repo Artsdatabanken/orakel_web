@@ -12,7 +12,7 @@ pool:
 steps:
 - task: AzureKeyVault@2
   inputs:
-    azureSubscription: 'test-deploy-legacy'
+    azureSubscription: 'test-deploy-code'
     KeyVaultName: 'adbtestorakelkv'
     SecretsFilter: 'ORAKEL-API-TOKEN'
     RunAsPreJob: true

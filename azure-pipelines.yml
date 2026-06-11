@@ -12,7 +12,7 @@ pool:
 steps:
 - task: AzureKeyVault@2
   inputs:
-    azureSubscription: 'prod-deploy-legacy'
+    azureSubscription: 'prod-deploy-code'
     KeyVaultName: 'adbprodorakelkv'
     SecretsFilter: 'ORAKEL-API-TOKEN'
     RunAsPreJob: true
