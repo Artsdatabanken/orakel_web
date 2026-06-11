@@ -10,5 +10,7 @@ test("renders the main page chrome", () => {
   );
   expect(screen.getByRole("banner")).toBeInTheDocument(); // <header>
   expect(screen.getByRole("main")).toBeInTheDocument();
-  expect(screen.getByRole("contentinfo")).toBeInTheDocument(); // <footer>
+  // <adb-site-footer> is a Lit web component; jsdom doesn't register it,
+  // so it has no implicit ARIA role — check the tag directly instead.
+  expect(document.querySelector("adb-site-footer")).toBeInTheDocument();
 });
