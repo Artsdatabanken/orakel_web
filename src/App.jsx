@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./App.css";
-import { aiApiUrl } from "./config";
+import { aiIdentifyUrl, aiApiToken } from "./config";
 import { getExif, gpsFromExif } from "./utils/utils";
 import SiteHeader from "./components/SiteHeader";
 import StartPage from "./components/StartPage";
@@ -123,8 +123,9 @@ function App() {
     }
 
     try {
-      const res = await axios.post(aiApiUrl, formdata, {
+      const res = await axios.post(aiIdentifyUrl, formdata, {
         signal: controller.signal,
+        headers: { Authorization: `Bearer ${aiApiToken}` },
       });
       let preds = res.data.predictions[0].taxa.items.filter(
         (p) => p.probability > 0.02

@@ -19,6 +19,9 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+  env:
+    ORAKEL_API_BASE: https://ai.artsdatabanken.no
+    ORAKEL_API_TOKEN: $(ORAKEL-API-TOKEN)
 
 - task: PublishBuildArtifacts@1
   inputs:
