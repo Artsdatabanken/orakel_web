@@ -50,17 +50,23 @@ function SpeciesDetail({ prediction, croppedImages }) {
   const headingName = showVernacular ? capitalizeFirst(rawName) : rawName;
   const lowerName = rawName.toLowerCase();
   const percent = Math.round((prediction.probability ?? 0) * 100);
-  // Scientific names render in italics; in the score line they also take a
-  // capital first letter (the placeholder text otherwise lowercases the name).
-  // Leave {name} unsubstituted so we can splice in the italic node ourselves.
+  // Scientific names render in italics with a capital first letter (the
+  // placeholder text otherwise lowercases the name); vernacular names keep
+  // their lowercase inline form. We leave the name placeholder unsubstituted
+  // and splice in our own node so the scientific name can be an <em>.
+  const renderName = () =>
+    showVernacular ? (
+      lowerName
+    ) : (
+      <em className="speciesDetail__sciName">{capitalizeFirst(scientific)}</em>
+    );
   const [scoreBefore, scoreAfter] = t("web_score_heading", { percent }).split(
     "{name}",
   );
-  const scoreNameNode = showVernacular ? (
-    lowerName
-  ) : (
-    <em className="speciesDetail__scoreName">{capitalizeFirst(scientific)}</em>
-  );
+  const [certaintyBefore, certaintyAfter] = t("certainty_text", {
+    1: percent,
+  }).split("%2$s");
+  const [readMoreBefore, readMoreAfter] = t("read_more_detailed").split("%1$s");
   // Mushroom warning keys off the canonical Norwegian group — placeholder
   // images and this check both rely on the untranslated field.
   const isMushroom = prediction.groupName === "Sopper";
@@ -110,7 +116,11 @@ function SpeciesDetail({ prediction, croppedImages }) {
           rel="noopener noreferrer"
           className="speciesDetail__readMore"
         >
-          <span>{t("read_more_detailed", { 1: lowerName })}</span>
+          <span>
+            {readMoreBefore}
+            {renderName()}
+            {readMoreAfter}
+          </span>
           <span className="speciesDetail__external" aria-hidden>
             <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -139,12 +149,14 @@ function SpeciesDetail({ prediction, croppedImages }) {
           </span>
           <span>
             {scoreBefore}
-            {scoreNameNode}
+            {renderName()}
             {scoreAfter}
           </span>
         </p>
         <p className="speciesDetail__scoreBody">
-          {t("certainty_text", { 1: percent, 2: lowerName })}
+          {certaintyBefore}
+          {renderName()}
+          {certaintyAfter}
         </p>
       </div>
 
