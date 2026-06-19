@@ -26,11 +26,21 @@ function App() {
   const [editIndex, setEditIndex] = useState(null);
   const abortRef = useRef(null);
 
+  // Revoke object URLs only when the app actually tears down — NOT on every
+  // change to croppedImages. The previous [croppedImages] dependency revoked
+  // *all* current URLs whenever the array changed, so adding a second image
+  // killed the first image's still-displayed blob URL (it survived in the
+  // start-page thumbnail only because that <img> had already decoded, but a
+  // freshly-rendered <img> on the results page loaded the dead URL and broke).
+  // Individual URLs are revoked where images actually leave the set: the
+  // edit/trash branches of onImageCropped and reset().
+  const croppedImagesRef = useRef(croppedImages);
+  croppedImagesRef.current = croppedImages;
   useEffect(() => {
     return () => {
-      croppedImages.forEach((p) => URL.revokeObjectURL(p.url));
+      croppedImagesRef.current.forEach((p) => URL.revokeObjectURL(p.url));
     };
-  }, [croppedImages]);
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -79,6 +89,14 @@ function App() {
         ...prev,
         { blob, url, name: blob.name, original },
       ]);
+      // Adding an image invalidates any existing result. Return to the
+      // input view so the new image is actually visible (the results
+      // gallery only shows the first image) and the full set can be
+      // re-identified — otherwise adding from the results page silently
+      // appends an unseen image and runs no new calculation.
+      setPredictions([]);
+      setError(null);
+      setView("start");
     }
     setUncroppedImages((prev) => prev.slice(1));
   };
@@ -152,6 +170,7 @@ function App() {
   };
 
   const reset = () => {
+    croppedImages.forEach((p) => URL.revokeObjectURL(p.url));
     setCroppedImages([]);
     setPredictions([]);
     setError(null);
@@ -202,6 +221,7 @@ function App() {
             previews={croppedImages}
             predictions={predictions}
             onAddFiles={addFiles}
+            onEditPreview={editPreview}
             onBack={reset}
           />
         )}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cropper from "react-cropper";
+import piexif from "piexifjs";
 import "cropperjs/dist/cropper.css";
 
 import Slider from "@mui/material/Slider";
@@ -90,11 +91,22 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
         .toBlob(
           (blob) => {
             if (exifdump) {
-              // Strip GPS from the embedded EXIF: location is sent to
-              // the API as separate latitude/longitude form fields, so
-              // leaving it inside the JPEG would mean shipping precise
-              // coordinates alongside the coarsened fields.
-              writeExif(blob, { ...exifdump, GPS: {} }).then((withExif) => {
+              // getCroppedCanvas renders physically upright pixels (cropperjs
+              // bakes in the source EXIF orientation). Re-attaching the
+              // original EXIF must therefore reset Orientation to 1, otherwise
+              // a rotated source — e.g. a phone portrait with Orientation 6 —
+              // gets rotated a second time and the crop comes out sideways.
+              //
+              // Strip GPS too: location is sent to the API as separate
+              // latitude/longitude form fields, so leaving it inside the JPEG
+              // would mean shipping precise coordinates alongside the
+              // coarsened fields.
+              const cleanedExif = {
+                ...exifdump,
+                "0th": { ...(exifdump["0th"] || {}), [piexif.ImageIFD.Orientation]: 1 },
+                GPS: {},
+              };
+              writeExif(blob, cleanedExif).then((withExif) => {
                 imageCropped(withExif);
                 setExifdump(undefined);
               });
