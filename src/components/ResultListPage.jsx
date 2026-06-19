@@ -44,7 +44,7 @@ function ResultRow({ prediction, isSelected, onSelect, t, activeCode }) {
   const filled = probabilityToFilledCount(probability);
   const vernacular = pickLocalized(
     prediction.vernacularNames,
-    prediction.vernacularName,
+    undefined,
     activeCode,
   );
   const groupName = pickLocalized(

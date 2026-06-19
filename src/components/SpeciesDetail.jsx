@@ -34,7 +34,7 @@ function SpeciesDetail({ prediction, croppedImages }) {
   const { t, activeCode } = useTranslation();
   const vernacular = pickLocalized(
     prediction.vernacularNames,
-    prediction.vernacularName,
+    undefined,
     activeCode,
   );
   const localizedGroupName = pickLocalized(
@@ -45,10 +45,22 @@ function SpeciesDetail({ prediction, croppedImages }) {
   const scientific = prediction.name;
   const sameName =
     vernacular && vernacular.toLowerCase() === scientific.toLowerCase();
-  const rawName = vernacular && !sameName ? vernacular : scientific;
-  const headingName = vernacular && !sameName ? capitalizeFirst(rawName) : rawName;
+  const showVernacular = vernacular && !sameName;
+  const rawName = showVernacular ? vernacular : scientific;
+  const headingName = showVernacular ? capitalizeFirst(rawName) : rawName;
   const lowerName = rawName.toLowerCase();
   const percent = Math.round((prediction.probability ?? 0) * 100);
+  // Scientific names render in italics; in the score line they also take a
+  // capital first letter (the placeholder text otherwise lowercases the name).
+  // Leave {name} unsubstituted so we can splice in the italic node ourselves.
+  const [scoreBefore, scoreAfter] = t("web_score_heading", { percent }).split(
+    "{name}",
+  );
+  const scoreNameNode = showVernacular ? (
+    lowerName
+  ) : (
+    <em className="speciesDetail__scoreName">{capitalizeFirst(scientific)}</em>
+  );
   // Mushroom warning keys off the canonical Norwegian group — placeholder
   // images and this check both rely on the untranslated field.
   const isMushroom = prediction.groupName === "Sopper";
@@ -66,8 +78,14 @@ function SpeciesDetail({ prediction, croppedImages }) {
           <TaxonImage result={prediction} size="89px" />
         </div>
         <div className="speciesCard__text">
-          <p className="speciesCard__name">{headingName}</p>
-          {vernacular && !sameName && (
+          <p className="speciesCard__name">
+            {showVernacular ? (
+              headingName
+            ) : (
+              <em className="speciesCard__nameSci">{rawName}</em>
+            )}
+          </p>
+          {showVernacular && (
             <p className="speciesCard__sci">{scientific}</p>
           )}
           <p className="speciesCard__group">{localizedGroupName}</p>
@@ -119,7 +137,11 @@ function SpeciesDetail({ prediction, croppedImages }) {
               />
             </svg>
           </span>
-          <span>{t("web_score_heading", { percent, name: lowerName })}</span>
+          <span>
+            {scoreBefore}
+            {scoreNameNode}
+            {scoreAfter}
+          </span>
         </p>
         <p className="speciesDetail__scoreBody">
           {t("certainty_text", { 1: percent, 2: lowerName })}
