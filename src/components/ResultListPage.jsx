@@ -88,7 +88,7 @@ function ResultRow({ prediction, isSelected, onSelect, t, activeCode }) {
   );
 }
 
-function ResultListPage({ previews, predictions, onAddFiles, onBack }) {
+function ResultListPage({ previews, predictions, onAddFiles, onEditPreview, onBack }) {
   const { t, activeCode } = useTranslation();
   // Auto-select only when there's exactly one prediction (no choice to
   // make). Multiple predictions start unselected so the user picks.
@@ -105,7 +105,23 @@ function ResultListPage({ previews, predictions, onAddFiles, onBack }) {
     event.target.value = "";
   };
 
-  const heroImage = previews[0];
+  // The add-more box must accept dropped files too — same contract as the
+  // start-page dropzone. Without these handlers the browser just opens the
+  // dropped image and nothing is added.
+  const handleDragOver = (e) => {
+    if (!Array.from(e.dataTransfer?.types || []).includes("Files")) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer?.files || []).filter((f) =>
+      f.type.startsWith("image/")
+    );
+    if (files.length) onAddFiles(files);
+  };
+
   const selected =
     selectedIndex !== null && predictions[selectedIndex]
       ? predictions[selectedIndex]
@@ -122,14 +138,32 @@ function ResultListPage({ previews, predictions, onAddFiles, onBack }) {
       <div className="resultPage__layout">
         <div className="resultPage__listCol">
           <div className="resultPage__gallery">
-            <div className="resultPage__hero">
-              {heroImage ? (
-                <img src={heroImage.url} alt="" />
-              ) : (
+            {/* Show every image that went into the identification, not just
+                the first — otherwise images added before identifying are
+                invisible here even though they were all sent to the API. */}
+            {previews.length > 0 ? (
+              previews.map((p, i) => (
+                <div className="resultPage__hero" key={i}>
+                  <button
+                    type="button"
+                    className="resultPage__heroBtn"
+                    onClick={() => onEditPreview?.(i)}
+                    title={t("crop_hint")}
+                  >
+                    <img src={p.url} alt="" />
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="resultPage__hero">
                 <div className="resultPage__heroPlaceholder" aria-hidden />
-              )}
-            </div>
-            <div className="resultPage__addMore">
+              </div>
+            )}
+            <div
+              className="resultPage__addMore"
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+            >
               <p className="resultPage__addMoreHint">{t("web_dropzone_addmore_hint")}</p>
               <label className="dropzone__button resultPage__addMoreBtn">
                 {t("web_choose_images")}
