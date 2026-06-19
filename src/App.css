@@ -682,10 +682,18 @@ p {
   line-height: 1.2;
 }
 
+.speciesCard__nameSci {
+  font-style: italic;
+}
+
 .speciesCard__sci {
   font-style: italic;
   font-size: var(--adb-font-size-3);
   line-height: 1.6;
+}
+
+.speciesDetail__scoreName {
+  font-style: italic;
 }
 
 .speciesCard__group {

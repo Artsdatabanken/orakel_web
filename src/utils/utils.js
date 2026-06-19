@@ -1,14 +1,12 @@
 import piexif from "piexifjs";
 
 // API returns localized name maps (vernacularNames, groupNames) keyed by
-// ISO 639-1. Pick the active language, falling back to English, then any
-// available entry, then the legacy singular field.
+// ISO 639-1. Only return the active language's entry; if it is missing,
+// fall back to the legacy singular field (which is empty when the species
+// has no vernacular name, so callers then show the scientific name).
 export const pickLocalized = (map, fallback, activeCode) => {
-  if (map && typeof map === "object") {
-    if (map[activeCode]) return map[activeCode];
-    if (map.en) return map.en;
-    const first = Object.values(map).find(Boolean);
-    if (first) return first;
+  if (map && typeof map === "object" && map[activeCode]) {
+    return map[activeCode];
   }
   return fallback;
 };
