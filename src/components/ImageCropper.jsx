@@ -113,20 +113,33 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
   const getCropData = () => {
     if (!(cropper && cropper.containerData)) return;
 
-    // maxWidth/maxHeight cap the long edge at imgSize without upscaling
-    // small crops, and cropperjs does the downscale in native code — so
-    // the JS pixel scan below never runs on more than imgSize² pixels,
-    // keeping Done snappy on huge originals. getCroppedCanvas leaves the
-    // bars — the part the image doesn't cover — fully transparent; trim
-    // those edges so only real pixels remain (no black baked into the
-    // JPEG, no dependence on how cropperjs positions the image).
+    // Compute the crop region's TRUE resolution in source pixels, then
+    // ask getCroppedCanvas for exactly that — capped at imgSize on the
+    // long edge, never above. Do NOT use maxWidth/maxHeight: when the
+    // region is smaller than the cap, cropperjs *upscales* it to the cap
+    // (e.g. a zoomed-in 51px crop blown up to 312px), baking blur into
+    // the JPEG. Passing explicit width/height only ever downscales, so a
+    // zoomed-in crop keeps its real detail and a whole-image crop is
+    // capped at imgSize (which also bounds the trimTransparent scan
+    // below to imgSize² pixels, keeping Done snappy on huge originals).
+    const canvasData = cropper.getCanvasData();
+    const cropBox = cropper.getCropBoxData();
+    const natural = cropper.getImageData().naturalWidth;
+    const displayRatio = canvasData.width / natural; // displayed px per source px
+    const nativeW = cropBox.width / displayRatio;
+    const nativeH = cropBox.height / displayRatio;
+    const scale = Math.min(1, imgSize / Math.max(nativeW, nativeH));
     const full = cropper.getCroppedCanvas({
-      maxWidth: imgSize,
-      maxHeight: imgSize,
+      width: Math.round(nativeW * scale),
+      height: Math.round(nativeH * scale),
       imageSmoothingEnabled: true,
       imageSmoothingQuality: "high",
     });
     if (!full) return;
+    // getCroppedCanvas leaves the bars — the part the image doesn't cover
+    // — fully transparent; trim those edges so only real pixels remain
+    // (no black baked into the JPEG, no dependence on how cropperjs
+    // positions the image).
     const out = trimTransparent(full);
 
     out.toBlob(
