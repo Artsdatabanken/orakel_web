@@ -34,13 +34,43 @@ if (!HTMLCanvasElement.prototype.toBlob) {
   });
 }
 
+// Crop away fully-transparent rows/columns around the edges and return a
+// canvas holding just the opaque region. Used to strip the (transparent)
+// bars getCroppedCanvas leaves around an image smaller than the crop box.
+function trimTransparent(canvas) {
+  const w = canvas.width;
+  const h = canvas.height;
+  const data = canvas.getContext("2d").getImageData(0, 0, w, h).data;
+  let top = h, left = w, right = -1, bottom = -1;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (data[(y * w + x) * 4 + 3] !== 0) {
+        if (x < left) left = x;
+        if (x > right) right = x;
+        if (y < top) top = y;
+        if (y > bottom) bottom = y;
+      }
+    }
+  }
+  if (right < left || bottom < top) return canvas; // fully transparent
+  const tw = right - left + 1;
+  const th = bottom - top + 1;
+  if (tw === w && th === h) return canvas; // nothing to trim
+  const out = document.createElement("canvas");
+  out.width = tw;
+  out.height = th;
+  out.getContext("2d").drawImage(canvas, left, top, tw, th, 0, 0, tw, th);
+  return out;
+}
+
 export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
   const { t } = useTranslation();
   const [image, setImage] = useState();
   const [cropper, setCropper] = useState();
   const [zoom, setZoom] = useState(.25);
   // Min zoom is set once the image loads (in `ready`) — the value
-  // where the smaller natural dimension exactly fills the crop box.
+  // where the larger natural dimension exactly fills the crop box, so
+  // the whole image is visible with 50% grey bars on the short axis.
   const [minZoom, setMinZoom] = useState(0);
   const [exifdump, setExifdump] = useState();
 
@@ -81,43 +111,66 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
   // };
 
   const getCropData = () => {
-    if (cropper && cropper.containerData) {
-      cropper
-        .getCroppedCanvas({
-          width: imgSize,
-          imageSmoothingEnabled: true,
-          imageSmoothingQuality: "high",
-        })
-        .toBlob(
-          (blob) => {
-            if (exifdump) {
-              // getCroppedCanvas renders physically upright pixels (cropperjs
-              // bakes in the source EXIF orientation). Re-attaching the
-              // original EXIF must therefore reset Orientation to 1, otherwise
-              // a rotated source — e.g. a phone portrait with Orientation 6 —
-              // gets rotated a second time and the crop comes out sideways.
-              //
-              // Strip GPS too: location is sent to the API as separate
-              // latitude/longitude form fields, so leaving it inside the JPEG
-              // would mean shipping precise coordinates alongside the
-              // coarsened fields.
-              const cleanedExif = {
-                ...exifdump,
-                "0th": { ...(exifdump["0th"] || {}), [piexif.ImageIFD.Orientation]: 1 },
-                GPS: {},
-              };
-              writeExif(blob, cleanedExif).then((withExif) => {
-                imageCropped(withExif);
-                setExifdump(undefined);
-              });
-            } else {
-              imageCropped(blob);
-            }
-          },
-          "image/jpeg",
-          0.7
-        );
-    }
+    if (!(cropper && cropper.containerData)) return;
+
+    // Compute the crop region's TRUE resolution in source pixels, then
+    // ask getCroppedCanvas for exactly that — capped at imgSize on the
+    // long edge, never above. Do NOT use maxWidth/maxHeight: when the
+    // region is smaller than the cap, cropperjs *upscales* it to the cap
+    // (e.g. a zoomed-in 51px crop blown up to 312px), baking blur into
+    // the JPEG. Passing explicit width/height only ever downscales, so a
+    // zoomed-in crop keeps its real detail and a whole-image crop is
+    // capped at imgSize (which also bounds the trimTransparent scan
+    // below to imgSize² pixels, keeping Done snappy on huge originals).
+    const canvasData = cropper.getCanvasData();
+    const cropBox = cropper.getCropBoxData();
+    const natural = cropper.getImageData().naturalWidth;
+    const displayRatio = canvasData.width / natural; // displayed px per source px
+    const nativeW = cropBox.width / displayRatio;
+    const nativeH = cropBox.height / displayRatio;
+    const scale = Math.min(1, imgSize / Math.max(nativeW, nativeH));
+    const full = cropper.getCroppedCanvas({
+      width: Math.round(nativeW * scale),
+      height: Math.round(nativeH * scale),
+      imageSmoothingEnabled: true,
+      imageSmoothingQuality: "high",
+    });
+    if (!full) return;
+    // getCroppedCanvas leaves the bars — the part the image doesn't cover
+    // — fully transparent; trim those edges so only real pixels remain
+    // (no black baked into the JPEG, no dependence on how cropperjs
+    // positions the image).
+    const out = trimTransparent(full);
+
+    out.toBlob(
+      (blob) => {
+        if (exifdump) {
+          // getCroppedCanvas renders physically upright pixels (cropperjs
+          // bakes in the source EXIF orientation). Re-attaching the
+          // original EXIF must therefore reset Orientation to 1, otherwise
+          // a rotated source — e.g. a phone portrait with Orientation 6 —
+          // gets rotated a second time and the crop comes out sideways.
+          //
+          // Strip GPS too: location is sent to the API as separate
+          // latitude/longitude form fields, so leaving it inside the JPEG
+          // would mean shipping precise coordinates alongside the
+          // coarsened fields.
+          const cleanedExif = {
+            ...exifdump,
+            "0th": { ...(exifdump["0th"] || {}), [piexif.ImageIFD.Orientation]: 1 },
+            GPS: {},
+          };
+          writeExif(blob, cleanedExif).then((withExif) => {
+            imageCropped(withExif);
+            setExifdump(undefined);
+          });
+        } else {
+          imageCropped(blob);
+        }
+      },
+      "image/jpeg",
+      0.7
+    );
   };
 
   const cancel = () => {
@@ -148,22 +201,19 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
     }
   };
 
-  // Bound the minimum zoom: after the proposed zoom step, the rendered
-  // canvas (image) must still cover the crop box on both axes.
-  // Reject the zoom otherwise so the user can never see anything but
-  // image pixels inside the crop box.
+  // Bound the minimum zoom: don't let the user zoom out past the point
+  // where the larger dimension fills the crop box (whole image visible
+  // with grey bars). Below that would just add more grey, no more image.
+  // Compute the floor live from the instance — react-cropper binds this
+  // handler once at init, so a `minZoom`-from-state check would be stale.
   const doZoom = (event) => {
     const inst = event.target?.cropper || cropper;
     if (inst && inst.getCanvasData && inst.getCropBoxData) {
       const canvas = inst.getCanvasData();
       const cropBox = inst.getCropBoxData();
-      const oldRatio = event.detail.oldRatio || 1;
-      const newRatio = event.detail.ratio;
-      const scale = newRatio / oldRatio;
-      const newW = canvas.width * scale;
-      const newH = canvas.height * scale;
-      const epsilon = 0.5; // pixel rounding tolerance
-      if (newW + epsilon < cropBox.width || newH + epsilon < cropBox.height) {
+      const largerNatural = Math.max(canvas.naturalWidth, canvas.naturalHeight);
+      const floor = cropBox.width / largerNatural;
+      if (event.detail.ratio < floor - 0.0001) {
         event.preventDefault();
         return;
       }
@@ -176,21 +226,30 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
   // desync from the actual zoom level.
   const clampZoomRequest = (value) => Math.max(value, minZoom);
 
-  // After any pan, make sure the canvas (image) still covers the crop
-  // box on all four sides — otherwise the crop would include empty
-  // pixels. Snap the canvas back inside the bounds if it has drifted.
+  // After any pan, keep the canvas (image) in bounds per axis: when the
+  // image is larger than the crop box on an axis, clamp so the crop box
+  // stays covered; when it's smaller (the grey-bar axis), center it so
+  // the bars stay symmetric.
   const clampPan = (event) => {
     const inst = event.target?.cropper;
     if (!inst || !inst.getCanvasData || !inst.getCropBoxData) return;
     const canvas = inst.getCanvasData();
     const cropBox = inst.getCropBoxData();
     let { left, top } = canvas;
-    if (left > cropBox.left) left = cropBox.left;
-    if (top > cropBox.top) top = cropBox.top;
-    const cropRight = cropBox.left + cropBox.width;
-    const cropBottom = cropBox.top + cropBox.height;
-    if (left + canvas.width < cropRight) left = cropRight - canvas.width;
-    if (top + canvas.height < cropBottom) top = cropBottom - canvas.height;
+    if (canvas.width >= cropBox.width) {
+      if (left > cropBox.left) left = cropBox.left;
+      if (left + canvas.width < cropBox.left + cropBox.width)
+        left = cropBox.left + cropBox.width - canvas.width;
+    } else {
+      left = cropBox.left + (cropBox.width - canvas.width) / 2;
+    }
+    if (canvas.height >= cropBox.height) {
+      if (top > cropBox.top) top = cropBox.top;
+      if (top + canvas.height < cropBox.top + cropBox.height)
+        top = cropBox.top + cropBox.height - canvas.height;
+    } else {
+      top = cropBox.top + (cropBox.height - canvas.height) / 2;
+    }
     if (
       Math.abs(left - canvas.left) > 0.5 ||
       Math.abs(top - canvas.top) > 0.5
@@ -227,16 +286,17 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
             if (!inst) return;
             const canvas = inst.getCanvasData();
             const cropBox = inst.getCropBoxData();
-            // Initial zoom so the image's smaller natural dimension
-            // exactly fills the corresponding crop-box side. That
+            // Initial zoom so the image's larger natural dimension
+            // exactly fills the corresponding crop-box side — the whole
+            // image is visible, with grey bars on the short axis. That
             // becomes the floor — the user can zoom in further but
             // never out past this point.
-            const smallerNatural = Math.min(
+            const largerNatural = Math.max(
               canvas.naturalWidth,
               canvas.naturalHeight,
             );
-            if (smallerNatural > 0) {
-              const ratio = cropBox.width / smallerNatural;
+            if (largerNatural > 0) {
+              const ratio = cropBox.width / largerNatural;
               setMinZoom(ratio);
               inst.zoomTo(ratio);
               setZoom(ratio);
