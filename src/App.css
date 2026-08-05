@@ -70,7 +70,7 @@ p {
 /* Hero */
 .hero {
   background-color: var(--adb-surface-brand-3);
-  padding: 3rem var(--adb-spacing-md);
+  padding: max(1rem, 3vh);
 }
 
 .hero__inner {
@@ -87,23 +87,22 @@ p {
 
 .hero__heading {
   font-weight: var(--adb-font-weight-bold);
-  font-size: 2.5rem; /* 40px — design spec */
-  line-height: 1.2;
+  font-size: max(1.5rem, 4vh);
+  line-height: max(2rem, 5vh);
   margin: 0 0 var(--adb-spacing-xsm);
 }
 
 .hero__paragraph {
-  font-size: 1.3125rem; /* 21px — design spec */
-  line-height: 1.72;
+  font-size: max(1rem, 2vh);
+  line-height: max(1.5rem, 3vh);
   max-width: 28rem;
 }
 
 .hero__avatar {
   flex: 0 0 auto;
-  width: 248px;
-  height: auto;
-  /* Native apps render the avatar mirrored. */
-  transform: scaleX(-1);
+  width: auto;
+  height: max(150px, 25vh);
+  transform: scaleX(-1); /* Mirror */
 }
 
 /* Dropzone */
