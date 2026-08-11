@@ -140,10 +140,10 @@ function StartPage({ previews, onAddFiles, onEditPreview, onIdentify, onAbort, l
             {t("web_app_download_body_line2")}
           </p>
           <div className="appDownload__badges" aria-label={t("web_app_download_badges_label")}>
-            <a href="#" className="appDownload__badge appDownload__badge--play">
+            <a href="https://play.google.com/store/apps/details?id=no.artsdatabanken.orakel" className="appDownload__badge appDownload__badge--play">
               <img src={googlePlayBadge} alt="Google Play" />
             </a>
-            <a href="#" className="appDownload__badge appDownload__badge--ios">
+            <a href="https://apps.apple.com/no/app/artsorakel/id1522271415" className="appDownload__badge appDownload__badge--ios">
               <img src={appStoreBadge} alt="App Store" />
             </a>
           </div>
