@@ -15,10 +15,19 @@ steps:
     versionSpec: '24.x'
   displayName: 'Install Node.js'
 
+- task: AzureKeyVault@2
+  displayName: 'Fetch API token from Key Vault'
+  inputs:
+    azureSubscription: 'test-deploy-code'
+    KeyVaultName: 'adbtestorakelkv'
+    SecretsFilter: 'ORAKEL-API-TOKEN'
+
 - script: |
     npm install
     npm run build
   displayName: 'npm install and build'
+  env:
+    VITE_AI_TOKEN: $(ORAKEL-API-TOKEN)
 
 - task: PublishBuildArtifacts@1
   inputs:

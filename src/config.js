@@ -6,5 +6,7 @@ const isProdHost =
   window.location.hostname === "orakel.artsdatabanken.no";
 
 export const aiApiUrl = isProdHost
-  ? "https://ai.artsdatabanken.no"
-  : "https://ai.test.artsdatabanken.no";
+  ? "https://ai.artsdatabanken.no/identify"
+  : "https://ai.test.artsdatabanken.no/identify";
+
+export const aiApiToken = import.meta.env.VITE_AI_TOKEN ?? "";
