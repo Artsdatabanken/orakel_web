@@ -1141,6 +1141,16 @@ p {
   width: 2rem;
   height: 2rem;
   cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.cropContainer .editing .imageEditButton svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .cropContainer .hint {
