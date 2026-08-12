@@ -180,7 +180,15 @@ p {
   position: absolute;
   inset: 0;
   opacity: 0;
-  cursor: pointer;
+  /* Let hover/click fall through to the label — Chrome ignores
+     cursor: pointer on a file input's filename area. Label activation
+     still opens the picker, and the input stays keyboard-focusable. */
+  pointer-events: none;
+}
+
+.dropzone__button:focus-within {
+  outline: 2px solid var(--adb-border-accent);
+  outline-offset: 2px;
 }
 
 .dropzone__thumbs {
