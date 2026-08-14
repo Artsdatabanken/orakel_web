@@ -40,7 +40,11 @@
     "web_social_label_list": "Sosiale medier",
     "web_personvern": "Personvernerklæring",
     "web_lisenser": "Lisenser",
-    "web_tilgjengelighet": "Tilgjengelighetserklæring"
+    "web_tilgjengelighet": "Tilgjengelighetserklæring",
+    "web_rotate_left": "Roter mot venstre",
+    "web_rotate_right": "Roter mot høyre",
+    "web_zoom_in": "Zoom inn",
+    "web_zoom_out": "Zoom ut"
   },
   "en": {
     "web_hero_subtitle": "Artsorakel uses artificial intelligence to recognize species in images.",
@@ -82,7 +86,11 @@
     "web_social_label_list": "Social media",
     "web_personvern": "Privacy statement",
     "web_lisenser": "Licenses",
-    "web_tilgjengelighet": "Accessibility statement"
+    "web_tilgjengelighet": "Accessibility statement",
+    "web_rotate_left": "Rotate left",
+    "web_rotate_right": "Rotate right",
+    "web_zoom_in": "Zoom in",
+    "web_zoom_out": "Zoom out"
   },
   "nl": {
     "web_hero_subtitle": "Artsorakel gebruikt kunstmatige intelligentie om soorten in afbeeldingen te herkennen.",
@@ -112,7 +120,11 @@
     "web_no_observations": "Geen waarnemingsgegevens beschikbaar",
     "web_lang_dropdown_label": "Kies taal",
     "web_til_forsiden_aria": "Naar de voorpagina",
-    "web_score_heading": "{percent} % score: {name}"
+    "web_score_heading": "{percent} % score: {name}",
+    "web_rotate_left": "Draai naar links",
+    "web_rotate_right": "Draai naar rechts",
+    "web_zoom_in": "Inzoomen",
+    "web_zoom_out": "Uitzoomen"
   },
   "es": {
     "web_hero_subtitle": "Artsorakel utiliza inteligencia artificial para reconocer especies en imágenes.",
@@ -142,7 +154,11 @@
     "web_no_observations": "Sin datos de avistamientos disponibles",
     "web_lang_dropdown_label": "Elegir idioma",
     "web_til_forsiden_aria": "A la página de inicio",
-    "web_score_heading": "{percent} % de coincidencia: {name}"
+    "web_score_heading": "{percent} % de coincidencia: {name}",
+    "web_rotate_left": "Girar a la izquierda",
+    "web_rotate_right": "Girar a la derecha",
+    "web_zoom_in": "Acercar",
+    "web_zoom_out": "Alejar"
   },
   "sv": {
     "web_hero_subtitle": "Artsorakel använder artificiell intelligens för att känna igen arter i bilder.",
@@ -172,7 +188,11 @@
     "web_no_observations": "Inga fynddata tillgängliga",
     "web_lang_dropdown_label": "Välj språk",
     "web_til_forsiden_aria": "Till startsidan",
-    "web_score_heading": "{percent} % matchning: {name}"
+    "web_score_heading": "{percent} % matchning: {name}",
+    "web_rotate_left": "Rotera åt vänster",
+    "web_rotate_right": "Rotera åt höger",
+    "web_zoom_in": "Zooma in",
+    "web_zoom_out": "Zooma ut"
   },
   "nn": {
     "web_hero_subtitle": "Artsorakel brukar kunstig intelligens til å kjenne att arter i bilete.",
@@ -202,6 +222,10 @@
     "web_no_observations": "Ingen funndata tilgjengeleg",
     "web_lang_dropdown_label": "Vel språk",
     "web_til_forsiden_aria": "Til framsida",
-    "web_score_heading": "{percent} % score: {name}"
+    "web_score_heading": "{percent} % score: {name}",
+    "web_rotate_left": "Roter mot venstre",
+    "web_rotate_right": "Roter mot høgre",
+    "web_zoom_in": "Zoom inn",
+    "web_zoom_out": "Zoom ut"
   }
 }

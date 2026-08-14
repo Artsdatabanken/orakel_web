@@ -330,11 +330,22 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
         />
       </div>
       <div className="editing">
-        <RotateLeftIcon
+        <button
+          type="button"
           className="clickable imageEditButton"
           onClick={rotateLeft}
-        />
-        <ZoomOutIcon className="clickable imageEditButton" onClick={zoomOut} />
+          aria-label={t("web_rotate_left")}
+        >
+          <RotateLeftIcon />
+        </button>
+        <button
+          type="button"
+          className="clickable imageEditButton"
+          onClick={zoomOut}
+          aria-label={t("web_zoom_out")}
+        >
+          <ZoomOutIcon />
+        </button>
         <div className="slider">
           <Slider
             value={zoom}
@@ -342,30 +353,51 @@ export const ImageCropper = ({ imgFile, darkMode, imageCropped, imgSize }) => {
             step={0.01}
             min={minZoom}
             max={Math.max(minZoom * 4, 2)}
-            aria-labelledby="zoom-slider"
+            aria-label="Zoom"
           />
         </div>
-        <ZoomInIcon className="clickable imageEditButton" onClick={zoomIn} />
-        <RotateRightIcon
+        <button
+          type="button"
+          className="clickable imageEditButton"
+          onClick={zoomIn}
+          aria-label={t("web_zoom_in")}
+        >
+          <ZoomInIcon />
+        </button>
+        <button
+          type="button"
           className="clickable imageEditButton"
           onClick={rotateRight}
-        />
+          aria-label={t("web_rotate_right")}
+        >
+          <RotateRightIcon />
+        </button>
       </div>
 
       <div className="hint">{t("crop_hint")}</div>
 
       <div className="buttons">
-        <div onClick={cancel} className="btn danger">
-          <svg viewBox="0 0 24 24">
+        <button
+          type="button"
+          onClick={cancel}
+          className="btn danger"
+          aria-label={t("content_desc_delete_image")}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
             <path
               fill="currentColor"
               d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
             />
           </svg>
-        </div>{" "}
-        <div onClick={getCropData} className="btn ok">
+        </button>{" "}
+        <button
+          type="button"
+          onClick={getCropData}
+          className="btn ok"
+          aria-label={t("content_desc_continue_preview")}
+        >
           <DoneIcon />
-        </div>
+        </button>
       </div>
     </div>
   );

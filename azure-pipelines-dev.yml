@@ -1,27 +1,40 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+# Build the Docker image, push to DockerHub, restart the test App Service.
+# The API token is NOT baked in at build time — the container injects it at
+# startup from the AI_TOKEN env var (App Service app setting → Key Vault
+# reference, resolved via the App Service's managed identity).
 
 trigger:
 - dev
 
-pool:
-  vmImage: ubuntu-latest
+resources:
+- repo: self
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '24.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'build'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: 'artsdatabanken/orakel-web'
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: 'azure-test'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: 'artsdatabanken/orakel-web'
+        command: 'push'
+        tags: 'azure-test'
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'test-deploy-code'
+        scriptType: 'pscore'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az webapp restart --name adb-test-orakel-as --resource-group adb-test-orakel-rg'
