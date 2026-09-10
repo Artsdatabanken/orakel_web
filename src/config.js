@@ -3,7 +3,7 @@
 //  - everything else (dev, orakel.test.artsdatabanken.no) → https://ai.test.artsdatabanken.no
 const isProdHost =
   typeof window !== "undefined" &&
-  window.location.hostname === "orakel.artsdatabanken.no";
+  window.location.hostname.indexOf("test.artsdatabanken.no") === -1;
 
 // Bare host — callers append their path (/identify, /save).
 export const aiApiUrl = isProdHost
